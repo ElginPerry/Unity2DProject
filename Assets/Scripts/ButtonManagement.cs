@@ -11,4 +11,11 @@ public class ButtonManagement : MonoBehaviour {
         GameObject.Find("POPUPPanel").SetActive(false);
         
     }
+    public void OkClicked()
+    {
+        PlayerMove script = (PlayerMove)GameObject.Find("Player").GetComponent("PlayerMove");
+        script.moveEnabled = true;
+        GameObject.Find("POPUPPanel").SetActive(false);
+
+    }
 }

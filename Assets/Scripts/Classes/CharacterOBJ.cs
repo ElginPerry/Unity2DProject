@@ -15,19 +15,25 @@ namespace Professor.Class
         public float FireDef { get; set; }
         public float IceAtk { get; set; }
         public float IceDef { get; set; }
+        public float Heal { get; set; }
+        public bool Respawn { get; set; }
+
+        public String Enemy { get; set; }
 
         public CharacterOBJ()
         {
             this.Gold = 0;
             this.Health = 150;
-            this.Awareness = 0;
+            this.Awareness = 10;
             this.MeleeAtk = 10;
             this.MeleeDef = 10;
             this.FireAtk = 5;
             this.FireDef = 5;
             this.IceAtk = 5;
             this.IceDef = 5;
-
+            this.Heal = 4;
+            this.Respawn = true;
+            this.Enemy = "";
         }
 
         public CharacterOBJ(int flag)
@@ -43,6 +49,8 @@ namespace Professor.Class
                 this.FireDef = 2;
                 this.IceAtk = 2;
                 this.IceDef = 2;
+                this.Heal = 4;
+                this.Respawn = true;
             }
             else if (flag == 2)
             {
@@ -55,11 +63,10 @@ namespace Professor.Class
                 this.FireDef = 2;
                 this.IceAtk = 10;
                 this.IceDef = 10;
+                this.Heal = 4;
+                this.Respawn = true;
             }
 
         }
-
-
-
     }
 }

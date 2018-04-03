@@ -6,5 +6,5 @@ using Professor.Class;
 
 public class DataManger : MonoBehaviour {
 
-    static public PlayerOBJ playerobj = new PlayerOBJ();
+    static public CharacterOBJ playerobj = new CharacterOBJ();
 }

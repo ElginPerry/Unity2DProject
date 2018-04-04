@@ -7,6 +7,7 @@ namespace Professor.Class
     public class PlayerLevelOBJ
     {
         public float Level { get; set; }
+        public float Exp { get; set; }
         public float Awareness { get; set; }
         public float MeleeAtk { get; set; }
         public float MeleeDef { get; set; }
@@ -19,6 +20,7 @@ namespace Professor.Class
         public PlayerLevelOBJ()
         {
             this.Level = 1;
+            this.Exp = 0;
             this.Awareness = 1;
             this.MeleeAtk = 1;
             this.MeleeDef = 1;

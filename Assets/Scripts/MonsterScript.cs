@@ -13,17 +13,18 @@ public class MonsterScript : MonoBehaviour
     public int MonsterType;
     Animator anim;
 
-    private bool encounter = false;
     public CharacterOBJ Monsterobj;
     public bool moveEnabled = true;
     Animator Panim;
-    
 
+    private Image Mheatlh;
+    private Image Maxheatlh;
     void Start()
     {        
         anim = GetComponent<Animator>();
         Monsterobj = new CharacterOBJ(MonsterType);
-        CombatPanel.SetActive(false);
+        Mheatlh = gameObject.transform.Find("Canvas").transform.Find("HealthBar").GetComponent<Image>();
+        Maxheatlh = gameObject.transform.Find("Canvas").transform.Find("HealthBack").GetComponent<Image>();
     }
 
     // Update is called once per frame
@@ -56,13 +57,15 @@ public class MonsterScript : MonoBehaviour
             {
                 transform.localPosition += -.07f * transform.right * .08f;
             }
-            if (encounter)
-            {
 
-            }
-            else
+            if (Monsterobj.MaxHealth > Monsterobj.Health)
             {
-
+                Monsterobj.Health += Monsterobj.Heal * .02f;
+                if (Monsterobj.Health > Monsterobj.MaxHealth)
+                {
+                    Monsterobj.Health = Monsterobj.MaxHealth;
+                }
+                Mheatlh.rectTransform.sizeDelta = new Vector2((Monsterobj.Health / Monsterobj.MaxHealth) * Maxheatlh.rectTransform.rect.width, 1);
             }
         }
     }

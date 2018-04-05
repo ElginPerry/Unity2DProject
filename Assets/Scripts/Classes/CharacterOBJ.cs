@@ -17,8 +17,10 @@ namespace Professor.Class
         public float IceAtk { get; set; }
         public float IceDef { get; set; }
         public float Heal { get; set; }
-        public bool Respawn { get; set; }
+        public float Respawn { get; set; }
         public String Enemy { get; set; }
+
+        
 
         public CharacterOBJ()
         {
@@ -33,7 +35,7 @@ namespace Professor.Class
             this.IceAtk = 5;
             this.IceDef = 3;
             this.Heal = 4;
-            this.Respawn = true;
+            this.Respawn = 1;
             this.Enemy = "";
         }
 
@@ -52,7 +54,7 @@ namespace Professor.Class
                 this.IceAtk = 2;
                 this.IceDef = 1;
                 this.Heal = 4;
-                this.Respawn = true;
+                this.Respawn = 10;
             }
             else if (flag == 2)
             {
@@ -67,7 +69,7 @@ namespace Professor.Class
                 this.IceAtk = 10;
                 this.IceDef = 5;
                 this.Heal = 4;
-                this.Respawn = true;
+                this.Respawn = 5;
             }
 
         }

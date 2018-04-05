@@ -22,6 +22,7 @@ public class DataManger : MonoBehaviour {
         Text Picedef;
         Text Paware;
         Text Pheal;
+        Image Phealthbar;
 
         Image Pimg;
         Image Mimg;
@@ -37,6 +38,7 @@ public class DataManger : MonoBehaviour {
         Text Micedef;
         Text Maware;
         Text Mheal;
+        Image Mhealthbar;
         Panim = GameObject.Find("Player").GetComponent<Animator>();
 
         CombatPanel.SetActive(value: false);//This keep the panel inactive
@@ -53,6 +55,9 @@ public class DataManger : MonoBehaviour {
 
         Pimg = CombatPanel.transform.Find("ImagePlayer").GetComponent<Image>();
         Mimg = CombatPanel.transform.Find("ImageMonster").GetComponent<Image>();
+
+        Phealthbar = CombatPanel.transform.Find("PlayerStats").transform.Find("HealthBar").GetComponent<Image>();
+        Mhealthbar = CombatPanel.transform.Find("MonsterStats").transform.Find("HealthBar").GetComponent<Image>();
 
         Mname = CombatPanel.transform.Find("MonsterStats").transform.Find("Name").GetComponent<Text>();
         Mhealth = CombatPanel.transform.Find("MonsterStats").transform.Find("HealthValue").GetComponent<Text>();
@@ -83,6 +88,9 @@ public class DataManger : MonoBehaviour {
         Paware.text = DataManger.playerobj.Awareness.ToString();
         Pheal.text = DataManger.playerobj.Heal.ToString();
 
+        float pch = DataManger.playerobj.Health / DataManger.playerobj.MaxHealth;
+        Phealthbar.rectTransform.sizeDelta = new Vector2(pch*100, 15);
+
         Mname.text = Monster.name;
         DataManger.playerobj.Enemy = Monster.name;
         Mhealth.text = Monsterobj.Health.ToString();
@@ -94,6 +102,9 @@ public class DataManger : MonoBehaviour {
         Micedef.text = Monsterobj.IceDef.ToString();
         Maware.text = Monsterobj.Awareness.ToString();
         Mheal.text = Monsterobj.Heal.ToString();
+
+        float mch = Monsterobj.Health / Monsterobj.MaxHealth;
+        Mhealthbar.rectTransform.sizeDelta = new Vector2(mch * 100, 15);
 
         Sprite PlayerImg = Player.GetComponent<SpriteRenderer>().sprite;
         Sprite MonsterImg = Monster.GetComponent<SpriteRenderer>().sprite;

@@ -72,9 +72,6 @@ public class Combat : MonoBehaviour
             }
             mscript.Monsterobj.Health -= damage;
             playerStats.transform.Find("Action").GetComponent<Image>().sprite = MeleeAction;
-            //monsterStats.transform.Find("Action").GetComponent<Image>().sprite = NoAction;
-            playerStats.transform.Find("Turn").GetComponent<Image>().color = Color.red;
-            monsterStats.transform.Find("Turn").GetComponent<Image>().color = Color.green;
             monsterStats.transform.Find("Result").GetComponent<Text>().text = damage.ToString();
             playerStats.transform.Find("HealResult").GetComponent<Text>().text = "";
             monsterStats.transform.Find("Result").GetComponent<Text>().color = Color.red;
@@ -91,10 +88,7 @@ public class Combat : MonoBehaviour
                 damage = (Matk - Pdef) * 2;
             }
             DataManger.playerobj.Health -= damage;
-            monsterStats.transform.Find("Action").GetComponent<Image>().sprite = MeleeAction;
-            //playerStats.transform.Find("Action").GetComponent<Image>().sprite = NoAction;
-            monsterStats.transform.Find("Turn").GetComponent<Image>().color = Color.red;
-            playerStats.transform.Find("Turn").GetComponent<Image>().color = Color.green;
+            monsterStats.transform.Find("Action").GetComponent<Image>().sprite = MeleeAction;            
             playerStats.transform.Find("Result").GetComponent<Text>().text = damage.ToString();
             monsterStats.transform.Find("HealResult").GetComponent<Text>().text = "";
             playerStats.transform.Find("Result").GetComponent<Text>().color = Color.red;
@@ -113,10 +107,7 @@ public class Combat : MonoBehaviour
                 damage = (Patk - Mdef) * 2;
             }
             mscript.Monsterobj.Health -= damage;
-            playerStats.transform.Find("Action").GetComponent<Image>().sprite = FireAction;
-            //monsterStats.transform.Find("Action").GetComponent<Image>().sprite = NoAction;
-            playerStats.transform.Find("Turn").GetComponent<Image>().color = Color.red;
-            monsterStats.transform.Find("Turn").GetComponent<Image>().color = Color.green;
+            playerStats.transform.Find("Action").GetComponent<Image>().sprite = FireAction;            
             monsterStats.transform.Find("Result").GetComponent<Text>().text = damage.ToString();
             playerStats.transform.Find("HealResult").GetComponent<Text>().text = "";
             monsterStats.transform.Find("Result").GetComponent<Text>().color = Color.red;
@@ -133,10 +124,7 @@ public class Combat : MonoBehaviour
                 damage = (Matk - Pdef) * 2;
             }
             DataManger.playerobj.Health -= damage;
-            monsterStats.transform.Find("Action").GetComponent<Image>().sprite = FireAction;
-           // playerStats.transform.Find("Action").GetComponent<Image>().sprite = NoAction;
-            playerStats.transform.Find("Turn").GetComponent<Image>().color = Color.green;
-            monsterStats.transform.Find("Turn").GetComponent<Image>().color = Color.red;
+            monsterStats.transform.Find("Action").GetComponent<Image>().sprite = FireAction;           
             playerStats.transform.Find("Result").GetComponent<Text>().text = damage.ToString();
             monsterStats.transform.Find("HealResult").GetComponent<Text>().text = "";
             playerStats.transform.Find("Result").GetComponent<Text>().color = Color.red;
@@ -155,10 +143,7 @@ public class Combat : MonoBehaviour
                 damage = (Patk - Mdef) * 2;
             }
             mscript.Monsterobj.Health -= damage;
-            playerStats.transform.Find("Action").GetComponent<Image>().sprite = IceAction;
-            //monsterStats.transform.Find("Action").GetComponent<Image>().sprite = NoAction;
-            playerStats.transform.Find("Turn").GetComponent<Image>().color = Color.red;
-            monsterStats.transform.Find("Turn").GetComponent<Image>().color = Color.green;
+            playerStats.transform.Find("Action").GetComponent<Image>().sprite = IceAction;           
             monsterStats.transform.Find("Result").GetComponent<Text>().text = damage.ToString();
             playerStats.transform.Find("HealResult").GetComponent<Text>().text = "";
             monsterStats.transform.Find("Result").GetComponent<Text>().color = Color.red;
@@ -175,10 +160,7 @@ public class Combat : MonoBehaviour
                 damage = (Matk - Pdef) * 2;
             }
             DataManger.playerobj.Health -= damage;
-            monsterStats.transform.Find("Action").GetComponent<Image>().sprite = IceAction;
-            //playerStats.transform.Find("Action").GetComponent<Image>().sprite = NoAction;
-            playerStats.transform.Find("Turn").GetComponent<Image>().color = Color.green;
-            monsterStats.transform.Find("Turn").GetComponent<Image>().color = Color.red;
+            monsterStats.transform.Find("Action").GetComponent<Image>().sprite = IceAction;          
             playerStats.transform.Find("Result").GetComponent<Text>().text = damage.ToString();
             monsterStats.transform.Find("HealResult").GetComponent<Text>().text = "";
             playerStats.transform.Find("Result").GetComponent<Text>().color = Color.red;
@@ -199,10 +181,7 @@ public class Combat : MonoBehaviour
                     increase = MaxHealth - Health;
                 }
                 DataManger.playerobj.Health += increase;
-                playerStats.transform.Find("Action").GetComponent<Image>().sprite = HealAction;
-                //monsterStats.transform.Find("Action").GetComponent<Image>().sprite = NoAction;
-                playerStats.transform.Find("Turn").GetComponent<Image>().color = Color.red;
-                monsterStats.transform.Find("Turn").GetComponent<Image>().color = Color.green;
+                playerStats.transform.Find("Action").GetComponent<Image>().sprite = HealAction;                
                 monsterStats.transform.Find("Result").GetComponent<Text>().text = "";
                 playerStats.transform.Find("HealResult").GetComponent<Text>().text = increase.ToString();
                 playerStats.transform.Find("HealResult").GetComponent<Text>().color = Color.green;
@@ -225,10 +204,7 @@ public class Combat : MonoBehaviour
                     increase = MaxHealth - Health;
                 }
                 mscript.Monsterobj.Health += increase;
-                monsterStats.transform.Find("Action").GetComponent<Image>().sprite = HealAction;
-                //playerStats.transform.Find("Action").GetComponent<Image>().sprite = NoAction;
-                playerStats.transform.Find("Turn").GetComponent<Image>().color = Color.green;
-                monsterStats.transform.Find("Turn").GetComponent<Image>().color = Color.red;
+                monsterStats.transform.Find("Action").GetComponent<Image>().sprite = HealAction;                
                 playerStats.transform.Find("Result").GetComponent<Text>().text = "";
                 monsterStats.transform.Find("HealResult").GetComponent<Text>().text = increase.ToString();
                 monsterStats.transform.Find("HealResult").GetComponent<Text>().color = Color.green;

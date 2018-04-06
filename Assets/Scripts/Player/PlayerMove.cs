@@ -17,6 +17,7 @@ public class PlayerMove : MonoBehaviour {
         animator = GetComponent<Animator>();
         Pheatlh = gameObject.transform.Find("Canvas").transform.Find("HealthBar").GetComponent<Image>();
         GameObject.Find("CombatPanel").SetActive(false);
+        DataManger.playerobj.position = gameObject.transform.localPosition;
     }
 
     private void Update()

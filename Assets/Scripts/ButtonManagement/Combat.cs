@@ -68,7 +68,7 @@ public class Combat : MonoBehaviour
             float damage = 0;
             if ((Patk-Mdef)*2>0)
             {
-                damage = (Patk - Mdef) * 2;
+                damage = Mathf.Round(((Patk - Mdef) * 2) * Random.Range(.7f, 1.2f));
             }
             mscript.Monsterobj.Health -= damage;
             playerStats.transform.Find("Action").GetComponent<Image>().sprite = MeleeAction;
@@ -86,7 +86,7 @@ public class Combat : MonoBehaviour
             float damage = 0;
             if ((Matk - Pdef) * 2 > 0)
             {
-                damage = (Matk - Pdef) * 2;
+                damage = Mathf.Round(((Matk - Pdef) * 2) * Random.Range(.7f, 1.2f));
             }
             DataManger.playerobj.Health -= damage;
             monsterStats.transform.Find("Action").GetComponent<Image>().sprite = MeleeAction;
@@ -106,7 +106,7 @@ public class Combat : MonoBehaviour
             float damage = 0;
             if ((Patk - Mdef) * 2 > 0)
             {
-                damage = (Patk - Mdef) * 2;
+                damage = Mathf.Round(((Patk - Mdef) * 2) *Random.Range(.7f, 1.2f));
             }
             mscript.Monsterobj.Health -= damage;
             playerStats.transform.Find("Action").GetComponent<Image>().sprite = FireAction;
@@ -124,7 +124,7 @@ public class Combat : MonoBehaviour
             float damage = 0;
             if ((Matk - Pdef) * 2 > 0)
             {
-                damage = (Matk - Pdef) * 2;
+                damage = Mathf.Round(((Matk - Pdef) * 2) *Random.Range(.7f, 1.2f));
             }
             DataManger.playerobj.Health -= damage;
             monsterStats.transform.Find("Action").GetComponent<Image>().sprite = FireAction;
@@ -144,7 +144,7 @@ public class Combat : MonoBehaviour
             float damage = 0;
             if ((Patk - Mdef) * 2 > 0)
             {
-                damage = (Patk - Mdef) * 2;
+                damage = Mathf.Round(((Patk - Mdef) * 2) *Random.Range(.7f, 1.2f));
             }
             mscript.Monsterobj.Health -= damage;
             playerStats.transform.Find("Action").GetComponent<Image>().sprite = IceAction;
@@ -162,7 +162,7 @@ public class Combat : MonoBehaviour
             float damage = 0;
             if ((Matk - Pdef) * 2 > 0)
             {
-                damage = (Matk - Pdef) * 2;
+                damage = Mathf.Round(((Matk - Pdef) * 2) * Random.Range(.7f,1.2f));
             }
             DataManger.playerobj.Health -= damage;
             monsterStats.transform.Find("Action").GetComponent<Image>().sprite = IceAction;

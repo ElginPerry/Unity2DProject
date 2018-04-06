@@ -20,9 +20,13 @@ public class MonsterScript : MonoBehaviour
     private Image Mheatlh;
     private Image Maxheatlh;
     void Start()
-    {        
+    {
+        CombatPanel = ((LevelManager)GameObject.FindWithTag("LevelObject").GetComponent("LevelManager")).CombatPanel;
+        Player = GameObject.Find("Player");
         anim = GetComponent<Animator>();
         Monsterobj = new CharacterOBJ(MonsterType);
+        Monsterobj.position = gameObject.transform.localPosition;
+        Monsterobj.Name = gameObject.name;
         Mheatlh = gameObject.transform.Find("Canvas").transform.Find("HealthBar").GetComponent<Image>();
         Maxheatlh = gameObject.transform.Find("Canvas").transform.Find("HealthBack").GetComponent<Image>();
     }

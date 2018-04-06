@@ -6,9 +6,11 @@ public class LevelManager : MonoBehaviour {
 
     public GameObject CombatPanel;
     public GameObject PopUpPanel;
-  
-	// Use this for initialization
-	void Start () {
+    public GameObject LootObj;
+    public GameObject InventoryObj;
+
+    // Use this for initialization
+    void Start () {
 		
 	}
 	

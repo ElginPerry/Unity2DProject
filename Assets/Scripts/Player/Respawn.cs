@@ -18,14 +18,16 @@ public class Respawn : MonoBehaviour {
 	void Update () {
         foreach (RespawnObj ro in DataManger.respawnObjs)
         {
-            ro.RespawnTime -= 1;
-            if (ro.RespawnTime == 0)
+            if (ro.Process)
             {
-                GameObject go = GameObject.Instantiate((GameObject)Resources.Load("Monsters/" + ro.PreFabName), Vector3.zero, Quaternion.identity, GameObject.Find("Monsters").GetComponent<Transform>());
-                go.transform.localPosition = ro.position;                
-                go.GetComponent<SpriteRenderer>().sortingOrder = 2;
+                ro.RespawnTime -= 1;
+                if (ro.RespawnTime == 0)
+                {
+                    GameObject go = GameObject.Instantiate((GameObject)Resources.Load("Monsters/" + ro.PreFabName), Vector3.zero, Quaternion.identity, GameObject.Find("Monsters").GetComponent<Transform>());
+                    go.transform.localPosition = ro.position;
+                    go.GetComponent<SpriteRenderer>().sortingOrder = 2;
+                }
             }
-
         }
     }
 }

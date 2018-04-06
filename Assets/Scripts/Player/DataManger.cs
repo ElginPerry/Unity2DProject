@@ -7,11 +7,15 @@ using Professor.Class;
 
 public class DataManger : MonoBehaviour {
 
-    static public CharacterOBJ playerobj = new CharacterOBJ();
-    static public PlayerLevelOBJ playerlevelobj = new PlayerLevelOBJ();
-    static public List<RespawnObj> respawnObjs = new List<RespawnObj>();
+    public static CharacterOBJ playerobj = new CharacterOBJ();
+    public static PlayerLevelOBJ playerlevelobj = new PlayerLevelOBJ();
+    public static List<RespawnObj> respawnObjs = new List<RespawnObj>();
+    public static MovementObj movementObj = new MovementObj();
+    public static List<ItemObj> playerItems = new List<ItemObj>();
+    public static List<ItemObj> AllItems = new List<ItemObj>();
+    public static AudioSource audioSource;
 
-    static public void SetupCombat(GameObject CombatPanel, GameObject Player, CharacterOBJ Monsterobj, Animator anim, GameObject Monster)
+    public static void SetupCombat(GameObject CombatPanel, GameObject Player, CharacterOBJ Monsterobj, Animator anim, GameObject Monster)
     {
         if (DataManger.playerobj.Health > 0 && Monsterobj.Health > 0)
         {
@@ -80,7 +84,7 @@ public class DataManger : MonoBehaviour {
             anim.enabled = false;
             Panim.enabled = false;
 
-            Pname.text = Player.name;
+            Pname.text = DataManger.playerobj.Name;
             Phealth.text = DataManger.playerobj.Health.ToString();
             Pmeleeatk.text = DataManger.playerobj.MeleeAtk.ToString();
             Pmeleedef.text = DataManger.playerobj.MeleeDef.ToString();
@@ -122,7 +126,47 @@ public class DataManger : MonoBehaviour {
         
     }
 
-    static public void DeathScript(GameObject player, GameObject monster, CharacterOBJ Monsterobj, GameObject CombatPanel)
+    public static void populatePlayerStats()
+    {
+        GameObject InvObj = ((LevelManager)GameObject.FindWithTag("Canvas-LvL").GetComponent("LevelManager")).InventoryObj;
+        Text Pname;
+        Text Phealth;
+        Text Pmeleeatk;
+        Text Pmeleedef;
+        Text Pfireatk;
+        Text Pfiredef;
+        Text Piceatk;
+        Text Picedef;
+        Text Paware;
+        Text Pheal;
+        Text PMhealth;
+
+        Pname = InvObj.transform.Find("PlayerStats").transform.Find("Name").GetComponent<Text>();
+        Phealth = InvObj.transform.Find("PlayerStats").transform.Find("HealthValue").GetComponent<Text>();
+        PMhealth = InvObj.transform.Find("PlayerStats").transform.Find("MaxHealthValue").GetComponent<Text>();
+        Pmeleeatk = InvObj.transform.Find("PlayerStats").transform.Find("MeleeAtkValue").GetComponent<Text>();
+        Pmeleedef = InvObj.transform.Find("PlayerStats").transform.Find("MeleeDefValue").GetComponent<Text>();
+        Pfireatk = InvObj.transform.Find("PlayerStats").transform.Find("FireAtkValue").GetComponent<Text>();
+        Pfiredef = InvObj.transform.Find("PlayerStats").transform.Find("FireDefValue").GetComponent<Text>();
+        Piceatk = InvObj.transform.Find("PlayerStats").transform.Find("IceAtkValue").GetComponent<Text>();
+        Picedef = InvObj.transform.Find("PlayerStats").transform.Find("IceDefValue").GetComponent<Text>();
+        Paware = InvObj.transform.Find("PlayerStats").transform.Find("AwarenessValue").GetComponent<Text>();
+        Pheal = InvObj.transform.Find("PlayerStats").transform.Find("HealValue").GetComponent<Text>();
+
+        Pname.text = DataManger.playerobj.Name;
+        Phealth.text = DataManger.playerobj.Health.ToString();
+        PMhealth.text = DataManger.playerobj.MaxHealth.ToString();
+        Pmeleeatk.text = DataManger.playerobj.MeleeAtk.ToString();
+        Pmeleedef.text = DataManger.playerobj.MeleeDef.ToString();
+        Pfireatk.text = DataManger.playerobj.FireAtk.ToString();
+        Pfiredef.text = DataManger.playerobj.FireDef.ToString();
+        Piceatk.text = DataManger.playerobj.IceAtk.ToString();
+        Picedef.text = DataManger.playerobj.IceDef.ToString();
+        Paware.text = DataManger.playerobj.Awareness.ToString();
+        Pheal.text = DataManger.playerobj.Heal.ToString();
+
+    }
+    public static void DeathScript(GameObject player, GameObject monster, CharacterOBJ Monsterobj, GameObject CombatPanel)
     {
         if (Monsterobj.Health <= 0)
         {
@@ -130,27 +174,31 @@ public class DataManger : MonoBehaviour {
             ro.PreFabName = Monsterobj.PreFab;
             ro.position = Monsterobj.position;
             ro.RespawnTime = Monsterobj.Respawn;
+            ro.Process = false;
             DataManger.playerlevelobj.Exp += Monsterobj.EXP;
             DataManger.respawnObjs.Add(ro);
             Destroy(monster);
             print("EXP:" + DataManger.playerlevelobj.Exp.ToString());
+            Combat cscript = (Combat)CombatPanel.GetComponent("Combat");
+            cscript.Resume();
+            CheckLoot();
         }
         
         if (DataManger.playerobj.Health <= 0)
         {
             player.transform.localPosition = DataManger.playerobj.position;
+            Combat cscript = (Combat)CombatPanel.GetComponent("Combat");
+            cscript.Resume();
         }
 
-        Combat cscript = (Combat)CombatPanel.GetComponent("Combat");
-        cscript.Resume();
     }
 
-    static public void CheckRespawns()
+    public static void CheckLoot()
     {
-        foreach (RespawnObj reo in respawnObjs)
-        {
-
-        }
+        GameObject LootObj = ((LevelManager)GameObject.FindWithTag("Canvas-LvL").GetComponent("LevelManager")).LootObj;
+        LootObj.SetActive(true);
     }
+
+
 }
 

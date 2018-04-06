@@ -17,7 +17,16 @@ public class PlayerMove : MonoBehaviour {
         animator = GetComponent<Animator>();
         Pheatlh = gameObject.transform.Find("Canvas").transform.Find("HealthBar").GetComponent<Image>();
         GameObject.Find("CombatPanel").SetActive(false);
+        GameObject.Find("LootObj").SetActive(false);
+        GameObject.Find("InventoryObj").SetActive(false);
         DataManger.playerobj.position = gameObject.transform.localPosition;
+        DataManger.audioSource = GetComponent<AudioSource>();
+
+        //Sound examples
+        //float vol = Random.Range(volLowRange, volHighRange);
+        //audioSource.PlayOneShot(shootSound, vol);
+        //GameObject throwThis = Instantiate(projectile, transform.position, transform.rotation) as GameObject;
+        //throwThis.rigidbody.AddRelativeForce(new Vector3(0, 0, throwSpeed));
     }
 
     private void Update()
@@ -43,10 +52,20 @@ public class PlayerMove : MonoBehaviour {
 
         if (moveEnabled)
         {
-            if (Input.GetButton("Horizontal"))
+            if (Input.GetButton("Horizontal") || DataManger.movementObj.hSpeed !=0)
             {
-                transform.localPosition += Input.GetAxis("Horizontal") * transform.right * moveSpeed;
-                hSpeed = Input.GetAxis("Horizontal");
+                if (DataManger.movementObj.hSpeed != 0)
+                {
+                    hSpeed = DataManger.movementObj.hSpeed;
+                }
+                else if (Input.GetAxis("Horizontal") < 0)
+                {
+                    hSpeed = -1;
+                }
+                else
+                {
+                    hSpeed = 1;
+                }                
             }
             else
             {
@@ -54,17 +73,35 @@ public class PlayerMove : MonoBehaviour {
             }
             animator.SetFloat("hSpeed", hSpeed);
 
-            if (Input.GetButton("Vertical"))
+            if (Input.GetButton("Vertical") || DataManger.movementObj.vSpeed != 0)
             {
-                transform.localPosition += Input.GetAxis("Vertical") * transform.up * moveSpeed;
-                vSpeed = Input.GetAxis("Vertical");
+                if (DataManger.movementObj.vSpeed != 0)
+                {
+                    vSpeed = DataManger.movementObj.vSpeed;
+                }
+                else if (Input.GetAxis("Vertical") < 0)
+                {
+                    vSpeed = -1;
+                }
+                else
+                {
+                    vSpeed = 1;
+                }
             }
             else
             {
                 vSpeed = 0;
             }
             animator.SetFloat("vSpeed", vSpeed);
-        }
 
+            if (hSpeed != 0)
+            {
+                transform.localPosition += hSpeed * transform.right * moveSpeed;
+            }
+            if (vSpeed !=0)
+            {
+                transform.localPosition += vSpeed * transform.up * moveSpeed;
+            }
+        }
     }
 }

@@ -43,6 +43,10 @@ public class Combat : MonoBehaviour
         script.moveEnabled = true;
         MonsterScript mscript = (MonsterScript)GameObject.Find(DataManger.playerobj.Enemy).GetComponent("MonsterScript");
         mscript.moveEnabled = true;
+        Animator Panim = GameObject.Find("Player").GetComponent<Animator>();
+        Animator Manim = GameObject.Find(DataManger.playerobj.Enemy).GetComponent<Animator>();
+        Panim.enabled = true;
+        Manim.enabled = true;
 
         playerStats.transform.Find("Action").GetComponent<Image>().sprite = NoAction;
         monsterStats.transform.Find("Action").GetComponent<Image>().sprite = NoAction;
@@ -50,12 +54,12 @@ public class Combat : MonoBehaviour
         playerStats.transform.Find("Result").GetComponent<Text>().text = "";
         monsterStats.transform.Find("HealResult").GetComponent<Text>().text = "";
         playerStats.transform.Find("HealResult").GetComponent<Text>().text = "";
+        GameObject cp = GameObject.Find("CombatPanel");
+        if (cp != null)
+        {
+            cp.SetActive(false);
+        }
 
-        Animator Panim = GameObject.Find("Player").GetComponent<Animator>();
-        Animator Manim = GameObject.Find(DataManger.playerobj.Enemy).GetComponent<Animator>();
-        Panim.enabled = true;
-        Manim.enabled = true;
-        GameObject.Find("CombatPanel").SetActive(false);
     }
 
     public void MeleeFun(int who)
@@ -219,7 +223,6 @@ public class Combat : MonoBehaviour
             }
         }
     }
-
     public void Enemyturn()
     {
         MonsterScript mscript = (MonsterScript)GameObject.Find(DataManger.playerobj.Enemy).GetComponent("MonsterScript");

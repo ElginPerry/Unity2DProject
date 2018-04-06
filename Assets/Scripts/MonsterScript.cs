@@ -21,7 +21,7 @@ public class MonsterScript : MonoBehaviour
     private Image Maxheatlh;
     void Start()
     {
-        CombatPanel = ((LevelManager)GameObject.FindWithTag("LevelObject").GetComponent("LevelManager")).CombatPanel;
+        CombatPanel = ((LevelManager)GameObject.FindWithTag("Canvas-LvL").GetComponent("LevelManager")).CombatPanel;
         Player = GameObject.Find("Player");
         anim = GetComponent<Animator>();
         Monsterobj = new CharacterOBJ(MonsterType);

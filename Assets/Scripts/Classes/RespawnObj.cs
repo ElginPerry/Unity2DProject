@@ -9,12 +9,14 @@ namespace Professor.Class
         public String PreFabName { get; set; }
         public Vector3 position { get; set; }
         public float RespawnTime { get; set; }
+        public bool Process { get; set; }
 
         public RespawnObj()
         {
             this.PreFabName = "";
             this.position = Vector3.zero;
             this.RespawnTime = 0;
+            this.Process = false;
         }
     }
 }

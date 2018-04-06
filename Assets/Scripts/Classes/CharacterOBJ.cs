@@ -28,7 +28,7 @@ namespace Professor.Class
 
         public CharacterOBJ()
         {
-            this.Name = "";
+            this.Name = "Professor Gomez";
             this.Gold = 0;
             this.Health = 150;
             this.MaxHealth = 150;
@@ -44,7 +44,7 @@ namespace Professor.Class
             this.Enemy = "";
             this.EXP = 0;
             this.position = Vector3.zero;
-            this.PreFab = "";
+            this.PreFab = "Player";
         }
 
         public CharacterOBJ(int flag)

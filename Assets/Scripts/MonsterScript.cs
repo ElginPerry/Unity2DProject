@@ -76,6 +76,7 @@ public class MonsterScript : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        GetComponent<AudioSource>().PlayScheduled(5);
         DataManger.SetupCombat(CombatPanel, Player, Monsterobj, anim, gameObject);
     }
 }

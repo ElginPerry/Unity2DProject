@@ -7,6 +7,7 @@ namespace Professor.Class
     public class ItemObj
     {
         public String Name { get; set; }
+        public int Type { get; set; }
         public float Gold { get; set; }
         public float Health { get; set; }
         public float MaxHealth { get; set; }
@@ -18,30 +19,27 @@ namespace Professor.Class
         public float IceAtk { get; set; }
         public float IceDef { get; set; }
         public float Heal { get; set; }
-        public float Respawn { get; set; }
-        public String Enemy { get; set; }
         public float EXP { get; set; }
-        public Vector3 position { get; set; }
+        public string PreFabName { get; set; }
         public string Sprite { get; set; }
 
         public ItemObj()
         {
-            this.Name = "Professor Gomez";
+            this.Name = "";
+            this.Type = 0;
             this.Gold = 0;
-            this.Health = 150;
-            this.MaxHealth = 150;
-            this.Awareness = 10;
-            this.MeleeAtk = 10;
-            this.MeleeDef = 5;
-            this.FireAtk = 5;
-            this.FireDef = 3;
-            this.IceAtk = 5;
-            this.IceDef = 3;
-            this.Heal = 4;
-            this.Respawn = 100;
-            this.Enemy = "";
+            this.Health = 0;
+            this.MaxHealth = 0;
+            this.Awareness = 0;
+            this.MeleeAtk = 0;
+            this.MeleeDef = 0;
+            this.FireAtk = 0;
+            this.FireDef = 0;
+            this.IceAtk = 0;
+            this.IceDef = 0;
+            this.Heal = 0;
             this.EXP = 0;
-            this.position = Vector3.zero;
+            this.PreFabName = "";
             this.Sprite = "";
         }        
     }

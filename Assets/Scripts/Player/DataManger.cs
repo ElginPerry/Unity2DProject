@@ -13,7 +13,7 @@ public class DataManger : MonoBehaviour {
     public static MovementObj movementObj = new MovementObj();
     public static List<ItemObj> playerItems = new List<ItemObj>();
     public static List<ItemObj> AllItems = new List<ItemObj>();
-    public static AudioSource audioSource;
+    public static AudioSource audioSource = new AudioSource();
 
     public static void SetupCombat(GameObject CombatPanel, GameObject Player, CharacterOBJ Monsterobj, Animator anim, GameObject Monster)
     {

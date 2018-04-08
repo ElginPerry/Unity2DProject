@@ -14,6 +14,8 @@ public class DataManger : MonoBehaviour {
     public static List<ItemObj> playerItems = new List<ItemObj>();
     public static List<ItemObj> AllItems = new List<ItemObj>();
     public static AudioSource audioSource = new AudioSource();
+    public static LootInfo lootInfo = new LootInfo();
+    
 
     public static void SetupCombat(GameObject CombatPanel, GameObject Player, CharacterOBJ Monsterobj, Animator anim, GameObject Monster)
     {
@@ -166,17 +168,20 @@ public class DataManger : MonoBehaviour {
         Pheal.text = DataManger.playerobj.Heal.ToString();
 
     }
+
     public static void DeathScript(GameObject player, GameObject monster, CharacterOBJ Monsterobj, GameObject CombatPanel)
     {
         if (Monsterobj.Health <= 0)
         {
+            lootInfo.EXP = Monsterobj.EXP;
+            lootInfo.Name = Monsterobj.Name;
             RespawnObj ro = new RespawnObj();
             ro.PreFabName = Monsterobj.PreFab;
             ro.position = Monsterobj.position;
             ro.RespawnTime = Monsterobj.Respawn;
             ro.Process = false;
             DataManger.playerlevelobj.Exp += Monsterobj.EXP;
-            DataManger.respawnObjs.Add(ro);
+            DataManger.respawnObjs.Add(ro);             
             Destroy(monster);
             print("EXP:" + DataManger.playerlevelobj.Exp.ToString());
             Combat cscript = (Combat)CombatPanel.GetComponent("Combat");
@@ -197,8 +202,52 @@ public class DataManger : MonoBehaviour {
     {
         GameObject LootObj = ((LevelManager)GameObject.FindWithTag("Canvas-LvL").GetComponent("LevelManager")).LootObj;
         LootObj.SetActive(true);
+        GameObject DisplayLootObj = ((LevelManager)GameObject.FindWithTag("Canvas-LvL").GetComponent("LevelManager")).DisplayLoot;
+        DisplayLootObj.SetActive(false);
     }
 
+    public static void Setupitems()
+    {
+        ItemObj it = new ItemObj();
+        it.Sprite = Resources.Load<Sprite>("Items/Staffs/Aqua Staff");
+        it.Name = "Ice Staff";
+        it.IceAtk = 5;
+        it.IceDef = 3;
+        AllItems.Add(it);
+
+        it = new ItemObj();
+        it.Sprite = Resources.Load<Sprite>("Items/Staffs/Red Staff");
+        it.Name = "Fire Staff";
+        it.Type = "Weapon";
+        it.FireAtk = 5;
+        it.FireDef = 3;
+        AllItems.Add(it);
+
+        it = new ItemObj();
+        it.Sprite = Resources.Load<Sprite>("Items/Staffs/Green Staff");
+        it.Name = "Heal Staff";
+        it.Type = "Weapon";
+        it.Heal = 3;
+        it.MeleeAtk = 3;
+        it.MeleeDef = 3;
+        AllItems.Add(it);
+
+        it = new ItemObj();
+        it.Sprite = Resources.Load<Sprite>("Items/Staffs/Blue Staff");
+        it.Name = "Greater Ice Staff";
+        it.Type = "Weapon";
+        it.IceAtk = 10;
+        it.IceDef = 6;
+        AllItems.Add(it);
+
+        it = new ItemObj();
+        it.Sprite = Resources.Load<Sprite>("Items/Staffs/Yellow Staff");
+        it.Name = "Greater Fire Staff";
+        it.Type = "Weapon";
+        it.FireAtk = 10;
+        it.FireDef = 6;
+        AllItems.Add(it);
+    }
 
 }
 

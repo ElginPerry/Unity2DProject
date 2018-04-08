@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Professor.Class;
 
 public class ButtonManagement : MonoBehaviour {
@@ -12,6 +13,7 @@ public class ButtonManagement : MonoBehaviour {
         GameObject.Find("POPUPPanel").SetActive(false);
         
     }
+
     public void OkClicked()
     {
         PlayerMove script = (PlayerMove)GameObject.Find("Player").GetComponent("PlayerMove");
@@ -22,6 +24,20 @@ public class ButtonManagement : MonoBehaviour {
 
     public void LootChestClicked()
     {
+        GameObject LootObj = ((LevelManager)GameObject.FindWithTag("Canvas-LvL").GetComponent("LevelManager")).LootObj;
+        LootObj.SetActive(false);
+        GameObject DisplayLootObj = ((LevelManager)GameObject.FindWithTag("Canvas-LvL").GetComponent("LevelManager")).DisplayLoot;
+        DisplayLootObj.SetActive(true);
+
+        float cnt = DataManger.AllItems.Count;
+        int f = Mathf.RoundToInt(Random.Range(0, cnt));
+        ((LevelManager)GameObject.FindWithTag("Canvas-LvL").GetComponent("LevelManager")).LootImage.sprite = DataManger.AllItems[f].Sprite;
+        string Loottxt = DataManger.AllItems[f].Name + "\n +" + DataManger.lootInfo.EXP + " EXP";
+        ((LevelManager)GameObject.FindWithTag("Canvas-LvL").GetComponent("LevelManager")).LootText.text = Loottxt;
+    }
+
+    public void CollectLoot()
+    {
         foreach (RespawnObj ro in DataManger.respawnObjs)
         {
             if (!ro.Process)
@@ -29,9 +45,8 @@ public class ButtonManagement : MonoBehaviour {
                 ro.Process = true;
             }
         }
-
-        GameObject LootObj = ((LevelManager)GameObject.FindWithTag("Canvas-LvL").GetComponent("LevelManager")).LootObj;
-        LootObj.SetActive(false);
+        GameObject DisplayLootObj = ((LevelManager)GameObject.FindWithTag("Canvas-LvL").GetComponent("LevelManager")).DisplayLoot;
+        DisplayLootObj.SetActive(false);
     }
 
     public void ToggleInventory()
@@ -47,6 +62,5 @@ public class ButtonManagement : MonoBehaviour {
             DataManger.populatePlayerStats();
             InvObj.SetActive(true);
         }
-
     }
 }

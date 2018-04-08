@@ -19,8 +19,11 @@ public class PlayerMove : MonoBehaviour {
         GameObject.Find("CombatPanel").SetActive(false);
         GameObject.Find("LootObj").SetActive(false);
         GameObject.Find("InventoryObj").SetActive(false);
+        GameObject.Find("DisplayLoot").SetActive(false);
+
         DataManger.playerobj.position = gameObject.transform.localPosition;
         DataManger.audioSource = GetComponent<AudioSource>();
+        DataManger.Setupitems();
 
         //Sound examples
         //float vol = Random.Range(volLowRange, volHighRange);
@@ -41,9 +44,7 @@ public class PlayerMove : MonoBehaviour {
                     DataManger.playerobj.Health = DataManger.playerobj.MaxHealth;
                 }
                 Pheatlh.rectTransform.sizeDelta = new Vector2((DataManger.playerobj.Health/DataManger.playerobj.MaxHealth)*5, 1);
-            }
-            
-
+            }  
         }
     }
 

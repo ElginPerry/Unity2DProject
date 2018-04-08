@@ -7,7 +7,7 @@ namespace Professor.Class
     public class ItemObj
     {
         public String Name { get; set; }
-        public int Type { get; set; }
+        public String Type { get; set; }
         public float Gold { get; set; }
         public float Health { get; set; }
         public float MaxHealth { get; set; }
@@ -21,12 +21,13 @@ namespace Professor.Class
         public float Heal { get; set; }
         public float EXP { get; set; }
         public string PreFabName { get; set; }
-        public string Sprite { get; set; }
+        public Sprite Sprite { get; set; }
+        public float Duration { get; set; }
 
         public ItemObj()
         {
             this.Name = "";
-            this.Type = 0;
+            this.Type = "";
             this.Gold = 0;
             this.Health = 0;
             this.MaxHealth = 0;
@@ -40,7 +41,8 @@ namespace Professor.Class
             this.Heal = 0;
             this.EXP = 0;
             this.PreFabName = "";
-            this.Sprite = "";
+            this.Sprite = null;
+            this.Duration = 0;
         }        
     }
 }

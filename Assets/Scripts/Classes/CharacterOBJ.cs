@@ -63,7 +63,7 @@ namespace Professor.Class
                 this.IceAtk = 2;
                 this.IceDef = 1;
                 this.Heal = 4;
-                this.Respawn = 250;
+                this.Respawn = 50;
                 this.EXP = 200;
                 this.position = Vector3.zero;
                 this.PreFab = "Wargbeast";

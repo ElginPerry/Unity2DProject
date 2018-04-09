@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Professor.Class;
+using System.Linq;
 
 public class ButtonManagement : MonoBehaviour {
         
@@ -28,12 +29,15 @@ public class ButtonManagement : MonoBehaviour {
         LootObj.SetActive(false);
         GameObject DisplayLootObj = ((LevelManager)GameObject.FindWithTag("Canvas-LvL").GetComponent("LevelManager")).DisplayLoot;
         DisplayLootObj.SetActive(true);
-
-        float cnt = DataManger.AllItems.Count;
+        List<ItemObj> noHave = DataManger.AllItems.Except(DataManger.playerItems).ToList();
+        float cnt = noHave.Count;
         int f = Mathf.RoundToInt(Random.Range(0, cnt));
-        ((LevelManager)GameObject.FindWithTag("Canvas-LvL").GetComponent("LevelManager")).LootImage.sprite = DataManger.AllItems[f].Sprite;
+        ((LevelManager)GameObject.FindWithTag("Canvas-LvL").GetComponent("LevelManager")).LootImage.sprite = noHave[f].Sprite;
         string Loottxt = DataManger.AllItems[f].Name + "\n +" + DataManger.lootInfo.EXP + " EXP";
         ((LevelManager)GameObject.FindWithTag("Canvas-LvL").GetComponent("LevelManager")).LootText.text = Loottxt;
+        ItemObj newitem = noHave[f];
+        int Order = DataManger.playerItems.FindAll(x => x.Sprite == null).OrderBy(x => x.Order).First<ItemObj>().Order;
+        DataManger.playerItems[Order] = newitem;
     }
 
     public void CollectLoot()
@@ -60,6 +64,7 @@ public class ButtonManagement : MonoBehaviour {
         else
         {
             DataManger.populatePlayerStats();
+            DataManger.populateInventory();
             InvObj.SetActive(true);
         }
     }

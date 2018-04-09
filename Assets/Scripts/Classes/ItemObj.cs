@@ -23,6 +23,8 @@ namespace Professor.Class
         public string PreFabName { get; set; }
         public Sprite Sprite { get; set; }
         public float Duration { get; set; }
+        public string InvSlot { get; set; }
+        public int Order { get; set; }
 
         public ItemObj()
         {
@@ -43,6 +45,7 @@ namespace Professor.Class
             this.PreFabName = "";
             this.Sprite = null;
             this.Duration = 0;
+            this.Order = 0;
         }        
     }
 }

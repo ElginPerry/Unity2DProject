@@ -33,7 +33,7 @@ namespace Professor.Class
             this.Health = 150;
             this.MaxHealth = 150;
             this.Awareness = 10;
-            this.MeleeAtk = 10;
+            this.MeleeAtk = 20;
             this.MeleeDef = 5;
             this.FireAtk = 5;
             this.FireDef = 3;

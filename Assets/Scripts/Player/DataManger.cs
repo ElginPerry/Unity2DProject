@@ -11,11 +11,13 @@ public class DataManger : MonoBehaviour {
     public static PlayerLevelOBJ playerlevelobj = new PlayerLevelOBJ();
     public static List<RespawnObj> respawnObjs = new List<RespawnObj>();
     public static MovementObj movementObj = new MovementObj();
-    public static List<ItemObj> playerItems = new List<ItemObj>();
     public static List<ItemObj> AllItems = new List<ItemObj>();
     public static AudioSource audioSource = new AudioSource();
     public static LootInfo lootInfo = new LootInfo();
-    
+    public static List<ItemObj> playerItems = new List<ItemObj>();
+
+
+
 
     public static void SetupCombat(GameObject CombatPanel, GameObject Player, CharacterOBJ Monsterobj, Animator anim, GameObject Monster)
     {
@@ -169,6 +171,20 @@ public class DataManger : MonoBehaviour {
 
     }
 
+    public static void populateInventory()
+    {
+        GameObject InvObj = ((LevelManager)GameObject.FindWithTag("Canvas-LvL").GetComponent("LevelManager")).InventoryObj;
+        Transform InvItems = InvObj.transform.Find("InventoryContain").transform.Find("InventoryItems");
+        for (int i = 0; i < 24; i++)
+        {
+            if (playerItems[i].Sprite != null)
+            {
+                InvItems.transform.Find("Image (" + i.ToString() + ")").GetComponent<Image>().sprite = playerItems[i].Sprite;
+                InvItems.transform.Find("Text (" + i.ToString() + ")").GetComponent<Text>().text = playerItems[i].Name;
+            }
+        }
+    }
+
     public static void DeathScript(GameObject player, GameObject monster, CharacterOBJ Monsterobj, GameObject CombatPanel)
     {
         if (Monsterobj.Health <= 0)
@@ -247,6 +263,59 @@ public class DataManger : MonoBehaviour {
         it.FireAtk = 10;
         it.FireDef = 6;
         AllItems.Add(it);
+
+        it = new ItemObj();
+        it.Sprite = Resources.Load<Sprite>("Items/Staffs/Purple Staff");
+        it.Name = "Greater Heal Staff";
+        it.Type = "Weapon";
+        it.Heal = 6;
+        it.MeleeAtk = 6;
+        it.MeleeDef = 6;
+        AllItems.Add(it);
+
+        it = new ItemObj();
+        it.Sprite = Resources.Load<Sprite>("Items/Armor/23");
+        it.Name = "Ice Chest";
+        it.Type = "Chest";
+        it.IceDef = 6;
+        it.FireDef = 2;
+        it.MeleeDef = 3;
+        AllItems.Add(it);
+
+        it = new ItemObj();
+        it.Sprite = Resources.Load<Sprite>("Items/Armor/24");
+        it.Name = "Fire Chest";
+        it.Type = "Chest";
+        it.IceDef = 2;
+        it.FireDef = 6;
+        it.MeleeDef = 3;
+        AllItems.Add(it);
+
+        it = new ItemObj();
+        it.Sprite = Resources.Load<Sprite>("Items/Armor/27");
+        it.Name = "Ice Boots";
+        it.Type = "Feet";
+        it.IceDef = 5;
+        it.FireDef = 3;
+        it.MeleeDef = 3;
+        AllItems.Add(it);
+
+        it = new ItemObj();
+        it.Sprite = Resources.Load<Sprite>("Items/Armor/28");
+        it.Name = "Fire Boots";
+        it.Type = "Feet";
+        it.IceDef = 5;
+        it.FireDef = 3;
+        it.MeleeDef = 3;
+        AllItems.Add(it);
+
+        for (int i = 0; i < 24; i++)
+        {
+            it = new ItemObj();
+            it.InvSlot = "Image (" + i.ToString() + ")";
+            it.Order = i;
+            playerItems.Add(it);
+        }
     }
 
 }

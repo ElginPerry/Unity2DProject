@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Professor.Class;
 
 public class UIDragger : MonoBehaviour {
     static ScrollRect scrollRect;
@@ -69,6 +70,16 @@ public class UIDragger : MonoBehaviour {
                     objecttoreplace.GetComponentInParent<Image>().sprite = objectToDragImage.sprite;
                     objectToDragImage.sprite = hldSprite;                    
                     objectToDrag.position = OrgPosition;
+
+                    //ItemObj move = new ItemObj();
+                    //ItemObj replace = new ItemObj();                   
+                    //move = DataManger.playerItems.Find(x => x.InvSlot == objectToDrag.name);                    
+                    //replace = DataManger.playerItems.Find(x => x.InvSlot == objecttoreplace.name);
+                    //print(move.Order + " " + replace.Order);
+                    //print(DataManger.playerItems[move.Order].InvSlot);
+                    //DataManger.playerItems[move.Order] = replace;
+                    //DataManger.playerItems[replace.Order] = move;
+
                 }
                 else
                 {

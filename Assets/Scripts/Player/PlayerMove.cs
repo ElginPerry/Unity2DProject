@@ -24,6 +24,8 @@ public class PlayerMove : MonoBehaviour {
         DataManger.playerobj.position = gameObject.transform.localPosition;
         DataManger.audioSource = GetComponent<AudioSource>();
         DataManger.Setupitems();
+        DataManger.SetupInventory();
+        DataManger.SetupLevelRequirements();
 
         //Sound examples
         //float vol = Random.Range(volLowRange, volHighRange);

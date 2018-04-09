@@ -8,6 +8,8 @@ namespace Professor.Class
     {
         public String Name { get; set; }
         public String Type { get; set; }
+        public String AltType1 { get; set; }
+        public String AltType2 { get; set; }
         public float Gold { get; set; }
         public float Health { get; set; }
         public float MaxHealth { get; set; }
@@ -25,11 +27,14 @@ namespace Professor.Class
         public float Duration { get; set; }
         public string InvSlot { get; set; }
         public int Order { get; set; }
+        public int ItemNumber { get; set; }
 
         public ItemObj()
         {
             this.Name = "";
             this.Type = "";
+            this.AltType1 = "";
+            this.AltType2 = "";
             this.Gold = 0;
             this.Health = 0;
             this.MaxHealth = 0;
@@ -45,7 +50,9 @@ namespace Professor.Class
             this.PreFabName = "";
             this.Sprite = null;
             this.Duration = 0;
+            this.InvSlot = "";
             this.Order = 0;
+            this.ItemNumber = 0;
         }        
     }
 }

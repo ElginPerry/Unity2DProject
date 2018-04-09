@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Professor.Class;
+using System;
 
 public class UIDragger : MonoBehaviour {
     static ScrollRect scrollRect;
@@ -65,21 +66,140 @@ public class UIDragger : MonoBehaviour {
             {
                 Transform objecttoreplace = GetDraggableTransformUnderMouse();
                 if (objecttoreplace != null)
-                {
-                    Sprite hldSprite = objecttoreplace.GetComponentInParent<Image>().sprite;
-                    objecttoreplace.GetComponentInParent<Image>().sprite = objectToDragImage.sprite;
-                    objectToDragImage.sprite = hldSprite;                    
+                { 
+                    GameObject InvObj = ((LevelManager)GameObject.FindWithTag("Canvas-LvL").GetComponent("LevelManager")).InventoryObj;
+                    Transform InvItems = InvObj.transform.Find("InventoryContain").transform.Find("InventoryItems");
+                    //Transform EquipedItems = InvObj.transform.Find("InventoryContain").transform.Find("InventoryItems").transform.Find("EquipedItems");
+                    Text MoveText;
+                    Text ReplaceText;
+                    ItemObj move = new ItemObj();
+                    ItemObj replace = new ItemObj();
+                    //ItemObj moveit = new ItemObj();
+                    //ItemObj replaceit = new ItemObj();
+                    string moveName = "";
+                    string replaceName = "";
+                    int hldItemNumber = 0;
+                    bool GoodSwap = true;
+                    bool MoveEquiped = false;
+                    bool ReplaceEquiped = false;
+
+                    if (objectToDrag.gameObject.tag == Dragable_TagEuiped || objecttoreplace.gameObject.tag == Dragable_TagEuiped)
+                    {
+
+                        String hldTextNameDrag = "";
+                        String hldTextNameReplace = "";
+
+                        if (objectToDrag.gameObject.tag == Dragable_TagEuiped)
+                        {
+                            move = DataManger.EquipedItems.Find(x => x.InvSlot == objectToDrag.name);
+                            
+                            hldTextNameDrag = objectToDrag.name;
+                            if (move.ItemNumber != 0)
+                            {
+                                moveName = DataManger.AllItems.Find(x => x.ItemNumber == move.ItemNumber).Name;
+                            }
+                            MoveText = null;
+                            MoveEquiped = true;
+                        }
+                        else
+                        {
+                            move = DataManger.playerItems.Find(x => x.InvSlot == objectToDrag.name);                            
+                            hldTextNameDrag = "Text " + objectToDrag.name.Split(' ')[1];
+                            if (move.ItemNumber != 0)
+                            {
+                                moveName = DataManger.AllItems.Find(x => x.ItemNumber == move.ItemNumber).Name;
+                            }
+                            MoveText = InvItems.transform.Find(hldTextNameDrag).GetComponent<Text>();
+                        }
+
+                        if (objecttoreplace.gameObject.tag == Dragable_TagEuiped)
+                        {
+                            replace = DataManger.EquipedItems.Find(x => x.InvSlot == objecttoreplace.name);
+                            hldTextNameReplace = objecttoreplace.name;
+                            if (replace.ItemNumber != 0)
+                            {
+                                replaceName = DataManger.AllItems.Find(x => x.ItemNumber == replace.ItemNumber).Name;
+                            }
+                            ReplaceText = null;
+                            ReplaceEquiped = true;
+                        }
+                        else
+                        {
+                            replace = DataManger.playerItems.Find(x => x.InvSlot == objecttoreplace.name);
+                            hldTextNameReplace = "Text " + objecttoreplace.name.Split(' ')[1];
+                            if (replace.ItemNumber != 0)
+                            {
+                                replaceName = DataManger.AllItems.Find(x => x.ItemNumber == replace.ItemNumber).Name;
+                            }
+                            ReplaceText = InvItems.transform.Find(hldTextNameReplace).GetComponent<Text>();
+                        }
+
+                        if (MoveEquiped && replace.ItemNumber != 0)
+                        {
+                            if (hldTextNameDrag != DataManger.AllItems.Find(x => x.ItemNumber == replace.ItemNumber).Type
+                                && hldTextNameDrag != DataManger.AllItems.Find(x => x.ItemNumber == replace.ItemNumber).AltType1
+                                && hldTextNameDrag != DataManger.AllItems.Find(x => x.ItemNumber == replace.ItemNumber).AltType2)
+                            {
+                                GoodSwap = false;
+                            }
+                        }
+                        if (ReplaceEquiped && move.ItemNumber != 0)
+                        {
+                            if (hldTextNameReplace != DataManger.AllItems.Find(x => x.ItemNumber == move.ItemNumber).Type
+                                && hldTextNameReplace != DataManger.AllItems.Find(x => x.ItemNumber == move.ItemNumber).AltType1
+                                && hldTextNameReplace != DataManger.AllItems.Find(x => x.ItemNumber == move.ItemNumber).AltType2)
+                            {
+                                GoodSwap = false;
+                            }
+                        }
+
+                        if (GoodSwap)
+                        {
+                            if (MoveText != null)
+                            {
+                                MoveText.text = replaceName;
+                            }
+                            if (ReplaceText != null)
+                            {
+                                ReplaceText.text = moveName;
+                            }
+                            hldItemNumber = move.ItemNumber;
+                            move.ItemNumber = replace.ItemNumber;
+                            replace.ItemNumber = hldItemNumber;
+                        }
+                    }
+                    else
+                    {
+                        String hldTextNameDrag = "Text " + objectToDrag.name.Split(' ')[1];
+                        String hldTextNameReplace = "Text " + objecttoreplace.name.Split(' ')[1];
+                                              
+                        move = DataManger.playerItems.Find(x => x.InvSlot == objectToDrag.name);
+                        if (move.ItemNumber != 0)
+                        {
+                            moveName = DataManger.AllItems.Find(x => x.ItemNumber == move.ItemNumber).Name;
+                        }
+                        replace = DataManger.playerItems.Find(x => x.InvSlot == objecttoreplace.name);
+                        if (replace.ItemNumber != 0)
+                        {
+                            replaceName = DataManger.AllItems.Find(x => x.ItemNumber == replace.ItemNumber).Name;
+                        }
+
+                        InvItems.transform.Find(hldTextNameDrag).GetComponent<Text>().text = replaceName;
+                        InvItems.transform.Find(hldTextNameReplace).GetComponent<Text>().text = moveName;
+
+                        hldItemNumber = move.ItemNumber;
+                        move.ItemNumber = replace.ItemNumber;
+                        replace.ItemNumber = hldItemNumber;
+                    }
+
+                    if (GoodSwap)
+                    {
+                        Sprite hldSprite = objecttoreplace.GetComponentInParent<Image>().sprite;
+                        objecttoreplace.GetComponentInParent<Image>().sprite = objectToDragImage.sprite;
+                        objectToDragImage.sprite = hldSprite;
+                    }
+
                     objectToDrag.position = OrgPosition;
-
-                    //ItemObj move = new ItemObj();
-                    //ItemObj replace = new ItemObj();                   
-                    //move = DataManger.playerItems.Find(x => x.InvSlot == objectToDrag.name);                    
-                    //replace = DataManger.playerItems.Find(x => x.InvSlot == objecttoreplace.name);
-                    //print(move.Order + " " + replace.Order);
-                    //print(DataManger.playerItems[move.Order].InvSlot);
-                    //DataManger.playerItems[move.Order] = replace;
-                    //DataManger.playerItems[replace.Order] = move;
-
                 }
                 else
                 {
@@ -89,6 +209,7 @@ public class UIDragger : MonoBehaviour {
                 objectToDrag = null;
             }
             dragging = false;
+            DataManger.populatePlayerStats();
         }
 	}
 

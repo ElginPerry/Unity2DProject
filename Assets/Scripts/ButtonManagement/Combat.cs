@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using Professor.Class;
 
 public class Combat : MonoBehaviour
 {
@@ -16,24 +17,31 @@ public class Combat : MonoBehaviour
 
     Animator Panim;
     Animator Manim;
+
+    ItemObj bonus;
     public void MeleeClicked()
     {
+        bonus = DataManger.GearBonus();
         MeleeFun(1);
     }
     public void FireClicked()
     {
+        bonus = DataManger.GearBonus();
         FireFun(1);
     }
     public void IceClicked()
     {
+        bonus = DataManger.GearBonus();
         IceFun(1);
     }
     public void HealClicked()
     {
+        bonus = DataManger.GearBonus();
         HealFun(1);
     }
     public void EscapeClicked()
     {
+        bonus = DataManger.GearBonus();
         Resume();
     }
 
@@ -65,8 +73,8 @@ public class Combat : MonoBehaviour
     public void MeleeFun(int who)
     {
         if (who == 1)
-        {
-            float Patk = DataManger.playerobj.MeleeAtk;
+        {            
+            float Patk = DataManger.playerobj.MeleeAtk + bonus.MeleeAtk;
             MonsterScript mscript = (MonsterScript)GameObject.Find(DataManger.playerobj.Enemy).GetComponent("MonsterScript");
             float Mdef = mscript.Monsterobj.MeleeDef;
             float damage = 0;
@@ -84,7 +92,7 @@ public class Combat : MonoBehaviour
         }
         else
         {
-            float Pdef = DataManger.playerobj.MeleeDef;
+            float Pdef = DataManger.playerobj.MeleeDef + bonus.MeleeDef;
             MonsterScript mscript = (MonsterScript)GameObject.Find(DataManger.playerobj.Enemy).GetComponent("MonsterScript");
             float Matk = mscript.Monsterobj.MeleeAtk;
             float damage = 0;
@@ -104,7 +112,7 @@ public class Combat : MonoBehaviour
     {
         if (who == 1)
         {
-            float Patk = DataManger.playerobj.FireAtk;
+            float Patk = DataManger.playerobj.FireAtk + bonus.FireAtk;
             MonsterScript mscript = (MonsterScript)GameObject.Find(DataManger.playerobj.Enemy).GetComponent("MonsterScript");
             float Mdef = mscript.Monsterobj.FireDef;
             float damage = 0;
@@ -122,7 +130,7 @@ public class Combat : MonoBehaviour
         }
         else
         {
-            float Pdef = DataManger.playerobj.FireDef;
+            float Pdef = DataManger.playerobj.FireDef + bonus.FireDef;
             MonsterScript mscript = (MonsterScript)GameObject.Find(DataManger.playerobj.Enemy).GetComponent("MonsterScript");
             float Matk = mscript.Monsterobj.FireAtk;
             float damage = 0;
@@ -142,7 +150,7 @@ public class Combat : MonoBehaviour
     {
         if (who == 1)
         {
-            float Patk = DataManger.playerobj.IceAtk;
+            float Patk = DataManger.playerobj.IceAtk + bonus.IceAtk;
             MonsterScript mscript = (MonsterScript)GameObject.Find(DataManger.playerobj.Enemy).GetComponent("MonsterScript");
             float Mdef = mscript.Monsterobj.IceDef;
             float damage = 0;
@@ -160,7 +168,7 @@ public class Combat : MonoBehaviour
         }
         else
         {
-            float Pdef = DataManger.playerobj.IceDef;
+            float Pdef = DataManger.playerobj.IceDef + bonus.IceDef;
             MonsterScript mscript = (MonsterScript)GameObject.Find(DataManger.playerobj.Enemy).GetComponent("MonsterScript");
             float Matk = mscript.Monsterobj.IceAtk;
             float damage = 0;
@@ -182,7 +190,7 @@ public class Combat : MonoBehaviour
         {
             float MaxHealth = DataManger.playerobj.MaxHealth;
             float Health = DataManger.playerobj.Health;
-            float Pheal = DataManger.playerobj.Heal;
+            float Pheal = DataManger.playerobj.Heal + bonus.Heal;
             if (MaxHealth > Health)
             {
                 float increase = Pheal * 10;
@@ -226,9 +234,9 @@ public class Combat : MonoBehaviour
     public void Enemyturn()
     {
         MonsterScript mscript = (MonsterScript)GameObject.Find(DataManger.playerobj.Enemy).GetComponent("MonsterScript");
-        float mdif = mscript.Monsterobj.MeleeAtk - DataManger.playerobj.MeleeDef;
-        float fdif = mscript.Monsterobj.FireAtk - DataManger.playerobj.FireDef;
-        float idif = mscript.Monsterobj.IceAtk - DataManger.playerobj.IceDef;
+        float mdif = mscript.Monsterobj.MeleeAtk - (DataManger.playerobj.MeleeDef + bonus.MeleeDef);
+        float fdif = mscript.Monsterobj.FireAtk - (DataManger.playerobj.FireDef + bonus.FireDef);
+        float idif = mscript.Monsterobj.IceAtk - (DataManger.playerobj.IceDef + bonus.IceDef);
         if (mdif >= fdif)
         {
             if (mdif >= idif)

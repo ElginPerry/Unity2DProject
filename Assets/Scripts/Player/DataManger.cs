@@ -15,6 +15,8 @@ public class DataManger : MonoBehaviour {
     public static AudioSource audioSource = new AudioSource();
     public static LootInfo lootInfo = new LootInfo();
     public static List<ItemObj> playerItems = new List<ItemObj>();
+    public static List<ItemObj> EquipedItems = new List<ItemObj>();
+    public static List<LevelSettings> levelSettings = new List<LevelSettings>();
 
 
 
@@ -88,16 +90,28 @@ public class DataManger : MonoBehaviour {
             anim.enabled = false;
             Panim.enabled = false;
 
+            ItemObj bonus = GearBonus();
             Pname.text = DataManger.playerobj.Name;
             Phealth.text = DataManger.playerobj.Health.ToString();
-            Pmeleeatk.text = DataManger.playerobj.MeleeAtk.ToString();
-            Pmeleedef.text = DataManger.playerobj.MeleeDef.ToString();
-            Pfireatk.text = DataManger.playerobj.FireAtk.ToString();
-            Pfiredef.text = DataManger.playerobj.FireDef.ToString();
-            Piceatk.text = DataManger.playerobj.IceAtk.ToString();
-            Picedef.text = DataManger.playerobj.IceDef.ToString();
-            Paware.text = DataManger.playerobj.Awareness.ToString();
-            Pheal.text = DataManger.playerobj.Heal.ToString();
+            Pmeleeatk.text = (DataManger.playerobj.MeleeAtk + bonus.MeleeAtk).ToString();
+            Pmeleedef.text = (DataManger.playerobj.MeleeDef + bonus.MeleeDef).ToString();
+            Pfireatk.text = (DataManger.playerobj.FireAtk + bonus.FireAtk).ToString();
+            Pfiredef.text = (DataManger.playerobj.FireDef + bonus.FireDef).ToString();
+            Piceatk.text = (DataManger.playerobj.IceAtk + bonus.IceAtk).ToString();
+            Picedef.text = (DataManger.playerobj.IceDef + bonus.IceDef).ToString();
+            Paware.text = (DataManger.playerobj.Awareness + bonus.Awareness).ToString();
+            Pheal.text = (DataManger.playerobj.Heal + bonus.Heal).ToString();
+
+
+            //Phealth.text = DataManger.playerobj.Health.ToString();
+            //Pmeleeatk.text = DataManger.playerobj.MeleeAtk.ToString();
+            //Pmeleedef.text = DataManger.playerobj.MeleeDef.ToString();
+            //Pfireatk.text = DataManger.playerobj.FireAtk.ToString();
+            //Pfiredef.text = DataManger.playerobj.FireDef.ToString();
+            //Piceatk.text = DataManger.playerobj.IceAtk.ToString();
+            //Picedef.text = DataManger.playerobj.IceDef.ToString();
+            //Paware.text = DataManger.playerobj.Awareness.ToString();
+            //Pheal.text = DataManger.playerobj.Heal.ToString();
 
             float pch = DataManger.playerobj.Health / DataManger.playerobj.MaxHealth;
             Phealthbar.rectTransform.sizeDelta = new Vector2(pch * 100, 15);
@@ -157,17 +171,19 @@ public class DataManger : MonoBehaviour {
         Paware = InvObj.transform.Find("PlayerStats").transform.Find("AwarenessValue").GetComponent<Text>();
         Pheal = InvObj.transform.Find("PlayerStats").transform.Find("HealValue").GetComponent<Text>();
 
-        Pname.text = DataManger.playerobj.Name;
-        Phealth.text = DataManger.playerobj.Health.ToString();
-        PMhealth.text = DataManger.playerobj.MaxHealth.ToString();
-        Pmeleeatk.text = DataManger.playerobj.MeleeAtk.ToString();
-        Pmeleedef.text = DataManger.playerobj.MeleeDef.ToString();
-        Pfireatk.text = DataManger.playerobj.FireAtk.ToString();
-        Pfiredef.text = DataManger.playerobj.FireDef.ToString();
-        Piceatk.text = DataManger.playerobj.IceAtk.ToString();
-        Picedef.text = DataManger.playerobj.IceDef.ToString();
-        Paware.text = DataManger.playerobj.Awareness.ToString();
-        Pheal.text = DataManger.playerobj.Heal.ToString();
+        ItemObj bonus = GearBonus();
+
+        Pname.text = DataManger.playerobj.Name; 
+        Phealth.text = DataManger.playerobj.Health.ToString();       
+        PMhealth.text = (DataManger.playerobj.MaxHealth + bonus.MaxHealth).ToString();
+        Pmeleeatk.text = (DataManger.playerobj.MeleeAtk + bonus.MeleeAtk).ToString();
+        Pmeleedef.text = (DataManger.playerobj.MeleeDef + bonus.MeleeDef).ToString();
+        Pfireatk.text = (DataManger.playerobj.FireAtk + bonus.FireAtk).ToString();
+        Pfiredef.text = (DataManger.playerobj.FireDef + bonus.FireDef).ToString();
+        Piceatk.text = (DataManger.playerobj.IceAtk + bonus.IceAtk).ToString();
+        Picedef.text = (DataManger.playerobj.IceDef + bonus.IceDef).ToString();
+        Paware.text = (DataManger.playerobj.Awareness + bonus.Awareness).ToString();
+        Pheal.text = (DataManger.playerobj.Heal + bonus.Heal).ToString();
 
     }
 
@@ -177,11 +193,22 @@ public class DataManger : MonoBehaviour {
         Transform InvItems = InvObj.transform.Find("InventoryContain").transform.Find("InventoryItems");
         for (int i = 0; i < 24; i++)
         {
-            if (playerItems[i].Sprite != null)
+            if (playerItems[i].ItemNumber != 0)
             {
-                InvItems.transform.Find("Image (" + i.ToString() + ")").GetComponent<Image>().sprite = playerItems[i].Sprite;
-                InvItems.transform.Find("Text (" + i.ToString() + ")").GetComponent<Text>().text = playerItems[i].Name;
+                ItemObj it = DataManger.AllItems.Find(x => x.ItemNumber == playerItems[i].ItemNumber);
+                InvItems.transform.Find("Image (" + i.ToString() + ")").GetComponent<Image>().sprite = it.Sprite;
+                InvItems.transform.Find("Text (" + i.ToString() + ")").GetComponent<Text>().text = it.Name;
             }
+        }
+        Transform EquipedItemsTrans = InvObj.transform.Find("InventoryContain").transform.Find("InventoryItems").transform.Find("EquipedItems");
+        foreach ( ItemObj eit in EquipedItems)
+        {
+            if (eit.ItemNumber != 0)
+            {
+                ItemObj ei = AllItems.Find(x => x.ItemNumber == eit.ItemNumber);
+                EquipedItemsTrans.transform.Find(eit.InvSlot).GetComponent<Image>().sprite = ei.Sprite; 
+            }
+
         }
     }
 
@@ -196,10 +223,11 @@ public class DataManger : MonoBehaviour {
             ro.position = Monsterobj.position;
             ro.RespawnTime = Monsterobj.Respawn;
             ro.Process = false;
-            DataManger.playerlevelobj.Exp += Monsterobj.EXP;
-            DataManger.respawnObjs.Add(ro);             
+            respawnObjs.Add(ro);
+            playerlevelobj.Exp += Monsterobj.EXP;
+            LevelCalc();
             Destroy(monster);
-            print("EXP:" + DataManger.playerlevelobj.Exp.ToString());
+            //print("EXP:" + DataManger.playerlevelobj.Exp.ToString());
             Combat cscript = (Combat)CombatPanel.GetComponent("Combat");
             cscript.Resume();
             CheckLoot();
@@ -222,55 +250,85 @@ public class DataManger : MonoBehaviour {
         DisplayLootObj.SetActive(false);
     }
 
+    public static void SetupLevelRequirements()
+    {
+        for(int i = 1; i < 30; i++)
+        {
+            LevelSettings ls = new LevelSettings();
+            ls.Level = i;
+            ls.ExpRequired = 3000 * i;
+            levelSettings.Add(ls);
+        }
+    }
     public static void Setupitems()
     {
+        int i = 0;
         ItemObj it = new ItemObj();
         it.Sprite = Resources.Load<Sprite>("Items/Staffs/Aqua Staff");
         it.Name = "Ice Staff";
+        it.Type = "MainHand";
+        it.AltType1 = "OffHand";
         it.IceAtk = 5;
         it.IceDef = 3;
+        i++;
+        it.ItemNumber = i;
         AllItems.Add(it);
 
         it = new ItemObj();
         it.Sprite = Resources.Load<Sprite>("Items/Staffs/Red Staff");
         it.Name = "Fire Staff";
-        it.Type = "Weapon";
+        it.Type = "MainHand";
+        it.AltType1 = "OffHand";
         it.FireAtk = 5;
         it.FireDef = 3;
+        i++;
+        it.ItemNumber = i++;
         AllItems.Add(it);
 
         it = new ItemObj();
         it.Sprite = Resources.Load<Sprite>("Items/Staffs/Green Staff");
         it.Name = "Heal Staff";
-        it.Type = "Weapon";
+        it.Type = "MainHand";
+        it.AltType1 = "OffHand";
         it.Heal = 3;
         it.MeleeAtk = 3;
         it.MeleeDef = 3;
+        i++;
+        it.ItemNumber = i++;
         AllItems.Add(it);
 
         it = new ItemObj();
         it.Sprite = Resources.Load<Sprite>("Items/Staffs/Blue Staff");
         it.Name = "Greater Ice Staff";
-        it.Type = "Weapon";
+        it.Type = "MainHand";
+        it.AltType1 = "OffHand";
         it.IceAtk = 10;
         it.IceDef = 6;
+        i++;
+        it.ItemNumber = i++;
         AllItems.Add(it);
 
         it = new ItemObj();
         it.Sprite = Resources.Load<Sprite>("Items/Staffs/Yellow Staff");
         it.Name = "Greater Fire Staff";
-        it.Type = "Weapon";
+        it.Type = "MainHand";
+        it.AltType1 = "OffHand";
         it.FireAtk = 10;
         it.FireDef = 6;
+        i++;
+        it.ItemNumber = i++;
         AllItems.Add(it);
 
         it = new ItemObj();
         it.Sprite = Resources.Load<Sprite>("Items/Staffs/Purple Staff");
         it.Name = "Greater Heal Staff";
-        it.Type = "Weapon";
+        it.Type = "MainHand";
+        it.AltType1 = "OffHand";
         it.Heal = 6;
         it.MeleeAtk = 6;
         it.MeleeDef = 6;
+        i++;
+        it.ItemNumber = i++;
         AllItems.Add(it);
 
         it = new ItemObj();
@@ -280,6 +338,8 @@ public class DataManger : MonoBehaviour {
         it.IceDef = 6;
         it.FireDef = 2;
         it.MeleeDef = 3;
+        i++;
+        it.ItemNumber = i++;
         AllItems.Add(it);
 
         it = new ItemObj();
@@ -289,6 +349,8 @@ public class DataManger : MonoBehaviour {
         it.IceDef = 2;
         it.FireDef = 6;
         it.MeleeDef = 3;
+        i++;
+        it.ItemNumber = i++;
         AllItems.Add(it);
 
         it = new ItemObj();
@@ -298,6 +360,8 @@ public class DataManger : MonoBehaviour {
         it.IceDef = 5;
         it.FireDef = 3;
         it.MeleeDef = 3;
+        i++;
+        it.ItemNumber = i++;
         AllItems.Add(it);
 
         it = new ItemObj();
@@ -307,16 +371,86 @@ public class DataManger : MonoBehaviour {
         it.IceDef = 5;
         it.FireDef = 3;
         it.MeleeDef = 3;
+        i++;
+        it.ItemNumber = i++;
         AllItems.Add(it);
+    }
 
+    public static void SetupInventory()
+    {
         for (int i = 0; i < 24; i++)
         {
-            it = new ItemObj();
+            ItemObj it = new ItemObj();
             it.InvSlot = "Image (" + i.ToString() + ")";
             it.Order = i;
             playerItems.Add(it);
         }
+
+        for (int i = 0; i < 8; i++)
+        {
+            ItemObj it = new ItemObj();
+            if (i == 0)
+            {
+                it.InvSlot = "Chest";
+            }
+            else if (i == 1)
+            {
+                it.InvSlot = "Head";
+            }
+            else if (i == 2)
+            {
+                it.InvSlot = "OffHand";
+            }
+            else if (i == 3)
+            {
+                it.InvSlot = "MainHand";
+            }
+            else if (i == 4)
+            {
+                it.InvSlot = "Feet";
+            }
+            else if (i == 5)
+            {
+                it.InvSlot = "Potion (0)";
+            }
+            else if (i == 6)
+            {
+                it.InvSlot = "Potion (1)";
+            }
+            else if (i == 7)
+            {
+                it.InvSlot = "Potion (2)";
+            }
+            it.Order = i;
+            EquipedItems.Add(it);
+        }
     }
 
+    public static ItemObj GearBonus()
+    {
+        ItemObj bonus = new ItemObj();
+        foreach (ItemObj it in EquipedItems)
+        {
+            if (it.ItemNumber != 0)
+            {
+                ItemObj ait = AllItems.Find(x => x.ItemNumber == it.ItemNumber);
+                bonus.MaxHealth += ait.MaxHealth;
+                bonus.MeleeAtk += ait.MeleeAtk;
+                bonus.MeleeDef += ait.MeleeDef;
+                bonus.FireAtk += ait.FireAtk;
+                bonus.FireDef += ait.FireDef;
+                bonus.IceAtk += ait.IceAtk;
+                bonus.IceDef += ait.IceDef;
+                bonus.Awareness += ait.Awareness;
+                bonus.Heal += ait.Heal;
+            }
+        }
+        return bonus;
+    }
+
+    public static void LevelCalc()
+    {
+
+    }
 }
 

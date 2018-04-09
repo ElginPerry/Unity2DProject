@@ -29,15 +29,20 @@ public class ButtonManagement : MonoBehaviour {
         LootObj.SetActive(false);
         GameObject DisplayLootObj = ((LevelManager)GameObject.FindWithTag("Canvas-LvL").GetComponent("LevelManager")).DisplayLoot;
         DisplayLootObj.SetActive(true);
-        List<ItemObj> noHave = DataManger.AllItems.Except(DataManger.playerItems).ToList();
+
+        //Filter Items in List - TODO
+        List<ItemObj> noHave = DataManger.AllItems;
         float cnt = noHave.Count;
-        int f = Mathf.RoundToInt(Random.Range(0, cnt));
+        int f = Mathf.RoundToInt(Random.Range(0, cnt-1));
         ((LevelManager)GameObject.FindWithTag("Canvas-LvL").GetComponent("LevelManager")).LootImage.sprite = noHave[f].Sprite;
         string Loottxt = DataManger.AllItems[f].Name + "\n +" + DataManger.lootInfo.EXP + " EXP";
         ((LevelManager)GameObject.FindWithTag("Canvas-LvL").GetComponent("LevelManager")).LootText.text = Loottxt;
-        ItemObj newitem = noHave[f];
-        int Order = DataManger.playerItems.FindAll(x => x.Sprite == null).OrderBy(x => x.Order).First<ItemObj>().Order;
-        DataManger.playerItems[Order] = newitem;
+
+        ItemObj newitem = new ItemObj();
+        newitem = noHave[f];
+
+        int Order = DataManger.playerItems.FindAll(x => x.ItemNumber == 0).OrderBy(x => x.Order).First<ItemObj>().Order;
+        DataManger.playerItems[Order].ItemNumber = newitem.ItemNumber;
     }
 
     public void CollectLoot()

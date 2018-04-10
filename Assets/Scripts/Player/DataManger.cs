@@ -158,6 +158,8 @@ public class DataManger : MonoBehaviour {
         Text Paware;
         Text Pheal;
         Text PMhealth;
+        Text PLevel;
+        Image PCurrentEXP;
 
         Pname = InvObj.transform.Find("PlayerStats").transform.Find("Name").GetComponent<Text>();
         Phealth = InvObj.transform.Find("PlayerStats").transform.Find("HealthValue").GetComponent<Text>();
@@ -170,6 +172,8 @@ public class DataManger : MonoBehaviour {
         Picedef = InvObj.transform.Find("PlayerStats").transform.Find("IceDefValue").GetComponent<Text>();
         Paware = InvObj.transform.Find("PlayerStats").transform.Find("AwarenessValue").GetComponent<Text>();
         Pheal = InvObj.transform.Find("PlayerStats").transform.Find("HealValue").GetComponent<Text>();
+        PLevel = InvObj.transform.Find("PlayerStats").transform.Find("LevelValue").GetComponent<Text>();
+        PCurrentEXP = InvObj.transform.Find("PlayerStats").transform.Find("EXPBar").GetComponent<Image>();
 
         ItemObj bonus = GearBonus();
 
@@ -184,6 +188,9 @@ public class DataManger : MonoBehaviour {
         Picedef.text = (DataManger.playerobj.IceDef + bonus.IceDef).ToString();
         Paware.text = (DataManger.playerobj.Awareness + bonus.Awareness).ToString();
         Pheal.text = (DataManger.playerobj.Heal + bonus.Heal).ToString();
+        PLevel.text = DataManger.playerlevelobj.Level.ToString();
+        float PEpercent = DataManger.playerlevelobj.CurrentExp / DataManger.playerlevelobj.NeededExp;
+        PCurrentEXP.rectTransform.sizeDelta = new Vector2(PEpercent * 100, 15);
 
     }
 
@@ -210,8 +217,27 @@ public class DataManger : MonoBehaviour {
             }
 
         }
+        populateEquipedDisplay();
     }
 
+    public static void populateEquipedDisplay()
+    {
+        Transform EquipedItemsTrans = GameObject.Find("EquipedDisplay").transform;
+        foreach (ItemObj eit in EquipedItems)
+        {
+            if (eit.ItemNumber != 0)
+            {
+                ItemObj ei = AllItems.Find(x => x.ItemNumber == eit.ItemNumber);
+                EquipedItemsTrans.transform.Find(eit.InvSlot).GetComponent<Image>().sprite = ei.Sprite;
+            }
+            else
+            {
+                EquipedItemsTrans.transform.Find(eit.InvSlot).GetComponent<Image>().sprite = null;
+            }
+
+        }
+
+    }
     public static void DeathScript(GameObject player, GameObject monster, CharacterOBJ Monsterobj, GameObject CombatPanel)
     {
         if (Monsterobj.Health <= 0)
@@ -256,10 +282,11 @@ public class DataManger : MonoBehaviour {
         {
             LevelSettings ls = new LevelSettings();
             ls.Level = i;
-            ls.ExpRequired = 3000 * i;
+            ls.ExpRequired = 3000 * (i-1);
             levelSettings.Add(ls);
         }
     }
+
     public static void Setupitems()
     {
         int i = 0;
@@ -450,7 +477,23 @@ public class DataManger : MonoBehaviour {
 
     public static void LevelCalc()
     {
-
+        int flag = 0;
+        foreach( LevelSettings ls in levelSettings)
+        {
+            if (ls.ExpRequired < playerlevelobj.Exp)
+            {
+                playerlevelobj.Level = ls.Level;
+                playerlevelobj.CurrentExp = playerlevelobj.Exp - ls.ExpRequired;
+            }
+            else
+            {
+                if (flag == 0)
+                {
+                    flag = 1;
+                    playerlevelobj.NeededExp = ls.ExpRequired;
+                }
+            }
+        }
     }
 }
 

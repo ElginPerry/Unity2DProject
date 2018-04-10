@@ -8,6 +8,8 @@ namespace Professor.Class
     {
         public float Level { get; set; }
         public float Exp { get; set; }
+        public float NeededExp { get; set; }
+        public float CurrentExp { get; set; }
         public float Awareness { get; set; }
         public float MeleeAtk { get; set; }
         public float MeleeDef { get; set; }
@@ -21,6 +23,8 @@ namespace Professor.Class
         {
             this.Level = 1;
             this.Exp = 0;
+            this.NeededExp = 0;
+            this.CurrentExp = 0;
             this.Awareness = 1;
             this.MeleeAtk = 1;
             this.MeleeDef = 1;

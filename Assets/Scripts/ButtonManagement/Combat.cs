@@ -198,6 +198,7 @@ public class Combat : MonoBehaviour
                 {
                     increase = MaxHealth - Health;
                 }
+                increase = Mathf.Round(increase);
                 DataManger.playerobj.Health += increase;
                 playerStats.transform.Find("Action").GetComponent<Image>().sprite = HealAction;
                 playerStats.transform.Find("ActionLabel").GetComponent<Text>().text = "Heal";

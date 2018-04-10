@@ -210,6 +210,7 @@ public class UIDragger : MonoBehaviour {
             }
             dragging = false;
             DataManger.populatePlayerStats();
+            DataManger.populateEquipedDisplay();
         }
 	}
 

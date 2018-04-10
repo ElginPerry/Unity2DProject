@@ -314,6 +314,7 @@ MonoBehaviour:
   CombatPanel: {fileID: 0}
   Player: {fileID: 0}
   MonsterType: 3
+  MoveSpeed: 0
   moveEnabled: 1
 --- !u!212 &212684464394670062
 SpriteRenderer:

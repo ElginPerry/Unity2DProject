@@ -18,6 +18,9 @@ public class Combat : MonoBehaviour
     Animator Panim;
     Animator Manim;
 
+    float hldPlayerHeal = 0;
+    float hldMonsterDamage = 0;
+
     ItemObj bonus;
     public void MeleeClicked()
     {
@@ -85,9 +88,11 @@ public class Combat : MonoBehaviour
             mscript.Monsterobj.Health -= damage;
             playerStats.transform.Find("Action").GetComponent<Image>().sprite = MeleeAction;
             playerStats.transform.Find("ActionLabel").GetComponent<Text>().text = "Melee Attack";
-            monsterStats.transform.Find("Result").GetComponent<Text>().text = damage.ToString();
+            playerStats.transform.Find("Result").GetComponent<Text>().text = damage.ToString();
             playerStats.transform.Find("HealResult").GetComponent<Text>().text = "";
-            monsterStats.transform.Find("Result").GetComponent<Text>().color = Color.red;
+            playerStats.transform.Find("Result").GetComponent<Text>().color = Color.red;
+            hldMonsterDamage = damage;
+            hldPlayerHeal = 0;
             Enemyturn();
         }
         else
@@ -103,9 +108,22 @@ public class Combat : MonoBehaviour
             DataManger.playerobj.Health -= damage;
             monsterStats.transform.Find("Action").GetComponent<Image>().sprite = MeleeAction;
             monsterStats.transform.Find("ActionLabel").GetComponent<Text>().text = "Melee Attack";
-            playerStats.transform.Find("Result").GetComponent<Text>().text = damage.ToString();
+            monsterStats.transform.Find("Result").GetComponent<Text>().text = damage.ToString();
             monsterStats.transform.Find("HealResult").GetComponent<Text>().text = "";
-            playerStats.transform.Find("Result").GetComponent<Text>().color = Color.red;
+            monsterStats.transform.Find("Result").GetComponent<Text>().color = Color.red;
+            monsterStats.transform.Find("MonsterDamage").GetComponent<Text>().text = hldMonsterDamage.ToString();
+            monsterStats.transform.Find("MonsterDamage").GetComponent<Text>().color = Color.red;
+            if (damage - hldPlayerHeal > 0)
+            {
+                playerStats.transform.Find("PlayerDamage").GetComponent<Text>().text = (damage - hldPlayerHeal).ToString();
+                playerStats.transform.Find("PlayerDamage").GetComponent<Text>().color = Color.red;
+            }
+            else
+            {
+                playerStats.transform.Find("PlayerDamage").GetComponent<Text>().text = (hldPlayerHeal - damage).ToString();
+                playerStats.transform.Find("PlayerDamage").GetComponent<Text>().color = Color.green;
+            }
+
         }
     }
     public void FireFun(int who)
@@ -123,9 +141,11 @@ public class Combat : MonoBehaviour
             mscript.Monsterobj.Health -= damage;
             playerStats.transform.Find("Action").GetComponent<Image>().sprite = FireAction;
             playerStats.transform.Find("ActionLabel").GetComponent<Text>().text = "Fire Attack";
-            monsterStats.transform.Find("Result").GetComponent<Text>().text = damage.ToString();
+            playerStats.transform.Find("Result").GetComponent<Text>().text = damage.ToString();
             playerStats.transform.Find("HealResult").GetComponent<Text>().text = "";
-            monsterStats.transform.Find("Result").GetComponent<Text>().color = Color.red;
+            playerStats.transform.Find("Result").GetComponent<Text>().color = Color.red;
+            hldMonsterDamage = damage;
+            hldPlayerHeal = 0;
             Enemyturn();
         }
         else
@@ -141,9 +161,23 @@ public class Combat : MonoBehaviour
             DataManger.playerobj.Health -= damage;
             monsterStats.transform.Find("Action").GetComponent<Image>().sprite = FireAction;
             monsterStats.transform.Find("ActionLabel").GetComponent<Text>().text = "Fire Attack";
-            playerStats.transform.Find("Result").GetComponent<Text>().text = damage.ToString();
+            monsterStats.transform.Find("Result").GetComponent<Text>().text = damage.ToString();
             monsterStats.transform.Find("HealResult").GetComponent<Text>().text = "";
-            playerStats.transform.Find("Result").GetComponent<Text>().color = Color.red;
+            monsterStats.transform.Find("Result").GetComponent<Text>().color = Color.red;
+            monsterStats.transform.Find("MonsterDamage").GetComponent<Text>().text = hldMonsterDamage.ToString();
+            monsterStats.transform.Find("MonsterDamage").GetComponent<Text>().color = Color.red;
+            if (damage - hldPlayerHeal > 0)
+            {
+                playerStats.transform.Find("PlayerDamage").GetComponent<Text>().text = (damage - hldPlayerHeal).ToString();
+                playerStats.transform.Find("PlayerDamage").GetComponent<Text>().color = Color.red;
+            }
+            else
+            {
+                playerStats.transform.Find("PlayerDamage").GetComponent<Text>().text = (hldPlayerHeal - damage).ToString();
+                playerStats.transform.Find("PlayerDamage").GetComponent<Text>().color = Color.green;
+            }
+
+
         }
     }
     public void IceFun(int who)
@@ -161,9 +195,11 @@ public class Combat : MonoBehaviour
             mscript.Monsterobj.Health -= damage;
             playerStats.transform.Find("Action").GetComponent<Image>().sprite = IceAction;
             playerStats.transform.Find("ActionLabel").GetComponent<Text>().text = "Ice Attack";
-            monsterStats.transform.Find("Result").GetComponent<Text>().text = damage.ToString();
+            playerStats.transform.Find("Result").GetComponent<Text>().text = damage.ToString();
             playerStats.transform.Find("HealResult").GetComponent<Text>().text = "";
-            monsterStats.transform.Find("Result").GetComponent<Text>().color = Color.red;
+            playerStats.transform.Find("Result").GetComponent<Text>().color = Color.red;
+            hldMonsterDamage = damage;
+            hldPlayerHeal = 0;
             Enemyturn();
         }
         else
@@ -179,9 +215,24 @@ public class Combat : MonoBehaviour
             DataManger.playerobj.Health -= damage;
             monsterStats.transform.Find("Action").GetComponent<Image>().sprite = IceAction;
             monsterStats.transform.Find("ActionLabel").GetComponent<Text>().text = "Ice Attack";
-            playerStats.transform.Find("Result").GetComponent<Text>().text = damage.ToString();
+            monsterStats.transform.Find("Result").GetComponent<Text>().text = damage.ToString();
             monsterStats.transform.Find("HealResult").GetComponent<Text>().text = "";
-            playerStats.transform.Find("Result").GetComponent<Text>().color = Color.red;
+            monsterStats.transform.Find("Result").GetComponent<Text>().color = Color.red;
+
+            monsterStats.transform.Find("MonsterDamage").GetComponent<Text>().text = hldMonsterDamage.ToString();
+            monsterStats.transform.Find("MonsterDamage").GetComponent<Text>().color = Color.red;
+            if (damage - hldPlayerHeal > 0)
+            {
+                playerStats.transform.Find("PlayerDamage").GetComponent<Text>().text = (damage - hldPlayerHeal).ToString();
+                playerStats.transform.Find("PlayerDamage").GetComponent<Text>().color = Color.red;
+            }
+            else
+            {
+                playerStats.transform.Find("PlayerDamage").GetComponent<Text>().text = (hldPlayerHeal - damage).ToString();
+                playerStats.transform.Find("PlayerDamage").GetComponent<Text>().color = Color.green;
+            }
+
+
         }
     }
     public void HealFun(int who)
@@ -205,6 +256,8 @@ public class Combat : MonoBehaviour
                 monsterStats.transform.Find("Result").GetComponent<Text>().text = "";
                 playerStats.transform.Find("HealResult").GetComponent<Text>().text = increase.ToString();
                 playerStats.transform.Find("HealResult").GetComponent<Text>().color = Color.green;
+                hldMonsterDamage = 0;
+                hldPlayerHeal = increase;
                 Enemyturn();
             }
 
@@ -229,6 +282,19 @@ public class Combat : MonoBehaviour
                 playerStats.transform.Find("Result").GetComponent<Text>().text = "";
                 monsterStats.transform.Find("HealResult").GetComponent<Text>().text = increase.ToString();
                 monsterStats.transform.Find("HealResult").GetComponent<Text>().color = Color.green;
+                playerStats.transform.Find("PlayerDamage").GetComponent<Text>().text = hldPlayerHeal.ToString();
+                playerStats.transform.Find("PlayerDamage").GetComponent<Text>().color = Color.green;
+                
+                if (hldMonsterDamage - increase > 0)
+                {
+                    monsterStats.transform.Find("MonsterDamage").GetComponent<Text>().text = (hldMonsterDamage - increase).ToString();
+                    monsterStats.transform.Find("MonsterDamage").GetComponent<Text>().color = Color.red;
+                }
+                else
+                {
+                    monsterStats.transform.Find("MonsterDamage").GetComponent<Text>().text = (increase - hldMonsterDamage).ToString();
+                    monsterStats.transform.Find("MonsterDamage").GetComponent<Text>().color = Color.green;
+                }
             }
         }
     }

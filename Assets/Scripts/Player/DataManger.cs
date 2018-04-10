@@ -102,16 +102,112 @@ public class DataManger : MonoBehaviour {
             Paware.text = (DataManger.playerobj.Awareness + bonus.Awareness).ToString();
             Pheal.text = (DataManger.playerobj.Heal + bonus.Heal).ToString();
 
-
-            //Phealth.text = DataManger.playerobj.Health.ToString();
-            //Pmeleeatk.text = DataManger.playerobj.MeleeAtk.ToString();
-            //Pmeleedef.text = DataManger.playerobj.MeleeDef.ToString();
-            //Pfireatk.text = DataManger.playerobj.FireAtk.ToString();
-            //Pfiredef.text = DataManger.playerobj.FireDef.ToString();
-            //Piceatk.text = DataManger.playerobj.IceAtk.ToString();
-            //Picedef.text = DataManger.playerobj.IceDef.ToString();
-            //Paware.text = DataManger.playerobj.Awareness.ToString();
-            //Pheal.text = DataManger.playerobj.Heal.ToString();
+            Pname.text = DataManger.playerobj.Name;
+            Phealth.text = DataManger.playerobj.Health.ToString();
+            if (bonus.MeleeAtk > 0)
+            {
+                Pmeleeatk.color = Color.green;
+            }
+            else if (bonus.MeleeAtk < 0)
+            {
+                Pmeleeatk.color = Color.red;
+            }
+            else
+            {
+                Pmeleeatk.color = Color.black;
+            }
+            Pmeleeatk.text = (DataManger.playerobj.MeleeAtk + bonus.MeleeAtk).ToString();
+            if (bonus.MeleeDef > 0)
+            {
+                Pmeleedef.color = Color.green;
+            }
+            else if (bonus.MeleeDef < 0)
+            {
+                Pmeleedef.color = Color.red;
+            }
+            else
+            {
+                Pmeleedef.color = Color.black;
+            }
+            Pmeleedef.text = (DataManger.playerobj.MeleeDef + bonus.MeleeDef).ToString();
+            if (bonus.FireAtk > 0)
+            {
+                Pfireatk.color = Color.green;
+            }
+            else if (bonus.FireAtk < 0)
+            {
+                Pfireatk.color = Color.red;
+            }
+            else
+            {
+                Pfireatk.color = Color.black;
+            }
+            Pfireatk.text = (DataManger.playerobj.FireAtk + bonus.FireAtk).ToString();
+            if (bonus.FireDef > 0)
+            {
+                Pfiredef.color = Color.green;
+            }
+            else if (bonus.FireDef < 0)
+            {
+                Pfiredef.color = Color.red;
+            }
+            else
+            {
+                Pfiredef.color = Color.black;
+            }
+            Pfiredef.text = (DataManger.playerobj.FireDef + bonus.FireDef).ToString();
+            if (bonus.IceAtk > 0)
+            {
+                Piceatk.color = Color.green;
+            }
+            else if (bonus.IceAtk < 0)
+            {
+                Piceatk.color = Color.red;
+            }
+            else
+            {
+                Piceatk.color = Color.black;
+            }
+            Piceatk.text = (DataManger.playerobj.IceAtk + bonus.IceAtk).ToString();
+            if (bonus.IceDef > 0)
+            {
+                Picedef.color = Color.green;
+            }
+            else if (bonus.IceDef < 0)
+            {
+                Picedef.color = Color.red;
+            }
+            else
+            {
+                Picedef.color = Color.black;
+            }
+            Picedef.text = (DataManger.playerobj.IceDef + bonus.IceDef).ToString();
+            if (bonus.Awareness > 0)
+            {
+                Paware.color = Color.green;
+            }
+            else if (bonus.Awareness < 0)
+            {
+                Paware.color = Color.red;
+            }
+            else
+            {
+                Paware.color = Color.black;
+            }
+            Paware.text = (DataManger.playerobj.Awareness + bonus.Awareness).ToString();
+            if (bonus.Heal > 0)
+            {
+                Pheal.color = Color.green;
+            }
+            else if (bonus.Heal < 0)
+            {
+                Pheal.color = Color.red;
+            }
+            else
+            {
+                Pheal.color = Color.black;
+            }
+            Pheal.text = (DataManger.playerobj.Heal + bonus.Heal).ToString();
 
             float pch = DataManger.playerobj.Health / DataManger.playerobj.MaxHealth;
             Phealthbar.rectTransform.sizeDelta = new Vector2(pch * 100, 15);
@@ -178,15 +274,123 @@ public class DataManger : MonoBehaviour {
         ItemObj bonus = GearBonus();
 
         Pname.text = DataManger.playerobj.Name; 
-        Phealth.text = DataManger.playerobj.Health.ToString();       
+        Phealth.text = DataManger.playerobj.Health.ToString();
+        if (bonus.MaxHealth > 0)
+        {
+            PMhealth.color = Color.green;
+        }
+        else if (bonus.MaxHealth < 0)
+        {
+            PMhealth.color = Color.red;
+        }
+        else
+        {
+            PMhealth.color = Color.black;
+        }
         PMhealth.text = (DataManger.playerobj.MaxHealth + bonus.MaxHealth).ToString();
+        if (bonus.MeleeAtk > 0)
+        {
+            Pmeleeatk.color = Color.green;
+        }
+        else if (bonus.MeleeAtk < 0)
+        {
+            Pmeleeatk.color = Color.red;
+        }
+        else
+        {
+            Pmeleeatk.color = Color.black;
+        }
         Pmeleeatk.text = (DataManger.playerobj.MeleeAtk + bonus.MeleeAtk).ToString();
+        if (bonus.MeleeDef > 0)
+        {
+            Pmeleedef.color = Color.green;
+        }
+        else if (bonus.MeleeDef < 0)
+        {
+            Pmeleedef.color = Color.red;
+        }
+        else
+        {
+            Pmeleedef.color = Color.black;
+        }
         Pmeleedef.text = (DataManger.playerobj.MeleeDef + bonus.MeleeDef).ToString();
+        if (bonus.FireAtk > 0)
+        {
+            Pfireatk.color = Color.green;
+        }
+        else if (bonus.FireAtk < 0)
+        {
+            Pfireatk.color = Color.red;
+        }
+        else
+        {
+            Pfireatk.color = Color.black;
+        }
         Pfireatk.text = (DataManger.playerobj.FireAtk + bonus.FireAtk).ToString();
+        if (bonus.FireDef > 0)
+        {
+            Pfiredef.color = Color.green;
+        }
+        else if (bonus.FireDef < 0)
+        {
+            Pfiredef.color = Color.red;
+        }
+        else
+        {
+            Pfiredef.color = Color.black;
+        }
         Pfiredef.text = (DataManger.playerobj.FireDef + bonus.FireDef).ToString();
+        if (bonus.IceAtk > 0)
+        {
+            Piceatk.color = Color.green;
+        }
+        else if (bonus.IceAtk < 0)
+        {
+            Piceatk.color = Color.red;
+        }
+        else
+        {
+            Piceatk.color = Color.black;
+        }
         Piceatk.text = (DataManger.playerobj.IceAtk + bonus.IceAtk).ToString();
+        if (bonus.IceDef > 0)
+        {
+            Picedef.color = Color.green;
+        }
+        else if (bonus.IceDef < 0)
+        {
+            Picedef.color = Color.red;
+        }
+        else
+        {
+            Picedef.color = Color.black;
+        }
         Picedef.text = (DataManger.playerobj.IceDef + bonus.IceDef).ToString();
+        if (bonus.Awareness > 0)
+        {
+            Paware.color = Color.green;
+        }
+        else if (bonus.Awareness < 0)
+        {
+            Paware.color = Color.red;
+        }
+        else
+        {
+            Paware.color = Color.black;
+        }
         Paware.text = (DataManger.playerobj.Awareness + bonus.Awareness).ToString();
+        if (bonus.Heal > 0)
+        {
+            Pheal.color = Color.green;
+        }
+        else if (bonus.Heal < 0)
+        {
+            Pheal.color = Color.red;
+        }
+        else
+        {
+            Pheal.color = Color.black;
+        }
         Pheal.text = (DataManger.playerobj.Heal + bonus.Heal).ToString();
         PLevel.text = DataManger.playerlevelobj.Level.ToString();
         float PEpercent = DataManger.playerlevelobj.CurrentExp / DataManger.playerlevelobj.NeededExp;
@@ -309,7 +513,7 @@ public class DataManger : MonoBehaviour {
         it.FireAtk = 5;
         it.FireDef = 3;
         i++;
-        it.ItemNumber = i++;
+        it.ItemNumber = i;
         AllItems.Add(it);
 
         it = new ItemObj();
@@ -321,7 +525,7 @@ public class DataManger : MonoBehaviour {
         it.MeleeAtk = 3;
         it.MeleeDef = 3;
         i++;
-        it.ItemNumber = i++;
+        it.ItemNumber = i;
         AllItems.Add(it);
 
         it = new ItemObj();
@@ -331,8 +535,9 @@ public class DataManger : MonoBehaviour {
         it.AltType1 = "OffHand";
         it.IceAtk = 10;
         it.IceDef = 6;
+        it.EXP = 3000;
         i++;
-        it.ItemNumber = i++;
+        it.ItemNumber = i;
         AllItems.Add(it);
 
         it = new ItemObj();
@@ -342,8 +547,9 @@ public class DataManger : MonoBehaviour {
         it.AltType1 = "OffHand";
         it.FireAtk = 10;
         it.FireDef = 6;
+        it.EXP = 3000;
         i++;
-        it.ItemNumber = i++;
+        it.ItemNumber = i;
         AllItems.Add(it);
 
         it = new ItemObj();
@@ -354,6 +560,7 @@ public class DataManger : MonoBehaviour {
         it.Heal = 6;
         it.MeleeAtk = 6;
         it.MeleeDef = 6;
+        it.EXP = 3000;
         i++;
         it.ItemNumber = i++;
         AllItems.Add(it);
@@ -366,7 +573,7 @@ public class DataManger : MonoBehaviour {
         it.FireDef = 2;
         it.MeleeDef = 3;
         i++;
-        it.ItemNumber = i++;
+        it.ItemNumber = i;
         AllItems.Add(it);
 
         it = new ItemObj();
@@ -377,7 +584,7 @@ public class DataManger : MonoBehaviour {
         it.FireDef = 6;
         it.MeleeDef = 3;
         i++;
-        it.ItemNumber = i++;
+        it.ItemNumber = i;
         AllItems.Add(it);
 
         it = new ItemObj();
@@ -388,7 +595,7 @@ public class DataManger : MonoBehaviour {
         it.FireDef = 3;
         it.MeleeDef = 3;
         i++;
-        it.ItemNumber = i++;
+        it.ItemNumber = i;
         AllItems.Add(it);
 
         it = new ItemObj();
@@ -399,8 +606,153 @@ public class DataManger : MonoBehaviour {
         it.FireDef = 3;
         it.MeleeDef = 3;
         i++;
+        it.ItemNumber = i;
+        AllItems.Add(it);
+
+        it = new ItemObj();
+        it.Sprite = Resources.Load<Sprite>("Items/Armor/31");
+        it.Name = "Shield";
+        it.Type = "MainHand";
+        it.AltType1 = "OffHand";
+        it.IceDef = 2;
+        it.FireDef = 2;
+        it.MeleeDef = 6;
+        i++;
+        it.ItemNumber = i;
+        AllItems.Add(it);
+
+        it = new ItemObj();
+        it.Sprite = Resources.Load<Sprite>("Items/Armor/30");
+        it.Name = "Great Shield";
+        it.Type = "MainHand";
+        it.AltType1 = "OffHand";
+        it.IceDef = 8;
+        it.FireDef = 8;
+        it.MeleeDef = 8;
+        it.EXP = 6000;
+        i++;
         it.ItemNumber = i++;
         AllItems.Add(it);
+
+        it = new ItemObj();
+        it.Sprite = Resources.Load<Sprite>("Items/Armor/29");
+        it.Name = "Ice Shield";
+        it.Type = "MainHand";
+        it.AltType1 = "OffHand";
+        it.IceDef = 10;
+        it.FireDef = -3;
+        it.MeleeDef = 5;
+        it.EXP = 3000;
+        i++;
+        it.ItemNumber = i++;
+        AllItems.Add(it);
+
+        it = new ItemObj();
+        it.Sprite = Resources.Load<Sprite>("Items/Armor/32");
+        it.Name = "Fire Shield";
+        it.Type = "MainHand";
+        it.AltType1 = "OffHand";
+        it.IceDef = -3;
+        it.FireDef = 10;
+        it.MeleeDef = 5;
+        it.EXP = 3000;
+        i++;
+        it.ItemNumber = i++;
+        AllItems.Add(it);
+
+        it = new ItemObj();
+        it.Sprite = Resources.Load<Sprite>("Items/Armor/19");
+        it.Name = "Awareness Ring";
+        it.Type = "Potion (0)";
+        it.AltType1 = "Potion (1)";
+        it.AltType2 = "Potion (2)";
+        it.Awareness = 10;
+        it.EXP = 3000;
+        i++;
+        it.ItemNumber = i;
+        AllItems.Add(it);
+
+        it = new ItemObj();
+        it.Sprite = Resources.Load<Sprite>("Items/Armor/18");
+        it.Name = "Greater Awareness Ring";
+        it.Type = "Potion (0)";
+        it.AltType1 = "Potion (1)";
+        it.AltType2 = "Potion (2)";
+        it.Awareness = 20;
+        it.EXP = 6000;
+        i++;
+        it.ItemNumber = i;
+        AllItems.Add(it);
+
+        it = new ItemObj();
+        it.Sprite = Resources.Load<Sprite>("Items/Potions/37");
+        it.Name = "Healing Potion";
+        it.Type = "Potion (0)";
+        it.AltType1 = "Potion (1)";
+        it.AltType2 = "Potion (2)";
+        it.Heal = 10;
+        i++;
+        it.ItemNumber = i;
+        AllItems.Add(it);
+
+        it = new ItemObj();
+        it.Sprite = Resources.Load<Sprite>("Items/Potions/33");
+        it.Name = "Utility Atack Potion";
+        it.Type = "Potion (0)";
+        it.AltType1 = "Potion (1)";
+        it.AltType2 = "Potion (2)";
+        it.MeleeAtk = 3;
+        it.FireAtk = 3;
+        it.IceAtk = 3;
+        i++;
+        it.ItemNumber = i++;
+        AllItems.Add(it);
+
+        it = new ItemObj();
+        it.Sprite = Resources.Load<Sprite>("Items/Potions/34");
+        it.Name = "Melee Potion";
+        it.Type = "Potion (0)";
+        it.AltType1 = "Potion (1)";
+        it.AltType2 = "Potion (2)";
+        it.MeleeAtk = 6;
+        it.FireAtk = -2;
+        it.IceAtk = -2;
+        it.EXP = 3000;
+        i++;
+        it.ItemNumber = i;
+        AllItems.Add(it);
+
+        it = new ItemObj();
+        it.Sprite = Resources.Load<Sprite>("Items/Potions/35");
+        it.Name = "Element Potion";
+        it.Type = "Potion (0)";
+        it.AltType1 = "Potion (1)";
+        it.AltType2 = "Potion (2)";
+        it.MeleeAtk = -2;
+        it.FireAtk = 3;
+        it.IceAtk = 3;
+        it.EXP = 3000;
+        i++;
+        it.ItemNumber = i;
+        AllItems.Add(it);
+
+        it = new ItemObj();
+        it.Sprite = Resources.Load<Sprite>("Items/Potions/36");
+        it.Name = "Mighty Potion";
+        it.Type = "Potion (0)";
+        it.AltType1 = "Potion (1)";
+        it.AltType2 = "Potion (2)";
+        it.MeleeAtk = 3;
+        it.FireAtk = 3;
+        it.IceAtk = 3;
+        it.MeleeDef = 3;
+        it.FireDef = 3;
+        it.IceDef = 3; 
+        it.EXP = 6000;
+        i++;
+        it.ItemNumber = i;
+        AllItems.Add(it);
+
     }
 
     public static void SetupInventory()

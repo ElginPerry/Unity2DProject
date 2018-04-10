@@ -31,11 +31,11 @@ public class ButtonManagement : MonoBehaviour {
         DisplayLootObj.SetActive(true);
 
         //Filter Items in List - TODO
-        List<ItemObj> noHave = DataManger.AllItems;
+        List<ItemObj> noHave = DataManger.AllItems.FindAll(x => x.EXP <= DataManger.playerlevelobj.Exp);
         float cnt = noHave.Count;
         int f = Mathf.RoundToInt(Random.Range(0, cnt-1));
         ((LevelManager)GameObject.FindWithTag("Canvas-LvL").GetComponent("LevelManager")).LootImage.sprite = noHave[f].Sprite;
-        string Loottxt = DataManger.AllItems[f].Name + "\n +" + DataManger.lootInfo.EXP + " EXP";
+        string Loottxt = noHave[f].Name + "\n +" + DataManger.lootInfo.EXP + " EXP";
         ((LevelManager)GameObject.FindWithTag("Canvas-LvL").GetComponent("LevelManager")).LootText.text = Loottxt;
 
         ItemObj newitem = new ItemObj();

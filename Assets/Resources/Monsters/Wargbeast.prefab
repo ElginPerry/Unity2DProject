@@ -324,6 +324,7 @@ MonoBehaviour:
   CombatPanel: {fileID: 0}
   Player: {fileID: 0}
   MonsterType: 1
+  MoveSpeed: 0.05
   moveEnabled: 1
 --- !u!114 &114974931281714092
 MonoBehaviour:

@@ -11,6 +11,7 @@ public class MonsterScript : MonoBehaviour
     public GameObject CombatPanel;
     public GameObject Player;
     public int MonsterType;
+    public float MoveSpeed;
     Animator anim;
 
     public CharacterOBJ Monsterobj;
@@ -36,30 +37,22 @@ public class MonsterScript : MonoBehaviour
     {
         if (moveEnabled)
         {
-            if (anim.GetCurrentAnimatorStateInfo(0).IsName("WargbeastWalkup"))
+            if (anim.GetCurrentAnimatorStateInfo(0).IsName("WalkUp"))
             {
                 //Do something if this particular state is palying
-                transform.localPosition += .05f * transform.up * .08f;
+                transform.localPosition += MoveSpeed * transform.up * .08f;
             }
-            else if (anim.GetCurrentAnimatorStateInfo(0).IsName("WargbeastWalkdown"))
+            else if (anim.GetCurrentAnimatorStateInfo(0).IsName("WalkDown"))
             {
-                transform.localPosition += -.05f * transform.up * .08f;
+                transform.localPosition += -MoveSpeed * transform.up * .08f;
             }
-            else if (anim.GetCurrentAnimatorStateInfo(0).IsName("WargbeastWalkright"))
+            else if (anim.GetCurrentAnimatorStateInfo(0).IsName("WalkRight"))
             {
-                transform.localPosition += .05f * transform.right * .08f;
+                transform.localPosition += MoveSpeed * transform.right * .08f;
             }
-            else if (anim.GetCurrentAnimatorStateInfo(0).IsName("WargbeastWalkLeft"))
+            else if (anim.GetCurrentAnimatorStateInfo(0).IsName("WalkLeft"))
             {
-                transform.localPosition += -.05f * transform.right * .08f;
-            }
-            else if (anim.GetCurrentAnimatorStateInfo(0).IsName("GhostWalkRight"))
-            {
-                transform.localPosition += .07f * transform.right * .08f;
-            }
-            else if (anim.GetCurrentAnimatorStateInfo(0).IsName("GhostWalkLeft"))
-            {
-                transform.localPosition += -.07f * transform.right * .08f;
+                transform.localPosition += -MoveSpeed * transform.right * .08f;
             }
 
             if (Monsterobj.MaxHealth > Monsterobj.Health)

@@ -65,6 +65,9 @@ public class Combat : MonoBehaviour
         playerStats.transform.Find("Result").GetComponent<Text>().text = "";
         monsterStats.transform.Find("HealResult").GetComponent<Text>().text = "";
         playerStats.transform.Find("HealResult").GetComponent<Text>().text = "";
+        monsterStats.transform.Find("MonsterDamage").GetComponent<Text>().text = "";
+        playerStats.transform.Find("PlayerDamage").GetComponent<Text>().text = "";
+
         GameObject cp = GameObject.Find("CombatPanel");
         if (cp != null)
         {

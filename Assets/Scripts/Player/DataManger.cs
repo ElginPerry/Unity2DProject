@@ -227,10 +227,11 @@ public class DataManger : MonoBehaviour {
             float mch = Monsterobj.Health / Monsterobj.MaxHealth;
             Mhealthbar.rectTransform.sizeDelta = new Vector2(mch * 100, 15);
 
-            Sprite PlayerImg = Player.GetComponent<SpriteRenderer>().sprite;
+            Sprite PlayerImg = Player.GetComponent<SpriteRenderer>().sprite;            
             Sprite MonsterImg = Monster.GetComponent<SpriteRenderer>().sprite;
-            Pimg.sprite = PlayerImg;
+            Pimg.sprite = PlayerImg;            
             Mimg.sprite = MonsterImg;
+            Mimg.color = Monster.GetComponent<SpriteRenderer>().color;
             CombatPanel.SetActive(true);
         }
         else
@@ -471,7 +472,6 @@ public class DataManger : MonoBehaviour {
         }
 
     }
-
     public static void CheckLoot()
     {
         GameObject LootObj = ((LevelManager)GameObject.FindWithTag("Canvas-LvL").GetComponent("LevelManager")).LootObj;

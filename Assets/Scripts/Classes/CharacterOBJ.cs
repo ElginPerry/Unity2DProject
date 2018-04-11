@@ -33,7 +33,7 @@ namespace Professor.Class
             this.Health = 150;
             this.MaxHealth = 150;
             this.Awareness = 10;
-            this.MeleeAtk = 5;
+            this.MeleeAtk = 25;
             this.MeleeDef = 3;
             this.FireAtk = 5;
             this.FireDef = 3;
@@ -94,8 +94,8 @@ namespace Professor.Class
                 this.Health = 180;
                 this.MaxHealth = 180;
                 this.Awareness = 10;
-                this.MeleeAtk = 5;
-                this.MeleeDef = 5;
+                this.MeleeAtk = 3;
+                this.MeleeDef = 3;
                 this.FireAtk = 12;
                 this.FireDef = 6;
                 this.IceAtk = 0;
@@ -104,10 +104,160 @@ namespace Professor.Class
                 this.Respawn = 250;
                 this.EXP = 250;
                 this.position = Vector3.zero;
+                this.PreFab = "RedLizard";
+            }
+            else if (flag == 4)
+            {
+                this.Name = "";
+                this.Gold = 0;
+                this.Health = 250;
+                this.MaxHealth = 250;
+                this.Awareness = 10;
+                this.MeleeAtk = 12;
+                this.MeleeDef = 5;
+                this.FireAtk = 0;
+                this.FireDef = 2;
+                this.IceAtk = 0;
+                this.IceDef = 2;
+                this.Heal = 4;
+                this.Respawn = 300;
+                this.EXP = 300;
+                this.position = Vector3.zero;
+                this.PreFab = "GreenLizard";
+            }
+            else if (flag == 5)
+            {
+                this.Name = "";
+                this.Gold = 0;
+                this.Health = 300;
+                this.MaxHealth = 300;
+                this.Awareness = 15;
+                this.MeleeAtk = 12;
+                this.MeleeDef = 5;
+                this.FireAtk = 12;
+                this.FireDef = 5;
+                this.IceAtk = 12;
+                this.IceDef = 5;
+                this.Heal = 4;
+                this.Respawn = 350;
+                this.EXP = 350;
+                this.position = Vector3.zero;
+                this.PreFab = "GoldLizard";
+            }
+            else if (flag == 6)
+            {
+                this.Name = "";
+                this.Gold = 0;
+                this.Health = 250;
+                this.MaxHealth = 250;
+                this.Awareness = 15;
+                this.MeleeAtk = 12;
+                this.MeleeDef = 5;
+                this.FireAtk = 1;
+                this.FireDef = 5;
+                this.IceAtk = 3;
+                this.IceDef = 6;
+                this.Heal = 4;
+                this.Respawn = 300;
+                this.EXP = 300;
+                this.position = Vector3.zero;
+                this.PreFab = "WhiteWerewolf";
+            }
+            else if (flag == 7)
+            {
+                this.Name = "";
+                this.Gold = 0;
+                this.Health = 250;
+                this.MaxHealth = 250;
+                this.Awareness = 15;
+                this.MeleeAtk = 12;
+                this.MeleeDef = 5;
+                this.FireAtk = 1;
+                this.FireDef = 5;
+                this.IceAtk = 3;
+                this.IceDef = 6;
+                this.Heal = 4;
+                this.Respawn = 300;
+                this.EXP = 300;
+                this.position = Vector3.zero;
+                this.PreFab = "BlueWerewolf";
+            }
+            else if (flag == 8)
+            {
+                this.Name = "";
+                this.Gold = 0;
+                this.Health = 250;
+                this.MaxHealth = 250;
+                this.Awareness = 15;
+                this.MeleeAtk = 12;
+                this.MeleeDef = 5;
+                this.FireAtk = 1;
+                this.FireDef = 5;
+                this.IceAtk = 3;
+                this.IceDef = 6;
+                this.Heal = 4;
+                this.Respawn = 300;
+                this.EXP = 300;
+                this.position = Vector3.zero;
+                this.PreFab = "WhiteDragon";
+            }
+            else if (flag == 9)
+            {
+                this.Name = "";
+                this.Gold = 0;
+                this.Health = 250;
+                this.MaxHealth = 250;
+                this.Awareness = 15;
+                this.MeleeAtk = 12;
+                this.MeleeDef = 5;
+                this.FireAtk = 1;
+                this.FireDef = 5;
+                this.IceAtk = 3;
+                this.IceDef = 6;
+                this.Heal = 4;
+                this.Respawn = 300;
+                this.EXP = 300;
+                this.position = Vector3.zero;
+                this.PreFab = "RedDragon";
+            }
+            else if (flag == 10)
+            {
+                this.Name = "";
+                this.Gold = 0;
+                this.Health = 250;
+                this.MaxHealth = 250;
+                this.Awareness = 15;
+                this.MeleeAtk = 12;
+                this.MeleeDef = 5;
+                this.FireAtk = 1;
+                this.FireDef = 5;
+                this.IceAtk = 3;
+                this.IceDef = 6;
+                this.Heal = 4;
+                this.Respawn = 300;
+                this.EXP = 300;
+                this.position = Vector3.zero;
+                this.PreFab = "GoldWargbeast";
+            }
+            else if (flag == 11)
+            {
+                this.Name = "";
+                this.Gold = 0;
+                this.Health = 250;
+                this.MaxHealth = 250;
+                this.Awareness = 15;
+                this.MeleeAtk = 12;
+                this.MeleeDef = 5;
+                this.FireAtk = 1;
+                this.FireDef = 5;
+                this.IceAtk = 3;
+                this.IceDef = 6;
+                this.Heal = 4;
+                this.Respawn = 300;
+                this.EXP = 300;
+                this.position = Vector3.zero;
                 this.PreFab = "FantasyArcher_02A";
             }
-
-            
         }
     }
 }

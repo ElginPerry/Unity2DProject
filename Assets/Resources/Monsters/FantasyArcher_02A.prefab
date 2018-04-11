@@ -90,8 +90,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1058208349607242}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.330654, y: -3.2030606, z: 0}
-  m_LocalScale: {x: 0.18, y: 0.18, z: 1}
+  m_LocalPosition: {x: -3.0660005, y: -6.4633336, z: 0}
+  m_LocalScale: {x: 0.20000002, y: 0.20000002, z: 1}
   m_Children:
   - {fileID: 224237535918606178}
   m_Father: {fileID: 0}
@@ -111,7 +111,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: -0.49648848, y: -0.24824141}
   serializedVersion: 2
-  m_Radius: 3.3047223
+  m_Radius: 4
 --- !u!82 &82196049842648854
 AudioSource:
   m_ObjectHideFlags: 1
@@ -313,8 +313,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CombatPanel: {fileID: 0}
   Player: {fileID: 0}
-  MonsterType: 3
-  MoveSpeed: 0
+  MonsterType: 11
+  MoveSpeed: 0.5
   moveEnabled: 1
 --- !u!212 &212684464394670062
 SpriteRenderer:

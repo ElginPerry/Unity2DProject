@@ -102,7 +102,7 @@ namespace Professor.Class
                 this.IceDef = 1;
                 this.Heal = 4;
                 this.Respawn = 250;
-                this.EXP = 150;
+                this.EXP = 250;
                 this.position = Vector3.zero;
                 this.PreFab = "FantasyArcher_02A";
             }

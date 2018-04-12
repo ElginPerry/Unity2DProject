@@ -258,6 +258,44 @@ namespace Professor.Class
                 this.position = Vector3.zero;
                 this.PreFab = "FantasyArcher_02A";
             }
+            else if (flag == 12)
+            {
+                this.Name = "";
+                this.Gold = 0;
+                this.Health = 250;
+                this.MaxHealth = 250;
+                this.Awareness = 15;
+                this.MeleeAtk = 12;
+                this.MeleeDef = 5;
+                this.FireAtk = 1;
+                this.FireDef = 5;
+                this.IceAtk = 3;
+                this.IceDef = 6;
+                this.Heal = 4;
+                this.Respawn = 300;
+                this.EXP = 300;
+                this.position = Vector3.zero;
+                this.PreFab = "UndeadSolider";
+            }
+            else if (flag == 13)
+            {
+                this.Name = "";
+                this.Gold = 0;
+                this.Health = 250;
+                this.MaxHealth = 250;
+                this.Awareness = 15;
+                this.MeleeAtk = 12;
+                this.MeleeDef = 5;
+                this.FireAtk = 1;
+                this.FireDef = 5;
+                this.IceAtk = 3;
+                this.IceDef = 6;
+                this.Heal = 4;
+                this.Respawn = 300;
+                this.EXP = 300;
+                this.position = Vector3.zero;
+                this.PreFab = "GoldUndeadSolider";
+            }
         }
     }
 }

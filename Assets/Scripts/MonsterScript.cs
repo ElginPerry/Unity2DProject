@@ -43,9 +43,9 @@ public class MonsterScript : MonoBehaviour
     private void FixedUpdate()
     {
         distance = Vector3.Distance(transform.position, Player.transform.position);
-        if (distance < 50 && firerate > 5)
+        if (distance < 70 && firerate > 4)
         {
-            GameObject go = GameObject.Instantiate((GameObject)Resources.Load("Projectile/FireBall"), Vector3.zero, Quaternion.identity, gameObject.transform);
+            GameObject go = GameObject.Instantiate((GameObject)Resources.Load("Projectile/fx_fireball"), Vector3.zero, Quaternion.identity, gameObject.transform);
             go.transform.localPosition = new Vector3(0f, 0f, 0f);
             firerate = 0;
         }

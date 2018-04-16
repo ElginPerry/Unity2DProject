@@ -42,14 +42,16 @@ public class MonsterScript : MonoBehaviour
     // Update is called once per frame
     private void FixedUpdate()
     {
-        distance = Vector3.Distance(transform.position, Player.transform.position);
-        if (distance < 70 && firerate > 4)
-        {
-            GameObject go = GameObject.Instantiate((GameObject)Resources.Load("Projectile/fx_fireball"), Vector3.zero, Quaternion.identity, gameObject.transform);
-            go.transform.localPosition = new Vector3(0f, 0f, 0f);
-            firerate = 0;
-        }
-        firerate += Time.deltaTime;
+        //distance = Vector3.Distance(transform.position, Player.transform.position);
+        //if (distance < 70 && firerate > 4)
+        //{
+        //    GameObject go = GameObject.Instantiate((GameObject)Resources.Load("Projectile/fx_fireball"), Vector3.zero, Quaternion.identity, gameObject.transform);
+        //    go.transform.localPosition = new Vector3(0f, 0f, 0f);
+        //    firerate = 0;
+        //}
+        //firerate += Time.deltaTime;
+
+
         if (moveEnabled)
         {
             if (1 == 1)
@@ -159,7 +161,7 @@ public class MonsterScript : MonoBehaviour
         //print("Oops");
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerEnter2DNew(Collider2D other)
     {
         //Vector3 vectorToTarget = Player.transform.position - transform.position;
         //float angle = (Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg) + 90;
@@ -172,7 +174,7 @@ public class MonsterScript : MonoBehaviour
         //moveEnabled = false;
     }
 
-    void OnTriggerEnter2DOld(Collider2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
         GetComponent<AudioSource>().PlayScheduled(5);
         DataManger.SetupCombat(CombatPanel, Player, Monsterobj, anim, gameObject);

@@ -229,8 +229,10 @@ public class DataManger : MonoBehaviour {
 
             Sprite PlayerImg = Player.GetComponent<SpriteRenderer>().sprite;            
             Sprite MonsterImg = Monster.GetComponent<SpriteRenderer>().sprite;
-            Pimg.sprite = PlayerImg;            
-            Mimg.sprite = MonsterImg;
+            //Pimg.sprite = PlayerImg;
+            //Mimg.sprite = MonsterImg;
+            Pimg.sprite = Pscript.CombatSprite; 
+            Mimg.sprite = Mscript.CombatSprite;
             Mimg.color = Monster.GetComponent<SpriteRenderer>().color;
             //Mimg.SetNativeSize();
             //Mimg.rectTransform.sizeDelta = Monster.GetComponent<SpriteRenderer>().size;

@@ -277,6 +277,7 @@ MonoBehaviour:
   Player: {fileID: 0}
   MonsterType: 1
   MoveSpeed: 0.05
+  CombatSprite: {fileID: 21300002, guid: 7d416593d872db4408b7c8687e793e29, type: 3}
   moveEnabled: 1
 --- !u!114 &114458507895952432
 MonoBehaviour:

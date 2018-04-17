@@ -104,7 +104,7 @@ namespace Professor.Class
                 this.Respawn = 250;
                 this.EXP = 250;
                 this.position = Vector3.zero;
-                this.PreFab = "RedLizard";
+                this.PreFab = "LizardRed";
             }
             else if (flag == 4)
             {
@@ -123,7 +123,7 @@ namespace Professor.Class
                 this.Respawn = 300;
                 this.EXP = 300;
                 this.position = Vector3.zero;
-                this.PreFab = "GreenLizard";
+                this.PreFab = "LizardGreen";
             }
             else if (flag == 5)
             {
@@ -142,7 +142,7 @@ namespace Professor.Class
                 this.Respawn = 350;
                 this.EXP = 350;
                 this.position = Vector3.zero;
-                this.PreFab = "GoldLizard";
+                this.PreFab = "LizardGold";
             }
             else if (flag == 6)
             {
@@ -161,7 +161,7 @@ namespace Professor.Class
                 this.Respawn = 300;
                 this.EXP = 300;
                 this.position = Vector3.zero;
-                this.PreFab = "WhiteWerewolf";
+                this.PreFab = "WerewolfWhite";
             }
             else if (flag == 7)
             {
@@ -199,7 +199,7 @@ namespace Professor.Class
                 this.Respawn = 300;
                 this.EXP = 300;
                 this.position = Vector3.zero;
-                this.PreFab = "WhiteDragon";
+                this.PreFab = "DragonWhite";
             }
             else if (flag == 9)
             {
@@ -218,7 +218,7 @@ namespace Professor.Class
                 this.Respawn = 300;
                 this.EXP = 300;
                 this.position = Vector3.zero;
-                this.PreFab = "RedDragon";
+                this.PreFab = "DragonRed";
             }
             else if (flag == 10)
             {
@@ -237,7 +237,7 @@ namespace Professor.Class
                 this.Respawn = 300;
                 this.EXP = 300;
                 this.position = Vector3.zero;
-                this.PreFab = "GoldWargbeast";
+                this.PreFab = "WargbeastGold";
             }
             else if (flag == 11)
             {
@@ -294,7 +294,7 @@ namespace Professor.Class
                 this.Respawn = 300;
                 this.EXP = 300;
                 this.position = Vector3.zero;
-                this.PreFab = "GoldUndeadSolider";
+                this.PreFab = "UndeadSoliderGold";
             }
         }
     }

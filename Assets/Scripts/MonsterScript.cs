@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Professor.Class;
 
+
 public class MonsterScript : MonoBehaviour
 {
 
@@ -12,15 +13,14 @@ public class MonsterScript : MonoBehaviour
     public GameObject Player;
     public int MonsterType;
     public float MoveSpeed;
-    public Sprite HighY;
-    public Sprite LowY;
+    public Sprite CombatSprite;
     Animator anim;
 
     public CharacterOBJ Monsterobj;
     public bool moveEnabled = true;
     Animator Panim;
-    float distance = 100;
-    float firerate = 100;
+    //float distance = 100;
+    //float firerate = 100;
 
     private Image Mheatlh;
     private Image Maxheatlh;
@@ -50,7 +50,6 @@ public class MonsterScript : MonoBehaviour
         //    firerate = 0;
         //}
         //firerate += Time.deltaTime;
-
 
         if (moveEnabled)
         {
@@ -101,37 +100,6 @@ public class MonsterScript : MonoBehaviour
                 }
                 MoveCnt += Time.deltaTime;
             }
-            else
-            {
-                if (anim.GetCurrentAnimatorStateInfo(0).IsName("WalkUp"))
-                {
-                    //Do something if this particular state is palying
-                    transform.localPosition += MoveSpeed * transform.up * .08f;
-                }
-                else if (anim.GetCurrentAnimatorStateInfo(0).IsName("WalkDown"))
-                {
-                    transform.localPosition += -MoveSpeed * transform.up * .08f;
-                }
-                else if (anim.GetCurrentAnimatorStateInfo(0).IsName("WalkRight"))
-                {
-                    transform.localPosition += MoveSpeed * transform.right * .08f;
-                }
-                else if (anim.GetCurrentAnimatorStateInfo(0).IsName("WalkLeft"))
-                {
-                    transform.localPosition += -MoveSpeed * transform.right * .08f;
-                }
-                else if (anim.GetCurrentAnimatorStateInfo(0).IsName("Walk"))
-                {
-                    if (MoveCnt > 15)
-                    {
-                        transform.Rotate(new Vector3(0, 0, 90));
-                        MoveCnt = 0;
-                    }
-                    transform.localPosition += -MoveSpeed * transform.up * .08f;
-                    MoveCnt += Time.deltaTime;
-                }
-            }
-
 
             if (Monsterobj.MaxHealth > Monsterobj.Health)
             {
@@ -143,17 +111,6 @@ public class MonsterScript : MonoBehaviour
                 Mheatlh.rectTransform.sizeDelta = new Vector2((Monsterobj.Health / Monsterobj.MaxHealth) * Maxheatlh.rectTransform.rect.width, 1);
             }
         }
-        //else
-        //{
-        //    if (Player.transform.position.y >= transform.position.y)
-        //    {
-        //        gameObject.GetComponent<SpriteRenderer>().sprite = HighY;
-        //    }
-        //    else
-        //    {
-        //        gameObject.GetComponent<SpriteRenderer>().sprite = LowY;
-        //    }
-        //}
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

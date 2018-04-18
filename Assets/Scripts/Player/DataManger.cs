@@ -841,14 +841,13 @@ public class DataManger : MonoBehaviour {
                 playerlevelobj.Level = ls.Level;
                 playerlevelobj.CurrentExp = playerlevelobj.Exp - ls.ExpRequired;
             }
-            else
+
+            if (flag == 0 && ls.Level > playerlevelobj.Level)
             {
-                if (flag == 0)
-                {
-                    flag = 1;
-                    playerlevelobj.NeededExp = ls.ExpRequired;
-                }
+                flag = 1;
+                playerlevelobj.NeededExp = ls.ExpRequired;
             }
+
         }
     }
 }

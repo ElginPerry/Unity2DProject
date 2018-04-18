@@ -14,16 +14,18 @@ public class MonsterScript : MonoBehaviour
     public int MonsterType;
     public float MoveSpeed;
     public Sprite CombatSprite;
+    public float CombatLevel;
     Animator anim;
 
     public CharacterOBJ Monsterobj;
     public bool moveEnabled = true;
     Animator Panim;
-    //float distance = 100;
+    float distance = 100;
     //float firerate = 100;
 
     private Image Mheatlh;
     private Image Maxheatlh;
+    private Text LevelDisplay;
     private float MoveCnt = 1;
     private float MoveMod = 1;
 
@@ -35,8 +37,9 @@ public class MonsterScript : MonoBehaviour
         Monsterobj = new CharacterOBJ(MonsterType);
         Monsterobj.position = gameObject.transform.localPosition;
         Monsterobj.Name = gameObject.name;
-        Mheatlh = gameObject.transform.Find("Canvas").transform.Find("HealthBar").GetComponent<Image>();
-        Maxheatlh = gameObject.transform.Find("Canvas").transform.Find("HealthBack").GetComponent<Image>();
+        Mheatlh = gameObject.transform.Find("MonsterCanvas").transform.Find("HealthBar").GetComponent<Image>();
+        Maxheatlh = gameObject.transform.Find("MonsterCanvas").transform.Find("HealthBack").GetComponent<Image>();
+        LevelDisplay = gameObject.transform.Find("MonsterCanvas").transform.Find("LevelPanel").transform.Find("Level").GetComponent<Text>();
     }
 
     // Update is called once per frame
@@ -50,6 +53,18 @@ public class MonsterScript : MonoBehaviour
         //    firerate = 0;
         //}
         //firerate += Time.deltaTime;
+        //distance = Vector3.Distance(transform.position, Player.transform.position);
+        //if (distance > 20)
+        //{
+        //    moveEnabled = false;
+        //    gameObject.SetActive(false);            
+        //}
+        //else
+        //{
+        //    print("here");
+        //    gameObject.SetActive(true);
+        //    moveEnabled = true;
+        //}
 
         if (moveEnabled)
         {
@@ -109,6 +124,7 @@ public class MonsterScript : MonoBehaviour
                     Monsterobj.Health = Monsterobj.MaxHealth;
                 }
                 Mheatlh.rectTransform.sizeDelta = new Vector2((Monsterobj.Health / Monsterobj.MaxHealth) * Maxheatlh.rectTransform.rect.width, 1);
+                LevelDisplay.text = CombatLevel.ToString();
             }
         }
     }

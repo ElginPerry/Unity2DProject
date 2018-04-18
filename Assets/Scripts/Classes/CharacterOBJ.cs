@@ -180,7 +180,7 @@ namespace Professor.Class
                 this.Respawn = 300;
                 this.EXP = 300;
                 this.position = Vector3.zero;
-                this.PreFab = "BlueWerewolf";
+                this.PreFab = "WerewolfBlue";
             }
             else if (flag == 8)
             {

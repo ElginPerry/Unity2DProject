@@ -11,6 +11,8 @@ public class PlayerMove : MonoBehaviour {
     public bool moveEnabled = true;
     public Sprite CombatSprite;
     private Image Pheatlh;
+    private Image PExpD;
+    private Text PLevel;
 
 
     Animator animator;    
@@ -18,17 +20,21 @@ public class PlayerMove : MonoBehaviour {
     void Start () {        
         animator = GetComponent<Animator>();
         Pheatlh = gameObject.transform.Find("Canvas").transform.Find("HealthBar").GetComponent<Image>();
+        PExpD = gameObject.transform.Find("Canvas").transform.Find("ExpBar").GetComponent<Image>();
+        PLevel = gameObject.transform.Find("Canvas").transform.Find("LevelPanel").transform.Find("Level").GetComponent<Text>();
         GameObject.Find("CombatPanel").SetActive(false);
         GameObject.Find("LootObj").SetActive(false);
         GameObject.Find("InventoryObj").SetActive(false);
         GameObject.Find("DisplayLoot").SetActive(false);
         GameObject.Find("SettingsPanel").SetActive(false);
+        GameObject.Find("POPUPPanel").SetActive(false);//This keep the panel inactive
 
         DataManger.playerobj.position = gameObject.transform.localPosition;
         DataManger.audioSource = GetComponent<AudioSource>();
         DataManger.Setupitems();
         DataManger.SetupInventory();
         DataManger.SetupLevelRequirements();
+        DataManger.LevelCalc();
 
         //Sound examples
         //float vol = Random.Range(volLowRange, volHighRange);
@@ -48,9 +54,13 @@ public class PlayerMove : MonoBehaviour {
                 {
                     DataManger.playerobj.Health = DataManger.playerobj.MaxHealth;
                 }
-                Pheatlh.rectTransform.sizeDelta = new Vector2((DataManger.playerobj.Health/DataManger.playerobj.MaxHealth)*5, 1);
-            }  
+                Pheatlh.rectTransform.sizeDelta = new Vector2((DataManger.playerobj.Health/DataManger.playerobj.MaxHealth)*5, 1);                
+            }
+            PLevel.text = DataManger.playerlevelobj.Level.ToString();
+            float PEpercent = DataManger.playerlevelobj.CurrentExp / DataManger.playerlevelobj.NeededExp;
+            PExpD.rectTransform.sizeDelta = new Vector2(PEpercent * 5, .5f);
         }
+        print(DataManger.playerlevelobj.CurrentExp + " / " + DataManger.playerlevelobj.NeededExp);
     }
 
     // Update is called once per frame

@@ -73,4 +73,28 @@ public class ButtonManagement : MonoBehaviour {
             InvObj.SetActive(true);
         }
     }
+
+    public void ToggleSettings()
+    {
+        GameObject settingsPanel = ((LevelManager)GameObject.FindWithTag("Canvas-LvL").GetComponent("LevelManager")).SettingsPanel;
+
+        if (settingsPanel.activeSelf)
+        {
+            settingsPanel.SetActive(false);
+        }
+        else
+        {
+            settingsPanel.SetActive(true);
+        }
+    }
+
+    public void CloseSettings()
+    {
+        GameObject.Find("SettingsPanel").SetActive(false);
+    }
+
+    public void ExitGameClicked()
+    {
+        Application.Quit();
+    }
 }

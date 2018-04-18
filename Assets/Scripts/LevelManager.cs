@@ -10,6 +10,7 @@ public class LevelManager : MonoBehaviour {
     public GameObject LootObj;
     public GameObject InventoryObj;
     public GameObject DisplayLoot;
+    public GameObject SettingsPanel;
     public Image LootImage;
     public Text LootText;
 

@@ -22,6 +22,7 @@ public class PlayerMove : MonoBehaviour {
         GameObject.Find("LootObj").SetActive(false);
         GameObject.Find("InventoryObj").SetActive(false);
         GameObject.Find("DisplayLoot").SetActive(false);
+        GameObject.Find("SettingsPanel").SetActive(false);
 
         DataManger.playerobj.position = gameObject.transform.localPosition;
         DataManger.audioSource = GetComponent<AudioSource>();
@@ -54,6 +55,7 @@ public class PlayerMove : MonoBehaviour {
 
     // Update is called once per frame
     private void FixedUpdate () {
+        if (Input.GetKeyDown(KeyCode.Escape)) { Application.Quit(); }
 
         if (moveEnabled)
         {

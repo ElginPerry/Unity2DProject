@@ -20,7 +20,7 @@ public class MonsterScript : MonoBehaviour
     public CharacterOBJ Monsterobj;
     public bool moveEnabled = true;
     Animator Panim;
-    float distance = 100;
+    //float distance = 100;
     //float firerate = 100;
 
     private Image Mheatlh;

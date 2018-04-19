@@ -406,7 +406,7 @@ public class DataManger : MonoBehaviour {
     public static void populateInventory()
     {
         GameObject InvObj = ((LevelManager)GameObject.FindWithTag("Canvas-LvL").GetComponent("LevelManager")).InventoryObj;
-        Transform InvItems = InvObj.transform.Find("InventoryContain").transform.Find("InventoryItems");
+        Transform InvItems = InvObj.transform.Find("InvPanel").transform.Find("InventoryContain").transform.Find("InventoryItems");
         for (int i = 0; i < 24; i++)
         {
             if (playerItems[i].ItemNumber != 0)
@@ -416,7 +416,7 @@ public class DataManger : MonoBehaviour {
                 InvItems.transform.Find("Text (" + i.ToString() + ")").GetComponent<Text>().text = it.Name;
             }
         }
-        Transform EquipedItemsTrans = InvObj.transform.Find("InventoryContain").transform.Find("InventoryItems").transform.Find("EquipedItems");
+        Transform EquipedItemsTrans = InvObj.transform.Find("InvPanel").transform.Find("InventoryContain").transform.Find("InventoryItems").transform.Find("EquipedItems");
         foreach ( ItemObj eit in EquipedItems)
         {
             if (eit.ItemNumber != 0)

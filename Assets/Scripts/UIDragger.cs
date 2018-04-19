@@ -68,7 +68,7 @@ public class UIDragger : MonoBehaviour {
                 if (objecttoreplace != null)
                 { 
                     GameObject InvObj = ((LevelManager)GameObject.FindWithTag("Canvas-LvL").GetComponent("LevelManager")).InventoryObj;
-                    Transform InvItems = InvObj.transform.Find("InventoryContain").transform.Find("InventoryItems");
+                    Transform InvItems = InvObj.transform.Find("InvPanel").transform.Find("InventoryContain").transform.Find("InventoryItems");
                     //Transform EquipedItems = InvObj.transform.Find("InventoryContain").transform.Find("InventoryItems").transform.Find("EquipedItems");
                     Text MoveText;
                     Text ReplaceText;

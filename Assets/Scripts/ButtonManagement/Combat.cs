@@ -90,7 +90,7 @@ public class Combat : MonoBehaviour
             }
             mscript.Monsterobj.Health -= damage;
             playerStats.transform.Find("Action").GetComponent<Image>().sprite = MeleeAction;
-            playerStats.transform.Find("ActionLabel").GetComponent<Text>().text = "Melee Attack";
+            //playerStats.transform.Find("ActionLabel").GetComponent<Text>().text = "Melee Attack";
             playerStats.transform.Find("Result").GetComponent<Text>().text = damage.ToString();
             playerStats.transform.Find("HealResult").GetComponent<Text>().text = "";
             playerStats.transform.Find("Result").GetComponent<Text>().color = Color.red;
@@ -110,7 +110,7 @@ public class Combat : MonoBehaviour
             }
             DataManger.playerobj.Health -= damage;
             monsterStats.transform.Find("Action").GetComponent<Image>().sprite = MeleeAction;
-            monsterStats.transform.Find("ActionLabel").GetComponent<Text>().text = "Melee Attack";
+            //monsterStats.transform.Find("ActionLabel").GetComponent<Text>().text = "Melee Attack";
             monsterStats.transform.Find("Result").GetComponent<Text>().text = damage.ToString();
             monsterStats.transform.Find("HealResult").GetComponent<Text>().text = "";
             monsterStats.transform.Find("Result").GetComponent<Text>().color = Color.red;
@@ -143,7 +143,7 @@ public class Combat : MonoBehaviour
             }
             mscript.Monsterobj.Health -= damage;
             playerStats.transform.Find("Action").GetComponent<Image>().sprite = FireAction;
-            playerStats.transform.Find("ActionLabel").GetComponent<Text>().text = "Fire Attack";
+            //playerStats.transform.Find("ActionLabel").GetComponent<Text>().text = "Fire Attack";
             playerStats.transform.Find("Result").GetComponent<Text>().text = damage.ToString();
             playerStats.transform.Find("HealResult").GetComponent<Text>().text = "";
             playerStats.transform.Find("Result").GetComponent<Text>().color = Color.red;
@@ -163,7 +163,7 @@ public class Combat : MonoBehaviour
             }
             DataManger.playerobj.Health -= damage;
             monsterStats.transform.Find("Action").GetComponent<Image>().sprite = FireAction;
-            monsterStats.transform.Find("ActionLabel").GetComponent<Text>().text = "Fire Attack";
+            //monsterStats.transform.Find("ActionLabel").GetComponent<Text>().text = "Fire Attack";
             monsterStats.transform.Find("Result").GetComponent<Text>().text = damage.ToString();
             monsterStats.transform.Find("HealResult").GetComponent<Text>().text = "";
             monsterStats.transform.Find("Result").GetComponent<Text>().color = Color.red;
@@ -197,7 +197,7 @@ public class Combat : MonoBehaviour
             }
             mscript.Monsterobj.Health -= damage;
             playerStats.transform.Find("Action").GetComponent<Image>().sprite = IceAction;
-            playerStats.transform.Find("ActionLabel").GetComponent<Text>().text = "Ice Attack";
+            //playerStats.transform.Find("ActionLabel").GetComponent<Text>().text = "Ice Attack";
             playerStats.transform.Find("Result").GetComponent<Text>().text = damage.ToString();
             playerStats.transform.Find("HealResult").GetComponent<Text>().text = "";
             playerStats.transform.Find("Result").GetComponent<Text>().color = Color.red;
@@ -217,7 +217,7 @@ public class Combat : MonoBehaviour
             }
             DataManger.playerobj.Health -= damage;
             monsterStats.transform.Find("Action").GetComponent<Image>().sprite = IceAction;
-            monsterStats.transform.Find("ActionLabel").GetComponent<Text>().text = "Ice Attack";
+            //monsterStats.transform.Find("ActionLabel").GetComponent<Text>().text = "Ice Attack";
             monsterStats.transform.Find("Result").GetComponent<Text>().text = damage.ToString();
             monsterStats.transform.Find("HealResult").GetComponent<Text>().text = "";
             monsterStats.transform.Find("Result").GetComponent<Text>().color = Color.red;
@@ -255,7 +255,7 @@ public class Combat : MonoBehaviour
                 increase = Mathf.Round(increase);
                 DataManger.playerobj.Health += increase;
                 playerStats.transform.Find("Action").GetComponent<Image>().sprite = HealAction;
-                playerStats.transform.Find("ActionLabel").GetComponent<Text>().text = "Heal";
+                //playerStats.transform.Find("ActionLabel").GetComponent<Text>().text = "Heal";
                 monsterStats.transform.Find("Result").GetComponent<Text>().text = "";
                 playerStats.transform.Find("HealResult").GetComponent<Text>().text = increase.ToString();
                 playerStats.transform.Find("HealResult").GetComponent<Text>().color = Color.green;
@@ -281,7 +281,7 @@ public class Combat : MonoBehaviour
                 }
                 mscript.Monsterobj.Health += increase;
                 monsterStats.transform.Find("Action").GetComponent<Image>().sprite = HealAction;
-                monsterStats.transform.Find("ActionLabel").GetComponent<Text>().text = "Heal";
+                //monsterStats.transform.Find("ActionLabel").GetComponent<Text>().text = "Heal";
                 playerStats.transform.Find("Result").GetComponent<Text>().text = "";
                 monsterStats.transform.Find("HealResult").GetComponent<Text>().text = increase.ToString();
                 monsterStats.transform.Find("HealResult").GetComponent<Text>().color = Color.green;

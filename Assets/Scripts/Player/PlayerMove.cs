@@ -60,7 +60,6 @@ public class PlayerMove : MonoBehaviour {
             float PEpercent = DataManger.playerlevelobj.CurrentExp / DataManger.playerlevelobj.NeededExp;
             PExpD.rectTransform.sizeDelta = new Vector2(PEpercent * 5, .5f);
         }
-        print(DataManger.playerlevelobj.CurrentExp + " / " + DataManger.playerlevelobj.NeededExp);
     }
 
     // Update is called once per frame

@@ -11,12 +11,11 @@ public class ClickMovement : MonoBehaviour
     public GameObject Player;
     public float speed = 20f;
     private Vector3 target;
+    Animator animator;
 
-    private Vector2 movement;
-    private bool ClickMove = false;
     void Start()
     {
-
+        animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -28,11 +27,19 @@ public class ClickMovement : MonoBehaviour
             {
                 target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 target.z = Player.transform.position.z;
-                ClickMove = true;
+                DataManger.movementObj.ClickMove = true;
+                if (target.x > Player.transform.position.x)
+                {
+                    animator.SetFloat("hSpeed", 1);
+                }
+                else
+                {
+                    animator.SetFloat("hSpeed", -1);
+                }
             }
             else
             {
-                ClickMove = false;
+                DataManger.movementObj.ClickMove = false;
             }
         }
         
@@ -40,9 +47,12 @@ public class ClickMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (ClickMove)
+        if (DataManger.movementObj.ClickMove)
         {
-            Player.transform.position = Vector3.MoveTowards(Player.transform.position, target, speed * Time.deltaTime);
+            if (Player.transform.position != target)
+            {
+                Player.transform.position = Vector3.MoveTowards(Player.transform.position, target, speed * Time.deltaTime);
+            }
         }
     }
 }

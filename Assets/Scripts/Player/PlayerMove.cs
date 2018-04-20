@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class PlayerMove : MonoBehaviour {
 
@@ -13,12 +14,15 @@ public class PlayerMove : MonoBehaviour {
     private Image Pheatlh;
     private Image PExpD;
     private Text PLevel;
+    private Vector3 target;
+    public GameObject ClickImage;
 
-
-    Animator animator;    
+    Animator animator;
+    Animator CIanim;
     // Use this for initialization
     void Start () {        
         animator = GetComponent<Animator>();
+        CIanim = ClickImage.GetComponent<Animator>();
         Pheatlh = gameObject.transform.Find("Canvas").transform.Find("HealthBar").GetComponent<Image>();
         PExpD = gameObject.transform.Find("Canvas").transform.Find("ExpBar").GetComponent<Image>();
         PLevel = gameObject.transform.Find("Canvas").transform.Find("LevelPanel").transform.Find("Level").GetComponent<Text>();
@@ -28,6 +32,7 @@ public class PlayerMove : MonoBehaviour {
         GameObject.Find("DisplayLoot").SetActive(false);
         GameObject.Find("SettingsPanel").SetActive(false);
         GameObject.Find("POPUPPanel").SetActive(false);//This keep the panel inactive
+        
 
         DataManger.playerobj.position = gameObject.transform.localPosition;
         DataManger.audioSource = GetComponent<AudioSource>();
@@ -35,6 +40,8 @@ public class PlayerMove : MonoBehaviour {
         DataManger.SetupInventory();
         DataManger.SetupLevelRequirements();
         DataManger.LevelCalc();
+        target = transform.position;
+        ClickImage.transform.position = new Vector3(0, 0, -3);
 
         //Sound examples
         //float vol = Random.Range(volLowRange, volHighRange);
@@ -68,56 +75,117 @@ public class PlayerMove : MonoBehaviour {
 
         if (moveEnabled)
         {
-            if (Input.GetButton("Horizontal") || DataManger.movementObj.hSpeed !=0)
+            if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
             {
-                if (DataManger.movementObj.hSpeed != 0)
+                target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                target.z = transform.position.z;
+                ClickImage.transform.position = target;
+                CIanim.SetBool("Clicked", true);
+                
+                float resX = target.x - transform.position.x;
+                float resY = target.y - transform.position.y;
+                if (target.x > transform.position.x && Mathf.Abs(resX) > Mathf.Abs(resY))
                 {
-                    hSpeed = DataManger.movementObj.hSpeed;
+                    animator.SetFloat("vSpeed", 0);
+                    animator.SetFloat("hSpeed", 1);
                 }
-                else if (Input.GetAxis("Horizontal") < 0)
+                else if (target.x < transform.position.x && Mathf.Abs(resX) > Mathf.Abs(resY))
                 {
-                    hSpeed = -1;
+                    animator.SetFloat("vSpeed", 0);
+                    animator.SetFloat("hSpeed", -1);
                 }
-                else
+                else if (target.y > transform.position.y && Mathf.Abs(resY) > Mathf.Abs(resX))
                 {
-                    hSpeed = 1;
-                }                
+                    animator.SetFloat("hSpeed", 0);
+                    animator.SetFloat("vSpeed", 1);
+                }
+                else if (target.y < transform.position.y && Mathf.Abs(resY) > Mathf.Abs(resX))
+                {
+                    animator.SetFloat("hSpeed", 0);
+                    animator.SetFloat("vSpeed", -1);
+                }
+                DataManger.movementObj.ClickMove = true;
             }
             else
             {
-                hSpeed = 0;
-            }
-            animator.SetFloat("hSpeed", hSpeed);
+                #region OldMOVE
+                //DataManger.movementObj.ClickMove = false;
+                //if (Input.GetButton("Horizontal") || DataManger.movementObj.hSpeed != 0)
+                //{
+                //    if (DataManger.movementObj.hSpeed != 0)
+                //    {
+                //        hSpeed = DataManger.movementObj.hSpeed;
+                //    }
+                //    else if (Input.GetAxis("Horizontal") < 0)
+                //    {
+                //        hSpeed = -1;
+                //    }
+                //    else
+                //    {
+                //        hSpeed = 1;
+                //    }
+                //}
+                //else
+                //{
+                //    hSpeed = 0;
+                //}
 
-            if (Input.GetButton("Vertical") || DataManger.movementObj.vSpeed != 0)
+
+                //animator.SetFloat("hSpeed", hSpeed);
+
+                //if (Input.GetButton("Vertical") || DataManger.movementObj.vSpeed != 0)
+                //{
+                //    if (DataManger.movementObj.vSpeed != 0)
+                //    {
+                //        vSpeed = DataManger.movementObj.vSpeed;
+                //    }
+                //    else if (Input.GetAxis("Vertical") < 0)
+                //    {
+                //        vSpeed = -1;
+                //    }
+                //    else
+                //    {
+                //        vSpeed = 1;
+                //    }
+                //}
+                //else
+                //{
+                //    vSpeed = 0;
+                //}
+                //animator.SetFloat("vSpeed", vSpeed);
+
+                //if (hSpeed != 0)
+                //{
+                //    transform.localPosition += hSpeed * transform.right * moveSpeed;
+                //}
+                //if (vSpeed != 0)
+                //{
+                //    transform.localPosition += vSpeed * transform.up * moveSpeed;
+                //}
+                #endregion
+            }
+
+
+            if (transform.position != target && CIanim.GetBool("Clicked"))
             {
-                if (DataManger.movementObj.vSpeed != 0)
-                {
-                    vSpeed = DataManger.movementObj.vSpeed;
-                }
-                else if (Input.GetAxis("Vertical") < 0)
-                {
-                    vSpeed = -1;
-                }
-                else
-                {
-                    vSpeed = 1;
-                }
+                transform.position = Vector3.MoveTowards(transform.position, target, moveSpeed * Time.deltaTime );
             }
             else
             {
-                vSpeed = 0;
+                animator.SetFloat("hSpeed", 0);
+                animator.SetFloat("vSpeed", 0);
+                ClickImage.transform.position = new Vector3(0, 0, -3);
+                CIanim.SetBool("Clicked", false);
             }
-            animator.SetFloat("vSpeed", vSpeed);
-
-            if (hSpeed != 0)
-            {
-                transform.localPosition += hSpeed * transform.right * moveSpeed;
-            }
-            if (vSpeed !=0)
-            {
-                transform.localPosition += vSpeed * transform.up * moveSpeed;
-            }
+          
+        }
+        else
+        {
+            target = transform.position;
+            animator.SetFloat("hSpeed", 0);
+            animator.SetFloat("vSpeed", 0);
+            ClickImage.transform.position = new Vector3(0, 0, -3);
+            CIanim.SetBool("Clicked", false);
         }
     }
 }

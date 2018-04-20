@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour {
 
-    public float ProjectileSpd;
+    public float ProjectileSpd; 
+    public float Damage = 0;
     GameObject Player;
     Vector3 playerPos;
     float timeAlive = 0;
+    
+   
     // Use this for initialization
     void Start () {
         Player = GameObject.Find("Player");
@@ -31,7 +34,8 @@ public class Projectile : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        print("Gotcha");
+        print("Gotcha " + Damage.ToString() );
         Destroy(gameObject);
+        DataManger.playerobj.Health -= Damage;
     }
 }

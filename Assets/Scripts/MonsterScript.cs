@@ -20,8 +20,8 @@ public class MonsterScript : MonoBehaviour
     public CharacterOBJ Monsterobj;
     public bool moveEnabled = true;
     Animator Panim;
-    //float distance = 100;
-    //float firerate = 100;
+    float distance = 100;
+    float firerate = 100;
 
     private Image Mheatlh;
     private Image Maxheatlh;
@@ -42,22 +42,30 @@ public class MonsterScript : MonoBehaviour
         LevelDisplay = gameObject.transform.Find("MonsterCanvas").transform.Find("LevelPanel").transform.Find("Level").GetComponent<Text>();
     }
 
+    private void Update()
+    {
+
+    }
+
     // Update is called once per frame
     private void FixedUpdate()
     {
-        //distance = Vector3.Distance(transform.position, Player.transform.position);
-        //if (distance < 70 && firerate > 4)
-        //{
-        //    GameObject go = GameObject.Instantiate((GameObject)Resources.Load("Projectile/fx_fireball"), Vector3.zero, Quaternion.identity, gameObject.transform);
-        //    go.transform.localPosition = new Vector3(0f, 0f, 0f);
-        //    firerate = 0;
-        //}
-        //firerate += Time.deltaTime;
+        #region oldmove
+        distance = Vector3.Distance(transform.position, Player.transform.position);
+        if (distance < 70 && firerate > 4)
+        {
+            GameObject go = GameObject.Instantiate((GameObject)Resources.Load("Projectile/" + Monsterobj.Projectile), Vector3.zero, Quaternion.identity, gameObject.transform);
+            go.transform.localPosition = new Vector3(0f, 0f, 0f);
+            Projectile pscript = (Projectile)go.GetComponent("Projectile");
+            pscript.Damage = Monsterobj.Damage;
+            firerate = 0;
+        }
+        firerate += Time.deltaTime;
         //distance = Vector3.Distance(transform.position, Player.transform.position);
         //if (distance > 20)
         //{
         //    moveEnabled = false;
-        //    gameObject.SetActive(false);            
+        //    gameObject.SetActive(false);
         //}
         //else
         //{
@@ -65,6 +73,7 @@ public class MonsterScript : MonoBehaviour
         //    gameObject.SetActive(true);
         //    moveEnabled = true;
         //}
+        #endregion
 
         if (moveEnabled)
         {
@@ -134,7 +143,7 @@ public class MonsterScript : MonoBehaviour
         //print("Oops");
     }
 
-    void OnTriggerEnter2DNew(Collider2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
         //Vector3 vectorToTarget = Player.transform.position - transform.position;
         //float angle = (Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg) + 90;
@@ -143,11 +152,12 @@ public class MonsterScript : MonoBehaviour
 
         //GameObject go = GameObject.Instantiate((GameObject)Resources.Load("Projectile/FireBall"), Vector3.zero, Quaternion.identity, gameObject.transform);
         //go.transform.localPosition = new Vector3(0f, 0f, 0f);
-
+        //Projectile pscript = (Projectile)go.GetComponent("Projectile");
+        //pscript.Damage = Monsterobj.FireAtk; 
         //moveEnabled = false;
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerEnter2DOld(Collider2D other)
     {
         GetComponent<AudioSource>().PlayScheduled(5);
         DataManger.SetupCombat(CombatPanel, Player, Monsterobj, anim, gameObject);

@@ -9,6 +9,9 @@ namespace Professor.Class
         public float vSpeed { get; set; }
         public float hSpeed { get; set; }
         public bool ClickMove { get; set; }
+        public GameObject combatTarget { get; set; }
+        public MonsterScript monsterScript { get; set; }
+        public CharacterOBJ combatMonster { get; set; }
         public MovementObj()
         {
             this.hSpeed = 0;

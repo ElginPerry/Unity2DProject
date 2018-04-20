@@ -31,7 +31,7 @@ public class PlayerMove : MonoBehaviour {
         GameObject.Find("InventoryObj").SetActive(false);
         GameObject.Find("DisplayLoot").SetActive(false);
         GameObject.Find("SettingsPanel").SetActive(false);
-        GameObject.Find("POPUPPanel").SetActive(false);//This keep the panel inactive
+        //GameObject.Find("POPUPPanel").SetActive(false);//This keep the panel inactive
         
 
         DataManger.playerobj.position = gameObject.transform.localPosition;
@@ -67,6 +67,21 @@ public class PlayerMove : MonoBehaviour {
             float PEpercent = DataManger.playerlevelobj.CurrentExp / DataManger.playerlevelobj.NeededExp;
             PExpD.rectTransform.sizeDelta = new Vector2(PEpercent * 5, .5f);
         }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Collider2D hitCollider = Physics2D.OverlapPoint(mousePosition);
+            if (hitCollider)
+            {
+                if (hitCollider.gameObject.tag == "Monster")
+                {
+                    print(hitCollider.transform.name);
+                    DataManger.movementObj.combatTarget = hitCollider.gameObject;
+                    DataManger.movementObj.combatMonster = ((MonsterScript)DataManger.movementObj.combatTarget.GetComponent("MonsterScript")).Monsterobj;
+                }
+            }
+        }
     }
 
     // Update is called once per frame
@@ -75,7 +90,7 @@ public class PlayerMove : MonoBehaviour {
 
         if (moveEnabled)
         {
-            if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
+            if (Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject())
             {
                 target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 target.z = transform.position.z;

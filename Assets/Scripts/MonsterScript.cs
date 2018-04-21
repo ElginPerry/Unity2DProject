@@ -15,10 +15,11 @@ public class MonsterScript : MonoBehaviour
     public float MoveSpeed;
     public Sprite CombatSprite;
     public float CombatLevel;
-    Animator anim;
-
     public CharacterOBJ Monsterobj;
     public bool moveEnabled = true;
+
+    Animator anim;
+
     Animator Panim;
     float distance = 100;
     float firerate = 100;
@@ -28,7 +29,7 @@ public class MonsterScript : MonoBehaviour
     private Text LevelDisplay;
     private float MoveCnt = 1;
     private float MoveMod = 1;
-
+    private SpriteRenderer SelectCircle;
     void Start()
     {
         CombatPanel = ((LevelManager)GameObject.FindWithTag("Canvas-LvL").GetComponent("LevelManager")).CombatPanel;
@@ -40,6 +41,7 @@ public class MonsterScript : MonoBehaviour
         Mheatlh = gameObject.transform.Find("MonsterCanvas").transform.Find("HealthBar").GetComponent<Image>();
         Maxheatlh = gameObject.transform.Find("MonsterCanvas").transform.Find("HealthBack").GetComponent<Image>();
         LevelDisplay = gameObject.transform.Find("MonsterCanvas").transform.Find("LevelPanel").transform.Find("Level").GetComponent<Text>();
+        SelectCircle = gameObject.transform.Find("SelectCircle").GetComponent<SpriteRenderer>();
     }
 
     private void Update()
@@ -50,7 +52,6 @@ public class MonsterScript : MonoBehaviour
     // Update is called once per frame
     private void FixedUpdate()
     {
-        #region oldmove
         distance = Vector3.Distance(transform.position, Player.transform.position);
         if (distance < 70 && firerate > 4)
         {
@@ -60,20 +61,25 @@ public class MonsterScript : MonoBehaviour
             pscript.Damage = Monsterobj.Damage;
             firerate = 0;
         }
+
+        if (DataManger.movementObj.combatTarget == gameObject)
+        {
+            if (distance > 70)
+            {
+                DataManger.movementObj.combatTarget = null;
+                SelectCircle.enabled = false;
+            }
+            else
+            {
+                SelectCircle.enabled = true;
+            }
+        }
+        else
+        {
+            SelectCircle.enabled = false;
+        }
+
         firerate += Time.deltaTime;
-        //distance = Vector3.Distance(transform.position, Player.transform.position);
-        //if (distance > 20)
-        //{
-        //    moveEnabled = false;
-        //    gameObject.SetActive(false);
-        //}
-        //else
-        //{
-        //    print("here");
-        //    gameObject.SetActive(true);
-        //    moveEnabled = true;
-        //}
-        #endregion
 
         if (moveEnabled)
         {
@@ -81,8 +87,6 @@ public class MonsterScript : MonoBehaviour
             {
                 if (MoveCnt > 15)
                 {
-
-                    //transform.Rotate(new Vector3(0, 0, 90));
                     MoveCnt = 0;
                     MoveMod++;
                     if (MoveMod > 4)

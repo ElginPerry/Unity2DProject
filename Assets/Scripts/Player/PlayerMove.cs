@@ -15,6 +15,7 @@ public class PlayerMove : MonoBehaviour {
     private Image PExpD;
     private Text PLevel;
     private Vector3 target;
+    private Vector3 mousepointer;
     public GameObject ClickImage;
 
     Animator animator;
@@ -68,58 +69,72 @@ public class PlayerMove : MonoBehaviour {
             PExpD.rectTransform.sizeDelta = new Vector2(PEpercent * 5, .5f);
         }
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Collider2D hitCollider = Physics2D.OverlapPoint(mousePosition);
-            if (hitCollider)
-            {
-                if (hitCollider.gameObject.tag == "Monster")
-                {
-                    print(hitCollider.transform.name);
-                    DataManger.movementObj.combatTarget = hitCollider.gameObject;
-                    DataManger.movementObj.combatMonster = ((MonsterScript)DataManger.movementObj.combatTarget.GetComponent("MonsterScript")).Monsterobj;
-                }
-            }
-        }
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        //    Collider2D hitCollider = Physics2D.OverlapPoint(mousePosition);
+        //    if (hitCollider)
+        //    {
+        //        if (hitCollider.gameObject.tag == "Monster")
+        //        {
+        //            print(hitCollider.transform.name);
+        //            DataManger.movementObj.combatTarget = hitCollider.gameObject;
+        //            DataManger.movementObj.combatMonster = ((MonsterScript)DataManger.movementObj.combatTarget.GetComponent("MonsterScript")).Monsterobj;
+        //        }
+        //    }
+        //}
     }
 
     // Update is called once per frame
     private void FixedUpdate () {
         if (Input.GetKeyDown(KeyCode.Escape)) { Application.Quit(); }
-
+        
         if (moveEnabled)
         {
             if (Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject())
             {
-                target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                target.z = transform.position.z;
-                ClickImage.transform.position = target;
-                CIanim.SetBool("Clicked", true);
-                
-                float resX = target.x - transform.position.x;
-                float resY = target.y - transform.position.y;
-                if (target.x > transform.position.x && Mathf.Abs(resX) > Mathf.Abs(resY))
+                mousepointer = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                Collider2D hitCollider = Physics2D.OverlapPoint(mousepointer);
+                if (hitCollider)
                 {
-                    animator.SetFloat("vSpeed", 0);
-                    animator.SetFloat("hSpeed", 1);
+                    if (hitCollider.gameObject.tag == "Monster")
+                    {
+                        print(hitCollider.transform.name);
+                        DataManger.movementObj.combatTarget = hitCollider.gameObject;
+                        DataManger.movementObj.combatMonster = ((MonsterScript)DataManger.movementObj.combatTarget.GetComponent("MonsterScript")).Monsterobj;
+                    }
                 }
-                else if (target.x < transform.position.x && Mathf.Abs(resX) > Mathf.Abs(resY))
+                else
                 {
-                    animator.SetFloat("vSpeed", 0);
-                    animator.SetFloat("hSpeed", -1);
+                    target = mousepointer;
+                    target.z = transform.position.z;
+                    ClickImage.transform.position = target;
+                    CIanim.SetBool("Clicked", true);
+
+                    float resX = target.x - transform.position.x;
+                    float resY = target.y - transform.position.y;
+                    if (target.x > transform.position.x && Mathf.Abs(resX) > Mathf.Abs(resY))
+                    {
+                        animator.SetFloat("vSpeed", 0);
+                        animator.SetFloat("hSpeed", 1);
+                    }
+                    else if (target.x < transform.position.x && Mathf.Abs(resX) > Mathf.Abs(resY))
+                    {
+                        animator.SetFloat("vSpeed", 0);
+                        animator.SetFloat("hSpeed", -1);
+                    }
+                    else if (target.y > transform.position.y && Mathf.Abs(resY) > Mathf.Abs(resX))
+                    {
+                        animator.SetFloat("hSpeed", 0);
+                        animator.SetFloat("vSpeed", 1);
+                    }
+                    else if (target.y < transform.position.y && Mathf.Abs(resY) > Mathf.Abs(resX))
+                    {
+                        animator.SetFloat("hSpeed", 0);
+                        animator.SetFloat("vSpeed", -1);
+                    }
+                    DataManger.movementObj.ClickMove = true;
                 }
-                else if (target.y > transform.position.y && Mathf.Abs(resY) > Mathf.Abs(resX))
-                {
-                    animator.SetFloat("hSpeed", 0);
-                    animator.SetFloat("vSpeed", 1);
-                }
-                else if (target.y < transform.position.y && Mathf.Abs(resY) > Mathf.Abs(resX))
-                {
-                    animator.SetFloat("hSpeed", 0);
-                    animator.SetFloat("vSpeed", -1);
-                }
-                DataManger.movementObj.ClickMove = true;
             }
             else
             {

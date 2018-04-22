@@ -34,16 +34,27 @@ public class ButtonManagement : MonoBehaviour {
         //Filter Items in List - TODO
         List<ItemObj> noHave = DataManger.AllItems.FindAll(x => x.EXP <= DataManger.playerlevelobj.Exp);
         float cnt = noHave.Count;
-        int f = Mathf.RoundToInt(Random.Range(0, cnt-1));
-        ((LevelManager)GameObject.FindWithTag("Canvas-LvL").GetComponent("LevelManager")).LootImage.sprite = noHave[f].Sprite;
-        string Loottxt = noHave[f].Name + "\n +" + DataManger.lootInfo.EXP + " EXP";
-        ((LevelManager)GameObject.FindWithTag("Canvas-LvL").GetComponent("LevelManager")).LootText.text = Loottxt;
+        int f = Mathf.RoundToInt(Random.Range(0, cnt - 1));
+        if (DataManger.playerItems.FindAll(x => x.ItemNumber == noHave[f].ItemNumber).Count > 0 || DataManger.EquipedItems.FindAll(x => x.ItemNumber == noHave[f].ItemNumber).Count > 0)
+        {
+            ((LevelManager)GameObject.FindWithTag("Canvas-LvL").GetComponent("LevelManager")).LootImage.sprite = ((LevelManager)GameObject.FindWithTag("Canvas-LvL").GetComponent("LevelManager")).LootGoldimage;
+            string Loottxt = "+" + DataManger.lootInfo.EXP + " EXP";
+            Loottxt += "\n +" + DataManger.lootInfo.EXP + " Gold";
+            DataManger.playerobj.Gold += DataManger.lootInfo.EXP;
+            ((LevelManager)GameObject.FindWithTag("Canvas-LvL").GetComponent("LevelManager")).LootText.text = Loottxt;
+        }
+        else
+        {
+            ItemObj newitem = new ItemObj();
+            newitem = noHave[f];
 
-        ItemObj newitem = new ItemObj();
-        newitem = noHave[f];
+            int Order = DataManger.playerItems.FindAll(x => x.ItemNumber == 0).OrderBy(x => x.Order).First<ItemObj>().Order;
+            DataManger.playerItems[Order].ItemNumber = newitem.ItemNumber;
 
-        int Order = DataManger.playerItems.FindAll(x => x.ItemNumber == 0).OrderBy(x => x.Order).First<ItemObj>().Order;
-        DataManger.playerItems[Order].ItemNumber = newitem.ItemNumber;
+            ((LevelManager)GameObject.FindWithTag("Canvas-LvL").GetComponent("LevelManager")).LootImage.sprite = noHave[f].Sprite;
+            string Loottxt = noHave[f].Name + "\n +" + DataManger.lootInfo.EXP + " EXP";
+            ((LevelManager)GameObject.FindWithTag("Canvas-LvL").GetComponent("LevelManager")).LootText.text = Loottxt;
+        }        
     }
 
     public void CollectLoot()
@@ -105,18 +116,21 @@ public class ButtonManagement : MonoBehaviour {
         DataManger.playerobj.DefaultAttack = "DaggerProjectile";
         DataManger.playerobj.Damage = DataManger.playerobj.MeleeAtk + bonus.MeleeAtk;
     }
+
     public void FireClicked()
     {
         bonus = DataManger.GearBonus();
         DataManger.playerobj.DefaultAttack = "FireballProjectile";
         DataManger.playerobj.Damage = DataManger.playerobj.FireAtk + bonus.FireAtk;
     }
+
     public void IceClicked()
     {
         bonus = DataManger.GearBonus();
         DataManger.playerobj.DefaultAttack = "IceBallProjectile";
         DataManger.playerobj.Damage = DataManger.playerobj.IceAtk + bonus.IceAtk;
     }
+
     public void HealClicked()
     {
         bonus = DataManger.GearBonus();

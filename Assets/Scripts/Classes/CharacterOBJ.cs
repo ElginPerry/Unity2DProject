@@ -49,7 +49,7 @@ namespace Professor.Class
             this.EXP = 0;
             this.position = Vector3.zero;
             this.PreFab = "Player";
-            this.Damage = 0;
+            this.Damage = 50;
             this.Projectile = "";
             this.DefaultAttack = "DaggerProjectile";
             this.ProjectileSpeed = 1.6f;

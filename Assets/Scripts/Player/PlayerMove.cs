@@ -19,7 +19,7 @@ public class PlayerMove : MonoBehaviour {
     public GameObject ClickImage;
 
     float distance = 100;
-    float firerate = 100;
+    float firerate = 0;
     Animator animator;
     Animator CIanim;
 
@@ -58,15 +58,19 @@ public class PlayerMove : MonoBehaviour {
     {
         if (moveEnabled)
         {
-            if (DataManger.playerobj.MaxHealth > DataManger.playerobj.Health)
+            if (DataManger.playerobj.Health <= 0)
+            {
+                DataManger.DeathScript(gameObject, DataManger.playerobj);
+            }
+            else if (DataManger.playerobj.MaxHealth > DataManger.playerobj.Health)
             {
                 DataManger.playerobj.Health += DataManger.playerobj.Heal * .02f;
                 if (DataManger.playerobj.Health > DataManger.playerobj.MaxHealth)
                 {
                     DataManger.playerobj.Health = DataManger.playerobj.MaxHealth;
-                }
-                Pheatlh.rectTransform.sizeDelta = new Vector2((DataManger.playerobj.Health/DataManger.playerobj.MaxHealth)*5, 1);                
+                }                             
             }
+            Pheatlh.rectTransform.sizeDelta = new Vector2((DataManger.playerobj.Health / DataManger.playerobj.MaxHealth) * 5, 1);
             PLevel.text = DataManger.playerlevelobj.Level.ToString();
             float PEpercent = DataManger.playerlevelobj.CurrentExp / DataManger.playerlevelobj.NeededExp;
             PExpD.rectTransform.sizeDelta = new Vector2(PEpercent * 5, .5f);
@@ -95,7 +99,7 @@ public class PlayerMove : MonoBehaviour {
         if (DataManger.movementObj.combatTarget != null && DataManger.playerobj.Damage != 0)
         {
             distance = Vector3.Distance(transform.position, DataManger.movementObj.combatTarget.transform.position);
-            if (distance < 80 && firerate > 3)
+            if (distance < 80 && firerate > 2)
             {
                 GameObject go = GameObject.Instantiate((GameObject)Resources.Load("Projectile/" + DataManger.playerobj.DefaultAttack), Vector3.zero, Quaternion.identity, gameObject.transform);
                 go.transform.localPosition = new Vector3(0f, 0f, 0f);
@@ -118,7 +122,7 @@ public class PlayerMove : MonoBehaviour {
                 {
                     if (hitCollider.gameObject.tag == "Monster")
                     {
-                        print(hitCollider.transform.name);
+                        //print(hitCollider.transform.name);
                         DataManger.movementObj.combatTarget = hitCollider.gameObject;
                         DataManger.movementObj.combatMonster = ((MonsterScript)DataManger.movementObj.combatTarget.GetComponent("MonsterScript")).Monsterobj;
                     }

@@ -27,14 +27,14 @@ public class Projectile : MonoBehaviour {
         timeAlive += Time.deltaTime;
         if (timeAlive >= 5)
         {
-            print("Missed!!");
+            //print("Missed!!");
             Destroy(gameObject);
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        print("Gotcha " + Damage.ToString() );        
+        //print("Gotcha " + Damage.ToString() );        
         DataManger.playerobj.Health -= Damage;
         Destroy(gameObject);
     }

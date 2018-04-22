@@ -53,7 +53,7 @@ public class MonsterScript : MonoBehaviour
     private void FixedUpdate()
     {
         distance = Vector3.Distance(transform.position, Player.transform.position);
-        if (distance < 70 && firerate > 4)
+        if (distance < 70 && firerate > 2.5)
         {
             GameObject go = GameObject.Instantiate((GameObject)Resources.Load("Projectile/" + Monsterobj.Projectile), Vector3.zero, Quaternion.identity, gameObject.transform);
             go.transform.localPosition = new Vector3(0f, 0f, 0f);
@@ -130,8 +130,11 @@ public class MonsterScript : MonoBehaviour
                 }
                 MoveCnt += Time.deltaTime;
             }
-
-            if (Monsterobj.MaxHealth > Monsterobj.Health)
+            if (Monsterobj.Health <= 0)
+            {
+                DataManger.DeathScript(gameObject, Monsterobj);
+            }
+            else if (Monsterobj.MaxHealth > Monsterobj.Health)
             {
                 Monsterobj.Health += Monsterobj.Heal * .02f;
                 if (Monsterobj.Health > Monsterobj.MaxHealth)

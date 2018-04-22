@@ -12,6 +12,7 @@ public class LevelManager : MonoBehaviour {
     public GameObject DisplayLoot;
     public GameObject SettingsPanel;
     public Image LootImage;
+    public Sprite LootGoldimage; 
     public Text LootText;
 
     // Use this for initialization

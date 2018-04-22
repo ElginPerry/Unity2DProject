@@ -18,9 +18,7 @@ public class DataManger : MonoBehaviour {
     public static List<ItemObj> EquipedItems = new List<ItemObj>();
     public static List<LevelSettings> levelSettings = new List<LevelSettings>();
 
-
-
-
+    
     public static void SetupCombat(GameObject CombatPanel, GameObject Player, CharacterOBJ Monsterobj, Animator anim, GameObject Monster)
     {
         if (DataManger.playerobj.Health > 0 && Monsterobj.Health > 0)
@@ -240,7 +238,7 @@ public class DataManger : MonoBehaviour {
         }
         else
         {
-            DeathScript(Player, Monster, Monsterobj, CombatPanel);
+           // DeathScript(Player, Monster, Monsterobj, CombatPanel);
         }
         
     }
@@ -260,6 +258,7 @@ public class DataManger : MonoBehaviour {
         Text Pheal;
         Text PMhealth;
         Text PLevel;
+        Text PGold;
         Image PCurrentEXP;
 
         Pname = InvObj.transform.Find("PlayerStats").transform.Find("Name").GetComponent<Text>();
@@ -275,11 +274,13 @@ public class DataManger : MonoBehaviour {
         Pheal = InvObj.transform.Find("PlayerStats").transform.Find("HealValue").GetComponent<Text>();
         PLevel = InvObj.transform.Find("PlayerStats").transform.Find("LevelValue").GetComponent<Text>();
         PCurrentEXP = InvObj.transform.Find("PlayerStats").transform.Find("EXPBar").GetComponent<Image>();
+        PGold = InvObj.transform.Find("PlayerStats").transform.Find("GoldValue").GetComponent<Text>();
 
         ItemObj bonus = GearBonus();
 
         Pname.text = DataManger.playerobj.Name; 
         Phealth.text = DataManger.playerobj.Health.ToString();
+        PGold.text = DataManger.playerobj.Gold.ToString();
         if (bonus.MaxHealth > 0)
         {
             PMhealth.color = Color.green;
@@ -447,35 +448,37 @@ public class DataManger : MonoBehaviour {
         }
 
     }
-    public static void DeathScript(GameObject player, GameObject monster, CharacterOBJ Monsterobj, GameObject CombatPanel)
+
+    public static void DeathScript(GameObject character, CharacterOBJ characterStats)
     {
-        if (Monsterobj.Health <= 0)
+        if (characterStats.Name != "Professor Gomez")
         {
-            lootInfo.EXP = Monsterobj.EXP;
-            lootInfo.Name = Monsterobj.Name;
+            lootInfo.EXP = characterStats.EXP;
+            lootInfo.Name = characterStats.Name;
             RespawnObj ro = new RespawnObj();
-            ro.PreFabName = Monsterobj.PreFab;
-            ro.position = Monsterobj.position;
-            ro.RespawnTime = Monsterobj.Respawn;
+            ro.PreFabName = characterStats.PreFab;
+            ro.position = characterStats.position;
+            ro.RespawnTime = characterStats.Respawn;
             ro.Process = false;
             respawnObjs.Add(ro);
-            playerlevelobj.Exp += Monsterobj.EXP;
+            playerlevelobj.Exp += characterStats.EXP;
             LevelCalc();
-            Destroy(monster);
+            Destroy(character);
             //print("EXP:" + DataManger.playerlevelobj.Exp.ToString());
-            Combat cscript = (Combat)CombatPanel.GetComponent("Combat");
-            cscript.Resume();
+            //Combat cscript = (Combat)CombatPanel.GetComponent("Combat");
+            //cscript.Resume();
             CheckLoot();
-        }
-        
-        if (DataManger.playerobj.Health <= 0)
+        }        
+        else
         {
-            player.transform.localPosition = DataManger.playerobj.position;
-            Combat cscript = (Combat)CombatPanel.GetComponent("Combat");
-            cscript.Resume();
+            character.transform.localPosition = DataManger.playerobj.position;
+            DataManger.playerobj.Health = 1;
+            //Combat cscript = (Combat)CombatPanel.GetComponent("Combat");
+            //cscript.Resume();
         }
 
     }
+
     public static void CheckLoot()
     {
         GameObject LootObj = ((LevelManager)GameObject.FindWithTag("Canvas-LvL").GetComponent("LevelManager")).LootObj;

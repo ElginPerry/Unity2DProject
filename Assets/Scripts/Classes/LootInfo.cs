@@ -8,11 +8,13 @@ namespace Professor.Class
     {
         public String Name { get; set; }
         public float EXP { get; set; }
+        public float Gold { get; set; }
 
         public LootInfo()
         {
             this.Name = "";
             this.EXP = 0;
+            this.Gold = 0;
         }
     }
 }

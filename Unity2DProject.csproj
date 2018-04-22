@@ -269,6 +269,7 @@
     <Compile Include="Assets\Scripts\Player\DataManger.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerMove.cs" />
     <Compile Include="Assets\Scripts\Player\Respawn.cs" />
+    <Compile Include="Assets\Scripts\PlayerProjectile.cs" />
     <Compile Include="Assets\Scripts\PopupPanel.cs" />
     <Compile Include="Assets\Scripts\Projectile.cs" />
     <Compile Include="Assets\Scripts\UIDragger.cs" />

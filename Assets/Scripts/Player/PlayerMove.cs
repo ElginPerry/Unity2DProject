@@ -18,8 +18,11 @@ public class PlayerMove : MonoBehaviour {
     private Vector3 mousepointer;
     public GameObject ClickImage;
 
+    float distance = 100;
+    float firerate = 100;
     Animator animator;
     Animator CIanim;
+
     // Use this for initialization
     void Start () {        
         animator = GetComponent<Animator>();
@@ -88,7 +91,23 @@ public class PlayerMove : MonoBehaviour {
     // Update is called once per frame
     private void FixedUpdate () {
         if (Input.GetKeyDown(KeyCode.Escape)) { Application.Quit(); }
-        
+
+        if (DataManger.movementObj.combatTarget != null && DataManger.playerobj.Damage != 0)
+        {
+            distance = Vector3.Distance(transform.position, DataManger.movementObj.combatTarget.transform.position);
+            if (distance < 80 && firerate > 3)
+            {
+                GameObject go = GameObject.Instantiate((GameObject)Resources.Load("Projectile/" + DataManger.playerobj.DefaultAttack), Vector3.zero, Quaternion.identity, gameObject.transform);
+                go.transform.localPosition = new Vector3(0f, 0f, 0f);
+                go.AddComponent<PlayerProjectile>();
+                PlayerProjectile pscript = (PlayerProjectile)go.GetComponent("PlayerProjectile");
+                pscript.Damage = DataManger.playerobj.Damage;
+                pscript.ProjectileSpd = DataManger.playerobj.ProjectileSpeed;
+                firerate = 0;
+            }
+            firerate += Time.deltaTime;
+        }
+
         if (moveEnabled)
         {
             if (Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject())

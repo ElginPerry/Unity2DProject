@@ -19,7 +19,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4847323866035864}
-  - component: {fileID: 114450772918350904}
   - component: {fileID: 58078302623823534}
   - component: {fileID: 198440811485693366}
   - component: {fileID: 199536575199541116}
@@ -59,19 +58,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -0.0000047683716}
   serializedVersion: 2
   m_Radius: 1
---- !u!114 &114450772918350904
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1219928864898044}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e7d48208cde50743a8e679f65ef3496, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ProjectileSpd: 1.5
-  Damage: 0
 --- !u!198 &198440811485693366
 ParticleSystem:
   m_ObjectHideFlags: 1

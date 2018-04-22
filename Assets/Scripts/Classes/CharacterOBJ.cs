@@ -25,6 +25,8 @@ namespace Professor.Class
         public string PreFab { get; set; }
         public float Damage { get; set; }
         public string Projectile { get; set; }
+        public string DefaultAttack { get; set; }
+        public float ProjectileSpeed { get; set; }
 
         
 
@@ -49,6 +51,8 @@ namespace Professor.Class
             this.PreFab = "Player";
             this.Damage = 0;
             this.Projectile = "";
+            this.DefaultAttack = "DaggerProjectile";
+            this.ProjectileSpeed = 1.6f;
         }
 
         public CharacterOBJ(int flag)
@@ -73,6 +77,7 @@ namespace Professor.Class
                 this.PreFab = "Wargbeast";
                 this.Damage = 0;
                 this.Projectile = "";
+                this.ProjectileSpeed = 1.6f;
 
             }
             else if (flag == 2)
@@ -93,6 +98,7 @@ namespace Professor.Class
                 this.EXP = 150;
                 this.position = Vector3.zero;
                 this.PreFab = "Ghost";
+                this.ProjectileSpeed = 1.6f;
             }
             else if (flag == 3)
             {
@@ -112,6 +118,7 @@ namespace Professor.Class
                 this.EXP = 250;
                 this.position = Vector3.zero;
                 this.PreFab = "LizardRed";
+                this.ProjectileSpeed = 1.6f;
             }
             else if (flag == 4)
             {
@@ -133,7 +140,7 @@ namespace Professor.Class
                 this.PreFab = "LizardGreen";
                 this.Damage = 15;
                 this.Projectile = "IceBallProjectile";
-
+                this.ProjectileSpeed = 1.6f;
             }
             else if (flag == 5)
             {
@@ -155,7 +162,7 @@ namespace Professor.Class
                 this.PreFab = "LizardGold";
                 this.Damage = 25;
                 this.Projectile = "DaggerProjectile";
-
+                this.ProjectileSpeed = 1.6f;
             }
             else if (flag == 6)
             {
@@ -177,7 +184,7 @@ namespace Professor.Class
                 this.PreFab = "WerewolfWhite";
                 this.Damage = 0;
                 this.Projectile = "";
-
+                this.ProjectileSpeed = 1.6f;
             }
             else if (flag == 7)
             {
@@ -199,7 +206,7 @@ namespace Professor.Class
                 this.PreFab = "WerewolfBlue";
                 this.Damage = 0;
                 this.Projectile = "";
-
+                this.ProjectileSpeed = 1.6f;
             }
             else if (flag == 8)
             {
@@ -221,7 +228,7 @@ namespace Professor.Class
                 this.PreFab = "DragonWhite";
                 this.Damage = 0;
                 this.Projectile = "";
-
+                this.ProjectileSpeed = 1.6f;
             }
             else if (flag == 9)
             {
@@ -243,7 +250,7 @@ namespace Professor.Class
                 this.PreFab = "DragonRed";
                 this.Damage = 0;
                 this.Projectile = "";
-
+                this.ProjectileSpeed = 1.6f;
             }
             else if (flag == 10)
             {
@@ -265,7 +272,7 @@ namespace Professor.Class
                 this.PreFab = "WargbeastGold";
                 this.Damage = 0;
                 this.Projectile = "";
-
+                this.ProjectileSpeed = 1.6f;
             }
             else if (flag == 11)
             {
@@ -287,7 +294,7 @@ namespace Professor.Class
                 this.PreFab = "FantasyArcher_02A";
                 this.Damage = 0;
                 this.Projectile = "";
-
+                this.ProjectileSpeed = 1.6f;
             }
             else if (flag == 12)
             {
@@ -309,7 +316,7 @@ namespace Professor.Class
                 this.PreFab = "UndeadSolider";
                 this.Damage = 0;
                 this.Projectile = "";
-
+                this.ProjectileSpeed = 1.6f;
             }
             else if (flag == 13)
             {
@@ -331,7 +338,7 @@ namespace Professor.Class
                 this.PreFab = "UndeadSoliderGold";
                 this.Damage = 0;
                 this.Projectile = "";
-
+                this.ProjectileSpeed = 1.6f;
             }
         }
     }

@@ -57,8 +57,10 @@ public class MonsterScript : MonoBehaviour
         {
             GameObject go = GameObject.Instantiate((GameObject)Resources.Load("Projectile/" + Monsterobj.Projectile), Vector3.zero, Quaternion.identity, gameObject.transform);
             go.transform.localPosition = new Vector3(0f, 0f, 0f);
+            go.AddComponent<Projectile>();
             Projectile pscript = (Projectile)go.GetComponent("Projectile");
             pscript.Damage = Monsterobj.Damage;
+            pscript.ProjectileSpd = Monsterobj.ProjectileSpeed;
             firerate = 0;
         }
 

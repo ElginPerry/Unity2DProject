@@ -34,8 +34,8 @@ public class Projectile : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        print("Gotcha " + Damage.ToString() );
-        Destroy(gameObject);
+        print("Gotcha " + Damage.ToString() );        
         DataManger.playerobj.Health -= Damage;
+        Destroy(gameObject);
     }
 }

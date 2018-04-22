@@ -6,7 +6,8 @@ using Professor.Class;
 using System.Linq;
 
 public class ButtonManagement : MonoBehaviour {
-        
+    ItemObj bonus;
+
     public void ExitClicked()
     {
         PlayerMove script = (PlayerMove)GameObject.Find("Player").GetComponent("PlayerMove");
@@ -96,5 +97,35 @@ public class ButtonManagement : MonoBehaviour {
     public void ExitGameClicked()
     {
         Application.Quit();
+    }
+        
+    public void MeleeClicked()
+    {
+        bonus = DataManger.GearBonus();
+        DataManger.playerobj.DefaultAttack = "DaggerProjectile";
+        DataManger.playerobj.Damage = DataManger.playerobj.MeleeAtk + bonus.MeleeAtk;
+    }
+    public void FireClicked()
+    {
+        bonus = DataManger.GearBonus();
+        DataManger.playerobj.DefaultAttack = "FireballProjectile";
+        DataManger.playerobj.Damage = DataManger.playerobj.FireAtk + bonus.FireAtk;
+    }
+    public void IceClicked()
+    {
+        bonus = DataManger.GearBonus();
+        DataManger.playerobj.DefaultAttack = "IceBallProjectile";
+        DataManger.playerobj.Damage = DataManger.playerobj.IceAtk + bonus.IceAtk;
+    }
+    public void HealClicked()
+    {
+        bonus = DataManger.GearBonus();
+        float increase = DataManger.playerobj.Heal + bonus.Heal * 10;
+        if (DataManger.playerobj.MaxHealth < DataManger.playerobj.Health + increase)
+        {
+            increase = DataManger.playerobj.MaxHealth - DataManger.playerobj.Health;
+        }
+        increase = Mathf.Round(increase);
+        DataManger.playerobj.Health += increase;
     }
 }

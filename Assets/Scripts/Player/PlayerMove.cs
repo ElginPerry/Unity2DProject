@@ -30,7 +30,6 @@ public class PlayerMove : MonoBehaviour {
         Pheatlh = gameObject.transform.Find("Canvas").transform.Find("HealthBar").GetComponent<Image>();
         PExpD = gameObject.transform.Find("Canvas").transform.Find("ExpBar").GetComponent<Image>();
         PLevel = gameObject.transform.Find("Canvas").transform.Find("LevelPanel").transform.Find("Level").GetComponent<Text>();
-        GameObject.Find("CombatPanel").SetActive(false);
         GameObject.Find("LootObj").SetActive(false);
         GameObject.Find("InventoryObj").SetActive(false);
         GameObject.Find("DisplayLoot").SetActive(false);

@@ -32,7 +32,6 @@ public class MonsterScript : MonoBehaviour
     private SpriteRenderer SelectCircle;
     void Start()
     {
-        CombatPanel = ((LevelManager)GameObject.FindWithTag("Canvas-LvL").GetComponent("LevelManager")).CombatPanel;
         Player = GameObject.Find("Player");
         anim = GetComponent<Animator>();
         Monsterobj = new CharacterOBJ(MonsterType);

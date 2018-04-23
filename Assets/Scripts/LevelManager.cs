@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour {
 
-    public GameObject CombatPanel;
     public GameObject PopUpPanel;
     public GameObject LootObj;
     public GameObject InventoryObj;

@@ -30,6 +30,7 @@ public class MonsterScript : MonoBehaviour
     private float MoveCnt = 1;
     private float MoveMod = 1;
     private SpriteRenderer SelectCircle;
+    CanvasGroup CG;
     void Start()
     {
         Player = GameObject.Find("Player");
@@ -41,6 +42,8 @@ public class MonsterScript : MonoBehaviour
         Maxheatlh = gameObject.transform.Find("MonsterCanvas").transform.Find("HealthBack").GetComponent<Image>();
         LevelDisplay = gameObject.transform.Find("MonsterCanvas").transform.Find("LevelPanel").transform.Find("Level").GetComponent<Text>();
         SelectCircle = gameObject.transform.Find("SelectCircle").GetComponent<SpriteRenderer>();
+        CG = gameObject.transform.Find("MonsterCanvas").transform.Find("ResultPanel").GetComponent<CanvasGroup>();
+
     }
 
     private void Update()
@@ -51,6 +54,10 @@ public class MonsterScript : MonoBehaviour
     // Update is called once per frame
     private void FixedUpdate()
     {
+        if (CG.alpha > 0)
+        {
+            CG.alpha -= .025f;
+        }
         distance = Vector3.Distance(transform.position, Player.transform.position);
         if (distance < 70 && firerate > 2.5)
         {

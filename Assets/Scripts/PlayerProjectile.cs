@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class PlayerProjectile : MonoBehaviour
 {
 
@@ -10,6 +10,9 @@ public class PlayerProjectile : MonoBehaviour
     GameObject Monster;
     Vector3 MonsterPos;
     float timeAlive = 0;
+    Text Result;
+    Transform ResultPanel;
+    CanvasGroup CG;
 
 
     // Use this for initialization
@@ -20,6 +23,10 @@ public class PlayerProjectile : MonoBehaviour
         float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg;
         Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
         transform.rotation = Quaternion.Slerp(transform.rotation, q, 1);
+        ResultPanel = Monster.transform.Find("MonsterCanvas").transform.Find("ResultPanel");
+        CG = ResultPanel.GetComponent<CanvasGroup>();
+        Result = ResultPanel.transform.Find("Result").GetComponent<Text>();
+
     }
 
     // Update is called once per frame
@@ -37,6 +44,10 @@ public class PlayerProjectile : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         //print("PlayerGotcha " + Damage.ToString());
+        ResultPanel.gameObject.SetActive(true);
+        Result.color = Color.red;
+        Result.text = "-" + Damage.ToString();
+        CG.alpha = .8f;
         DataManger.movementObj.combatMonster.Health -= Damage;
         Destroy(gameObject);
     }

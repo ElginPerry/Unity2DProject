@@ -75,8 +75,8 @@ namespace Professor.Class
                 this.EXP = 200;
                 this.position = Vector3.zero;
                 this.PreFab = "Wargbeast";
-                this.Damage = 0;
-                this.Projectile = "";
+                this.Damage = 25;
+                this.Projectile = "DaggerProjectile";
                 this.ProjectileSpeed = 1.6f;
 
             }
@@ -98,6 +98,8 @@ namespace Professor.Class
                 this.EXP = 150;
                 this.position = Vector3.zero;
                 this.PreFab = "Ghost";
+                this.Damage = 15;
+                this.Projectile = "IceBallProjectile";
                 this.ProjectileSpeed = 1.6f;
             }
             else if (flag == 3)
@@ -118,6 +120,8 @@ namespace Professor.Class
                 this.EXP = 250;
                 this.position = Vector3.zero;
                 this.PreFab = "LizardRed";
+                this.Damage = 20;
+                this.Projectile = "FireballProjectile";
                 this.ProjectileSpeed = 1.6f;
             }
             else if (flag == 4)
@@ -182,8 +186,8 @@ namespace Professor.Class
                 this.EXP = 300;
                 this.position = Vector3.zero;
                 this.PreFab = "WerewolfWhite";
-                this.Damage = 0;
-                this.Projectile = "";
+                this.Damage = 15;
+                this.Projectile = "DaggerProjectile";
                 this.ProjectileSpeed = 1.6f;
             }
             else if (flag == 7)
@@ -204,8 +208,8 @@ namespace Professor.Class
                 this.EXP = 300;
                 this.position = Vector3.zero;
                 this.PreFab = "WerewolfBlue";
-                this.Damage = 0;
-                this.Projectile = "";
+                this.Damage = 15;
+                this.Projectile = "IceBallProjectile";
                 this.ProjectileSpeed = 1.6f;
             }
             else if (flag == 8)
@@ -226,8 +230,8 @@ namespace Professor.Class
                 this.EXP = 300;
                 this.position = Vector3.zero;
                 this.PreFab = "DragonWhite";
-                this.Damage = 0;
-                this.Projectile = "";
+                this.Damage = 15;
+                this.Projectile = "IceBallProjectile";
                 this.ProjectileSpeed = 1.6f;
             }
             else if (flag == 9)
@@ -248,8 +252,8 @@ namespace Professor.Class
                 this.EXP = 300;
                 this.position = Vector3.zero;
                 this.PreFab = "DragonRed";
-                this.Damage = 0;
-                this.Projectile = "";
+                this.Damage = 15;
+                this.Projectile = "FireballProjectile";
                 this.ProjectileSpeed = 1.6f;
             }
             else if (flag == 10)
@@ -266,12 +270,12 @@ namespace Professor.Class
                 this.IceAtk = 3;
                 this.IceDef = 6;
                 this.Heal = 4;
-                this.Respawn = 300;
-                this.EXP = 300;
+                this.Respawn = 450;
+                this.EXP = 500;
                 this.position = Vector3.zero;
                 this.PreFab = "WargbeastGold";
-                this.Damage = 0;
-                this.Projectile = "";
+                this.Damage = 35;
+                this.Projectile = "FireballProjectile";
                 this.ProjectileSpeed = 1.6f;
             }
             else if (flag == 11)
@@ -292,8 +296,8 @@ namespace Professor.Class
                 this.EXP = 300;
                 this.position = Vector3.zero;
                 this.PreFab = "FantasyArcher_02A";
-                this.Damage = 0;
-                this.Projectile = "";
+                this.Damage = 15;
+                this.Projectile = "IceBallProjectile";
                 this.ProjectileSpeed = 1.6f;
             }
             else if (flag == 12)
@@ -314,8 +318,8 @@ namespace Professor.Class
                 this.EXP = 300;
                 this.position = Vector3.zero;
                 this.PreFab = "UndeadSolider";
-                this.Damage = 0;
-                this.Projectile = "";
+                this.Damage = 15;
+                this.Projectile = "IceBallProjectile";
                 this.ProjectileSpeed = 1.6f;
             }
             else if (flag == 13)
@@ -336,8 +340,8 @@ namespace Professor.Class
                 this.EXP = 300;
                 this.position = Vector3.zero;
                 this.PreFab = "UndeadSoliderGold";
-                this.Damage = 0;
-                this.Projectile = "";
+                this.Damage = 15;
+                this.Projectile = "FireballProjectile";
                 this.ProjectileSpeed = 1.6f;
             }
         }

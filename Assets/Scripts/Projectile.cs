@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Projectile : MonoBehaviour {
 
@@ -9,7 +10,9 @@ public class Projectile : MonoBehaviour {
     GameObject Player;
     Vector3 playerPos;
     float timeAlive = 0;
-    
+    Text Result;
+    Transform ResultPanel;
+    CanvasGroup CG;
    
     // Use this for initialization
     void Start () {
@@ -18,6 +21,9 @@ public class Projectile : MonoBehaviour {
         float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg;
         Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);        
         transform.rotation = Quaternion.Slerp(transform.rotation, q, 1);
+        ResultPanel = Player.transform.Find("Canvas").transform.Find("ResultPanel");
+        CG = ResultPanel.GetComponent<CanvasGroup>();
+        Result = ResultPanel.transform.Find("Result").GetComponent<Text>();
     }
 	
 	// Update is called once per frame
@@ -34,7 +40,11 @@ public class Projectile : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //print("Gotcha " + Damage.ToString() );        
+        //print("Gotcha " + Damage.ToString() );
+        ResultPanel.gameObject.SetActive(true);
+        Result.color = Color.red;
+        Result.text = "-" + Damage.ToString();
+        CG.alpha = .8f;
         DataManger.playerobj.Health -= Damage;
         Destroy(gameObject);
     }

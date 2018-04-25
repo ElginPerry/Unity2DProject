@@ -22,7 +22,7 @@ public class PlayerMove : MonoBehaviour {
     float firerate = 0;
     Animator animator;
     Animator CIanim;
-
+    CanvasGroup CG;
     // Use this for initialization
     void Start () {        
         animator = GetComponent<Animator>();
@@ -34,8 +34,7 @@ public class PlayerMove : MonoBehaviour {
         GameObject.Find("InventoryObj").SetActive(false);
         GameObject.Find("DisplayLoot").SetActive(false);
         GameObject.Find("SettingsPanel").SetActive(false);
-        //GameObject.Find("POPUPPanel").SetActive(false);//This keep the panel inactive
-        
+        CG = gameObject.transform.Find("Canvas").transform.Find("ResultPanel").GetComponent<CanvasGroup>(); 
 
         DataManger.playerobj.position = gameObject.transform.localPosition;
         DataManger.audioSource = GetComponent<AudioSource>();
@@ -55,6 +54,10 @@ public class PlayerMove : MonoBehaviour {
 
     private void Update()
     {
+        if (CG.alpha > 0)
+        {
+            CG.alpha -= .025f;
+        }
         if (moveEnabled)
         {
             if (DataManger.playerobj.Health <= 0)

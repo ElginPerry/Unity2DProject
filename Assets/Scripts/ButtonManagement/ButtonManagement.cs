@@ -6,6 +6,7 @@ using Professor.Class;
 using System.Linq;
 
 public class ButtonManagement : MonoBehaviour {
+    public Transform ResultPanel;
     ItemObj bonus;
 
     public void ExitClicked()
@@ -140,6 +141,12 @@ public class ButtonManagement : MonoBehaviour {
             increase = DataManger.playerobj.MaxHealth - DataManger.playerobj.Health;
         }
         increase = Mathf.Round(increase);
+        ResultPanel.gameObject.SetActive(true);
+        CanvasGroup CG = ResultPanel.GetComponent<CanvasGroup>();
+        Text Result = ResultPanel.transform.Find("Result").GetComponent<Text>();
+        Result.color = Color.white;
+        Result.text = "+" + increase.ToString();
+        CG.alpha = .8f;
         DataManger.playerobj.Health += increase;
     }
 }

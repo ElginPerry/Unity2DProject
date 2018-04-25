@@ -44,7 +44,6 @@ public class PlayerProjectile : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         //print("PlayerGotcha " + Damage.ToString());
-        ResultPanel.gameObject.SetActive(true);
         Result.color = Color.red;
         Result.text = "-" + Damage.ToString();
         CG.alpha = .8f;

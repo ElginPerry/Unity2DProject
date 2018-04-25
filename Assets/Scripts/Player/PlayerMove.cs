@@ -52,6 +52,12 @@ public class PlayerMove : MonoBehaviour {
         //throwThis.rigidbody.AddRelativeForce(new Vector3(0, 0, throwSpeed));
     }
 
+    void Awake()
+    {
+       // VSync must be disabled
+        Application.targetFrameRate = 60;
+    }
+
     private void Update()
     {
         if (CG.alpha > 0)

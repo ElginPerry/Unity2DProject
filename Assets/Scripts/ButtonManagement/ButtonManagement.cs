@@ -7,6 +7,10 @@ using System.Linq;
 
 public class ButtonManagement : MonoBehaviour {
     public Transform ResultPanel;
+    public GameObject MeleeBtn;
+    public GameObject FireBtn;
+    public GameObject IceBtn;
+
     ItemObj bonus;
 
     public void ExitClicked()
@@ -16,7 +20,6 @@ public class ButtonManagement : MonoBehaviour {
         GameObject.Find("POPUPPanel").SetActive(false);
         
     }
-
     public void OkClicked()
     {
         PlayerMove script = (PlayerMove)GameObject.Find("Player").GetComponent("PlayerMove");
@@ -24,7 +27,6 @@ public class ButtonManagement : MonoBehaviour {
         GameObject.Find("POPUPPanel").SetActive(false);
 
     }
-
     public void LootChestClicked()
     {
         GameObject LootObj = ((LevelManager)GameObject.FindWithTag("Canvas-LvL").GetComponent("LevelManager")).LootObj;
@@ -58,7 +60,6 @@ public class ButtonManagement : MonoBehaviour {
             ((LevelManager)GameObject.FindWithTag("Canvas-LvL").GetComponent("LevelManager")).LootText.text = Loottxt;
         }        
     }
-
     public void CollectLoot()
     {
         foreach (RespawnObj ro in DataManger.respawnObjs)
@@ -71,7 +72,6 @@ public class ButtonManagement : MonoBehaviour {
         GameObject DisplayLootObj = ((LevelManager)GameObject.FindWithTag("Canvas-LvL").GetComponent("LevelManager")).DisplayLoot;
         DisplayLootObj.SetActive(false);
     }
-
     public void ToggleInventory()
     {
         GameObject InvObj = ((LevelManager)GameObject.FindWithTag("Canvas-LvL").GetComponent("LevelManager")).InventoryObj;
@@ -87,7 +87,6 @@ public class ButtonManagement : MonoBehaviour {
             InvObj.SetActive(true);
         }
     }
-
     public void ToggleSettings()
     {
         GameObject settingsPanel = ((LevelManager)GameObject.FindWithTag("Canvas-LvL").GetComponent("LevelManager")).SettingsPanel;
@@ -101,22 +100,22 @@ public class ButtonManagement : MonoBehaviour {
             settingsPanel.SetActive(true);
         }
     }
-
     public void CloseSettings()
     {
         GameObject.Find("SettingsPanel").SetActive(false);
     }
-
     public void ExitGameClicked()
     {
         Application.Quit();
     }
-        
     public void MeleeClicked()
     {
         bonus = DataManger.GearBonus();
         DataManger.playerobj.DefaultAttack = "DaggerProjectile";
         DataManger.playerobj.Damage = DataManger.playerobj.MeleeAtk + bonus.MeleeAtk;
+        MeleeBtn.GetComponent<Image>().color = Color.red;
+        FireBtn.GetComponent<Image>().color = Color.white;
+        IceBtn.GetComponent<Image>().color = Color.white;
     }
 
     public void FireClicked()
@@ -124,6 +123,9 @@ public class ButtonManagement : MonoBehaviour {
         bonus = DataManger.GearBonus();
         DataManger.playerobj.DefaultAttack = "FireballProjectile";
         DataManger.playerobj.Damage = DataManger.playerobj.FireAtk + bonus.FireAtk;
+        MeleeBtn.GetComponent<Image>().color = Color.white;
+        FireBtn.GetComponent<Image>().color = Color.red;
+        IceBtn.GetComponent<Image>().color = Color.white;
     }
 
     public void IceClicked()
@@ -131,6 +133,9 @@ public class ButtonManagement : MonoBehaviour {
         bonus = DataManger.GearBonus();
         DataManger.playerobj.DefaultAttack = "IceBallProjectile";
         DataManger.playerobj.Damage = DataManger.playerobj.IceAtk + bonus.IceAtk;
+        MeleeBtn.GetComponent<Image>().color = Color.white;
+        FireBtn.GetComponent<Image>().color = Color.white;
+        IceBtn.GetComponent<Image>().color = Color.red;
     }
 
     public void HealClicked()

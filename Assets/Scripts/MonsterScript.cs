@@ -56,7 +56,7 @@ public class MonsterScript : MonoBehaviour
     {
         if (CG.alpha > 0)
         {
-            CG.alpha -= .025f;
+            CG.alpha -= .01f;
         }
         distance = Vector3.Distance(transform.position, Player.transform.position);
         if (distance < 70 && firerate > 2.5)

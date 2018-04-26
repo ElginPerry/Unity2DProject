@@ -60,10 +60,12 @@ public class PlayerMove : MonoBehaviour {
 
     private void Update()
     {
+        //Damage Panel Fade
         if (CG.alpha > 0)
         {
-            CG.alpha -= .025f;
+            CG.alpha -= .01f;
         }
+        //Health Regen and Level display
         if (moveEnabled)
         {
             if (DataManger.playerobj.Health <= 0)
@@ -83,21 +85,6 @@ public class PlayerMove : MonoBehaviour {
             float PEpercent = DataManger.playerlevelobj.CurrentExp / DataManger.playerlevelobj.NeededExp;
             PExpD.rectTransform.sizeDelta = new Vector2(PEpercent * 5, .5f);
         }
-
-        //if (Input.GetMouseButtonDown(0))
-        //{
-        //    Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        //    Collider2D hitCollider = Physics2D.OverlapPoint(mousePosition);
-        //    if (hitCollider)
-        //    {
-        //        if (hitCollider.gameObject.tag == "Monster")
-        //        {
-        //            print(hitCollider.transform.name);
-        //            DataManger.movementObj.combatTarget = hitCollider.gameObject;
-        //            DataManger.movementObj.combatMonster = ((MonsterScript)DataManger.movementObj.combatTarget.GetComponent("MonsterScript")).Monsterobj;
-        //        }
-        //    }
-        //}
     }
 
     // Update is called once per frame
@@ -122,7 +109,7 @@ public class PlayerMove : MonoBehaviour {
 
         if (moveEnabled)
         {
-            if (Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject())
+            if (Input.GetMouseButton(0) && !IsPointerOverGameObject())
             {
                 mousepointer = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 Collider2D hitCollider = Physics2D.OverlapPoint(mousepointer);
@@ -248,5 +235,21 @@ public class PlayerMove : MonoBehaviour {
             ClickImage.transform.position = new Vector3(0, 0, -3);
             CIanim.SetBool("Clicked", false);
         }
+    }
+
+    public static bool IsPointerOverGameObject()
+    {
+        //check mouse
+        if (EventSystem.current.IsPointerOverGameObject())
+            return true;
+
+        //check touch
+        if (Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began)
+        {
+            if (EventSystem.current.IsPointerOverGameObject(Input.touches[0].fingerId))
+                return true;
+        }
+
+        return false;
     }
 }

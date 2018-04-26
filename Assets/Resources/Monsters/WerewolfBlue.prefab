@@ -540,7 +540,7 @@ MonoBehaviour:
   MonsterType: 7
   MoveSpeed: 0.03
   CombatSprite: {fileID: 21300020, guid: 93eba44d47f0a494fb26d168d17339f4, type: 3}
-  CombatLevel: 1
+  CombatLevel: 0
   moveEnabled: 1
 --- !u!114 &114947350496605598
 MonoBehaviour:
@@ -828,7 +828,7 @@ RectTransform:
   m_GameObject: {fileID: 1627912375769944}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
   m_Children:
   - {fileID: 224397993276529256}
   m_Father: {fileID: 224112149943244684}

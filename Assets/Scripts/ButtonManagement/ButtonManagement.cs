@@ -36,7 +36,8 @@ public class ButtonManagement : MonoBehaviour {
         List<ItemObj> noHave = DataManger.AllItems.FindAll(x => x.EXP <= DataManger.playerlevelobj.Exp);
         float cnt = noHave.Count;
         int f = Mathf.RoundToInt(Random.Range(0, cnt - 1));
-        if (DataManger.playerItems.FindAll(x => x.ItemNumber == noHave[f].ItemNumber).Count > 0 || DataManger.EquipedItems.FindAll(x => x.ItemNumber == noHave[f].ItemNumber).Count > 0)
+        int no = Mathf.RoundToInt(Random.Range(0, 10));
+        if (DataManger.playerItems.FindAll(x => x.ItemNumber == noHave[f].ItemNumber).Count > 0 || DataManger.EquipedItems.FindAll(x => x.ItemNumber == noHave[f].ItemNumber).Count > 0 || no < 7)
         {
             ((LevelManager)GameObject.FindWithTag("Canvas-LvL").GetComponent("LevelManager")).LootImage.sprite = ((LevelManager)GameObject.FindWithTag("Canvas-LvL").GetComponent("LevelManager")).LootGoldimage;
             string Loottxt = "+" + DataManger.lootInfo.EXP + " EXP";
@@ -146,7 +147,7 @@ public class ButtonManagement : MonoBehaviour {
         Text Result = ResultPanel.transform.Find("Result").GetComponent<Text>();
         Result.color = Color.white;
         Result.text = "+" + increase.ToString();
-        CG.alpha = .8f;
+        CG.alpha = 1f;
         DataManger.playerobj.Health += increase;
     }
 }

@@ -13,20 +13,18 @@ public class PlayerProjectile : MonoBehaviour
     Text Result;
     Transform ResultPanel;
     CanvasGroup CG;
-
-
+    
     // Use this for initialization
     void Start()
     {
         Monster = DataManger.movementObj.combatTarget;
-        Vector3 vectorToTarget = Monster.transform.position - transform.position;
-        float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg;
-        Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
-        transform.rotation = Quaternion.Slerp(transform.rotation, q, 1);
         ResultPanel = Monster.transform.Find("MonsterCanvas").transform.Find("ResultPanel");
         CG = ResultPanel.GetComponent<CanvasGroup>();
         Result = ResultPanel.transform.Find("Result").GetComponent<Text>();
-
+        Vector3 vectorToTarget = Monster.transform.position - transform.position;
+        float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg;
+        Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
+        transform.rotation = Quaternion.Slerp(transform.rotation, q, 1);       
     }
 
     // Update is called once per frame
@@ -44,10 +42,13 @@ public class PlayerProjectile : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         //print("PlayerGotcha " + Damage.ToString());
-        Result.color = Color.red;
-        Result.text = "-" + Damage.ToString();
-        CG.alpha = .8f;
-        DataManger.movementObj.combatMonster.Health -= Damage;
-        Destroy(gameObject);
+        if (Result != null)
+        {
+            Result.color = Color.red;
+            Result.text = "-" + Damage.ToString();
+            CG.alpha = 1f;
+            DataManger.movementObj.combatMonster.Health -= Damage;
+            Destroy(gameObject);
+        }
     }
 }

@@ -540,7 +540,7 @@ MonoBehaviour:
   MonsterType: 7
   MoveSpeed: 0.03
   CombatSprite: {fileID: 21300020, guid: 93eba44d47f0a494fb26d168d17339f4, type: 3}
-  CombatLevel: 0
+  CombatLevel: 1
   moveEnabled: 1
 --- !u!114 &114947350496605598
 MonoBehaviour:

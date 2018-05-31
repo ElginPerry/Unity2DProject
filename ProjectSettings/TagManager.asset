@@ -9,6 +9,7 @@ TagManager:
   - UIDraggable
   - UIDraggableEquiped
   - Monster
+  - UI-Item
   layers:
   - Default
   - TransparentFX

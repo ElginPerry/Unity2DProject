@@ -160,7 +160,7 @@ PlayerSettings:
   applicationIdentifier:
     Android: com.RPGGame.MindRest
   buildNumber: {}
-  AndroidBundleVersionCode: 1
+  AndroidBundleVersionCode: 2
   AndroidMinSdkVersion: 16
   AndroidTargetSdkVersion: 23
   AndroidPreferredInstallLocation: 1

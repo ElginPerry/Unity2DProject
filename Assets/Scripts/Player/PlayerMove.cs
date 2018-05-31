@@ -109,7 +109,7 @@ public class PlayerMove : MonoBehaviour {
 
         if (moveEnabled)
         {
-            if (Input.GetMouseButton(0) && !IsPointerOverGameObject())
+            if (Input.GetMouseButton(0) && !IsPointerOverUIObject())
             {
                 mousepointer = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 Collider2D hitCollider = Physics2D.OverlapPoint(mousepointer);
@@ -251,5 +251,14 @@ public class PlayerMove : MonoBehaviour {
         }
 
         return false;
+    }
+
+    private bool IsPointerOverUIObject()
+    {
+        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+        eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+        return results.Count > 0;
     }
 }
